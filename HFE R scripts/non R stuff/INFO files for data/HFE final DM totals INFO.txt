@@ -1,0 +1,20 @@
+Total tree biomass values by compartment at the final harvest.
+Based on the file "HFEfinalDMs.csv" received from Craig Barton.
+
+All biomass in g dry weight.
+
+chamber - chamber number (>12 = outside tree)
+wf - Foliage mass.
+wbr1 - Branch mass (< 1cm diameter)
+wbr2 - Branch mass (> 1cm diameter)
+wbr - wbr1 + wbr2
+ws - Main stem mass
+wr1sam - Root biomass (<1cm diameter)
+wr1sieve - Root biomass (<1cm diameter from sieve)
+wr1 - Root biomass total (<1cm diameter)
+wr2 - Root biomass total (>1cm diameter) (=wr12 + wr25)
+wr12 - Root biomass >1cm & <2cm
+wr25 - Root biomass >2cm & <5cm
+wr5 - Root biomass > 5cm
+wstump - Stump biomass
+wr - Total belowground biomass (=wr1 + wr2 + wr5 + wstump)

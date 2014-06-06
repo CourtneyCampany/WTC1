@@ -1,0 +1,37 @@
+Short Desciption:,
+HFE-I Harvest Sample Branches for architecture,
+,
+Methods:,
+"5 sample branches per canopy layer, covering a range of diameters, ",
+"harvested for detailed descriptions of architecture, allometry, and dry mass determination",
+,
+Data Owner:,Craig Barton
+Dates:,Start 16th March 2009 & Finish 1st April 2009
+,
+Variables:,
+chamber,all 18 trees (12 chamber trees + 6 controls)
+layerno,layer # (1-5)
+branchnumber,Consistent branch number (numbered from bottom to top)
+stemnumber,Stem number for forked stems.
+oldbranchnumber,
+azimuthangle ,approx. direction that most of the branch was facing as some branches got twisted by the plastic or other branched and changed direction from the angle of projection from the stem.
+diameter,Branch diameter at 5cm from stem (mm)
+length ,linear length from base to tip
+ insertionheight,from chamber floor
+,add 45cm to get insertion from chamber floor'
+tipheight,"from chamber floor, (Tip height - Insertion (cm), calculate by subtracting hieght at tip from height at inserstion (same for chamber or ground floor))"
+,add 45cm to get insertion from chamber floor'
+br2order ,number of 2nd order branches
+Wleafandpetiole,fresh mass (g)
+WsubsampleLA,fresh mass of leaf subsample (g) for leaf area
+leafarea ,"(cm2), grab sample of ~100 intact leaves taken from pooled fully expanded leaves from the 5 sample branches per layer"
+Wnonexpleaf,fresh mass of not fully explanded leaves (g)
+Wflowerbuds,fresh mass (g)
+Wbrlt1,fresh mass <1cm (g)
+Wbrgt1,fresh mass >1cm (g)
+Wdeadwood,fresh mass (g)
+,
+Comments,"Wall = growing up against the wall (the cylinder part), so tip height may not be true"
+,Nose = growing into the nose of the air flow - lvs on tip normally damaged by air movement
+,Cone = growing up into the cone and touching the cone walls
+,Damper = touching the damper at the top of chamber

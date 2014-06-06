@@ -1,0 +1,10 @@
+chamber				Chamber number
+stemnumber			Stem number, allowing for different numbers for forked trees
+branchnumber		Sequential branch number starting at the bottom of the stem
+leafnumber			Leaf number, corresponding to sequential number in leaf angle table.
+leafarea			Area of leaf (cm2)
+leaflength			Length of leaf (mm)
+leafwidth			Leaf width (mm)
+leafweight			Dry leaf weight (g)
+SLA					Specific leaf area (cm2 g-1)
+comments

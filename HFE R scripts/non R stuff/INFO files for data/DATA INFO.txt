@@ -1,0 +1,3 @@
+Data owner: Craig Barton et al.
+
+Note: litter data collected at final harvest is in the directory /Biomass Data/Litter

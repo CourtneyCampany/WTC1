@@ -1,0 +1,13 @@
+
+Before final harvest (on 2009-3-11), a small sample of leaves was taken from each layer (sunlit/shaded) for chemical analyses etc.
+
+For N and C analyses: Analysed by Roslyn Woodfield using LECO TruSpec Micro. Standard used - Oatmeal (%N 2.70+/- 0.04, %C 46.85+/-0.4).
+
+layer	- 1-5, counting from bottom layer.
+position - Inner or outer crown section
+leafarea - Total leaf area (cm2)
+freshweight	- Fresh weight (g)
+dryweight - Dry weight (g)
+SLA	- Specific leaf area (cm g-1)
+nperc - nitrogen concentration (%)
+cperc - carbon concentration (%)

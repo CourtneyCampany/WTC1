@@ -1,0 +1,32 @@
+Short Desciption:,
+HFE-I Pooled Fresh & Dry Mass for All Sample Branch Data from Final Harvest,
+,
+Methods:,
+All sample branches (#5) were pooled for each canopy layer for dry mass determination,
+"Includes branch wood, flowerbuds, and leaves",
+,
+Data Owner:,Craig Barton
+Dates:,Start 16th March 2009 & Finish 1st April 2009
+,
+Variables:,
+chamber,all 18 trees (12 chamber trees + 6 controls)
+layerno,layer # (1-5)
+Wleafpetiole_noLA,Pooled fresh mass leaf +petiole + not fully exp lvs WITHOUT leaf area sample (g)
+Wleafpetiole,Pooled fresh mass leaf +petiole + not fully exp lvs WITH leaf area sample (g)
+Wbrlt1,Pooled FM branch wood <1cm (g)
+Wbrgt1,Pooled FM branch wood >1cm (g)
+Wflwrbud,Pooled fresh mass of flower buds (g)
+Wdeadwood,Pooled fresh mass of dead wood (g)
+DWleafpetiole_noLA,dry mass of  Leaf with Petiole (expanded and fully expanded leaves) but WITHOUT leaf area sample (g)
+DWleafpetiole,drymass of Leaf with Petiole (expanded and fully expanded leaves) WITH leaf area sample (g)
+DWbrlt1,dry mass of branch wood <1cm (g)
+DWbrgt1,dry mass of branch wood >1cm (g)
+DWflwrbud,dry mass of flower buds (g)
+DWdeadwood,dry mass of dead wood (g)
+leafcount,#
+Wlamina,fresh weight of lamina (g)
+Wpetiole,fresh weight of petiole (g)
+laminaarea,area lamina (cm2)
+DWpetiole,dry mass of petiole  (g)
+DWlamina,dry mass of lamina (g)
+comments,
