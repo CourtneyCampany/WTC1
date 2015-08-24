@@ -1,7 +1,7 @@
 source("functions and packages/load packages.R")
 source("functions and packages/functions.R")
 #read calculated data
-source("whole tree csv/calculated read data.R")
+source("whole_tree_csv/calculated read data.R")
 
 #CALCULATE treatment means for each tree component and cumulative chamber flux on harvest date
 
