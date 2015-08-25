@@ -1,6 +1,6 @@
 # read root mass and total treemass with C flux
 root <- read.csv("calculated mass/root_mass.csv")
-root$Date <- as.Date(root$Date)
+  root$Date <- as.Date(root$Date)
 
 #treeC <- read.csv("whole_tree_csv/Tree Flux and Mass.csv")
 
