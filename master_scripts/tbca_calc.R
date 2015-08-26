@@ -17,6 +17,11 @@ harvest_C$TBCA <- with(harvest_C, CO2cum - treeC)
 harvest_C$Fs_resid <- with(harvest_C, TBCA - (frootC_all + CrootC))
 
 
+write.csv(harvest_C[, c(1:2, 7:9, 15:16)], "calculated_mass/TBCA.csv", row.names = FALSE)
+
+
+
+
 
   
   

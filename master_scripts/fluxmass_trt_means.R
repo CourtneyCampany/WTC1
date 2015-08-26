@@ -1,10 +1,7 @@
-source("functions and packages/load packages.R")
-source("functions and packages/functions.R")
-
+source("functions_and_packages/load_packages.R")
+source("functions_and_packages/functions.R")
 
 #read calculated data for each component----------------------------------------------------------------------------------------
-#source("whole_tree_csv/calculated_read_data.R")
-
 
 # chamber treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
@@ -68,7 +65,7 @@ treefluxC_se <- ddply(final_fluxmass, .(treatment), summarize,
 
 treeC_stats <- merge(treefluxC_means, treefluxC_se)
  
-write.csv(treeC_stats, "whole tree csv/harvest_trt_means.csv", row.names = FALSE)
+write.csv(treeC_stats, "master_scripts/harvest_trt_means.csv", row.names = FALSE)
 
 #--------------------------------------------------------------------------------------------------------
 #run lm on raw data from harvest date
