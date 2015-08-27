@@ -1,24 +1,24 @@
 ######TREE CARBON FLUX (from floor date set at 0) by treatment means
-source("functions and packages/load packages.R")
-source("functions and packages/functions.R")
+source("functions_and_packages/load_packages.R")
+source("functions_and_packages/functions.R")
 
 # read root mass and total treemass with C flux
 treeC <- read.csv("whole_tree_csv/tree_C_flux.csv")
-treeC$Date <- as.Date(treeC$Date)
-treeC$abovegroundC <- with(treeC, boleC+branchC+leafC+litterC)
+  treeC$Date <- as.Date(treeC$Date)
+  treeC$abovegroundC <- with(treeC, boleC+branchC+leafC+litterC)
 
 #test both root data sets (with or without very fine roots)
-root <- read.csv("calculated mass/root_mass.csv")
-root$Date <- as.Date(root$Date)
+root <- read.csv("calculated_mass/root_mass.csv")
+  root$Date <- as.Date(root$Date)
 
 #root values need to be additive to aboveground C 
 finalC <- subset(treeC, Date=="2009-03-16")
-finalC <- subset(finalC, select = c("chamber", "Date", "abovegroundC"))
-finalC <- merge(finalC, root)
+  finalC <- subset(finalC, select = c("chamber", "Date", "abovegroundC"))
+  finalC <- merge(finalC, root)
 
-finalC$coarseabove <- with(finalC, abovegroundC+CrootC)
-finalC$frootabove <- with(finalC, coarseabove+frootC)
-finalC$allrootabove <- with(finalC, coarseabove+frootC_all)
+  finalC$coarseabove <- with(finalC, abovegroundC+CrootC)
+  finalC$frootabove <- with(finalC, coarseabove+frootC)
+  finalC$allrootabove <- with(finalC, coarseabove+frootC_all)
 
 
 #-------------------------------------------------------------------------------------------------------
@@ -26,12 +26,13 @@ finalC$allrootabove <- with(finalC, coarseabove+frootC_all)
 
 # chamber treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
-chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
-chambersumm <- droplevels(chambersumm[,1:3])
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
+  
 treeC_means <- merge(treeC, chambersumm)
-treeC_means$treatment <- as.factor(paste(treeC_means$CO2_treatment, treeC_means$Water_treatment, sep="-"))
-treeC_means$bolebranch <- with(treeC_means, boleC+branchC)
-treeC_means$aboveC <- with(treeC_means, boleC+branchC+leafC+litterC)
+  treeC_means$treatment <- as.factor(paste(treeC_means$CO2_treatment, treeC_means$Water_treatment, sep="-"))
+  treeC_means$bolebranch <- with(treeC_means, boleC+branchC)
+  treeC_means$aboveC <- with(treeC_means, boleC+branchC+leafC+litterC)
 
 #aboveground components
 fluxC_means <- ddply(treeC_means, .(treatment, Date), summarize,
@@ -46,11 +47,13 @@ fluxC_se <- ddply(treeC_means, .(treatment, Date), summarize,
                   bolebranch_se = round(se(bolebranch), 3),
                   aboveC_se = round(se(aboveC), 3))
 
-treeC_stats <- merge(fluxC_means, fluxC_se)     
+treeC_stats <- merge(fluxC_means, fluxC_se)    
+
+write.csv(treeC_stats, "calculated_mass/treeC_day.csv", row.names=FALSE)
 
 #roots
 finalC_means <- merge(finalC, chambersumm)
-finalC_means$treatment <- as.factor(paste(finalC_means$CO2_treatment, finalC_means$Water_treatment, sep="-"))
+  finalC_means$treatment <- as.factor(paste(finalC_means$CO2_treatment, finalC_means$Water_treatment, sep="-"))
 
 rootC_means <- ddply(finalC_means, .(treatment, Date), summarize,                 
                      coarseabove = round(mean(coarseabove),2),
@@ -142,13 +145,10 @@ plot_trt_means <- function(trt){
 #loop through all
 trt_lvl <- levels(rootC_stats$treatment)
 
-#windows()
+
 for(i in 1:length(trt_lvl)){
   par(mfrow=c(2,2))
   plot_trt_means(trt_lvl[i])
   mypath <- file.path("output", paste("carbon_balance_", trt_lvl[i], ".pdf", sep=""))
   dev.copy2pdf(file=mypath)
 }
-
-windows()
-par(mfrow=c(6,2))
