@@ -3,6 +3,7 @@ library(wesanderson)
 
 leaflab <- expression(Leaf~Area~~(m^2))
 treefluxlab <- expression(Tree~Carbon~Uptake~~(g))
+tbcalab <- "TBCA  (g)"
 
 ypos <- c(2.5,1,0)
 

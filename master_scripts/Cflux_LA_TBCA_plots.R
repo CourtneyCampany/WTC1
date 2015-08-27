@@ -4,8 +4,8 @@ library(doBy)
 
 ## treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
-chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
-chambersumm <- droplevels(chambersumm[,1:3])
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
 
 ##read in and format Leaf Area
 leafarea <- read.csv("raw csv/HFE LA estimates alldates.csv")
@@ -31,20 +31,58 @@ fluxC <- treeC[, c(1:3, 11:12)]
 
 ##merge flux data and leaf area 
 flux_la <- merge(fluxC, leafarea_agg, all=FALSE)
-
-
+  flux_la$CO2_treatment <- gsub("-dry", "", flux_la$treatment)
+  flux_la$CO2_treatment <- gsub("-wet", "", flux_la$CO2_treatment)
+  flux_la$CO2_treatment <- as.factor(flux_la$CO2_treatment)
+  flux_la$Water_treatment <- gsub("ambient-", "", flux_la$treatment)
+  flux_la$Water_treatment <- gsub("elevated-", "", flux_la$Water_treatment)
+  flux_la$Water_treatment <- as.factor(flux_la$Water_treatment)
+  
 ###plot relationships of TBCA and leaf area with CO2 flux
-palette(c("black", "blue", "red", "forestgreen"))
+palette(c("black", "blue"))
 
 windows(7,7)
-
+#1. leaf area and CO2uptake
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
 plot(LAestlin~CO2cum, data=flux_la,  type='n',ylab=leaflab, xlab=treefluxlab)
 
 for(i in unique(flux_la$treatment)){
-  points(LAestlin~CO2cum, data=flux_la[flux_la$treatment == i,], col=treatment, type='l', lwd=2)
+  points(LAestlin~CO2cum, data=flux_la[flux_la$treatment == i,], col=as.factor(CO2_treatment), 
+         type='l', lwd=2.5, lty=c(1,2)[as.factor(Water_treatment)])
 }
 
+legend("topleft", trtlab, pch=c(15, 15, -1, -1), lty=c(-1, -1, 1,2), col=c("black", "blue", "black", "black"), 
+       bty='n', inset=0.01)
+dev.copy2pdf(file="master_scripts/paper_figs/leafarea_cflux.pdf")
+dev.off() 
 
+#2. Leaf area and TBCA
+windows(7,7)
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+plot(TBCA~LAestlin, data=flux_la,  type='n',ylab=tbcalab, xlab=leaflab)
 
+for(i in unique(flux_la$treatment)){
+  points(TBCA~LAestlin, data=flux_la[flux_la$treatment == i,], col=as.factor(CO2_treatment), 
+         type='l', lwd=2.5, lty=c(1,2)[as.factor(Water_treatment)])
+}
 
+legend("topleft", trtlab, pch=c(15, 15, -1, -1), lty=c(-1, -1, 1,2), col=c("black", "blue", "black", "black"), 
+       bty='n', inset=0.01)
+dev.copy2pdf(file="master_scripts/paper_figs/leafarea_tbca.pdf")
+dev.off() 
 
+#3. TBCA and CO2 flux
+windows(7,7)
+par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+plot(TBCA~CO2cum, data=flux_la,  type='n',ylab=tbcalab, xlab=treefluxlab)
+
+for(i in unique(flux_la$treatment)){
+  points(TBCA~CO2cum, data=flux_la[flux_la$treatment == i,], col=as.factor(CO2_treatment), 
+         type='l', lwd=2.5, lty=c(1,2)[as.factor(Water_treatment)])
+}
+
+legend("topleft", trtlab, pch=c(15, 15, -1, -1), lty=c(-1, -1, 1,2), col=c("black", "blue", "black", "black"), 
+       bty='n', inset=0.01)
+
+dev.copy2pdf(file="master_scripts/paper_figs/tbca_cflux.pdf")
+dev.off() 
