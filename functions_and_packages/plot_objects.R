@@ -16,4 +16,4 @@ lmflab <- expression(LMF~~(g~g^-1))
 boxlab <- c(expression(aCO[2]-Drought), expression(aCO[2]-Control), expression(eCO[2]-Drought), expression(eCO[2]-Control))
 
 
-dayClab <- c("Carbon Flux", "Bole", "+Branch", " +Leaf and Litter", "  +Coarse", "   +Fine Root")
+dayClab <- c("Carbon Flux", "Bole", "+Branch", " +Leaf and Litter", "  +Fine Root", "   +Coarse Root")

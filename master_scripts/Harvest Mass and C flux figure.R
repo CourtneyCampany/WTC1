@@ -42,7 +42,7 @@ points(treeC ~ Cflux, data = dayfluxtomass,pch=c(1,19)[CO2_treatment],col=Water_
 
 mtext("p < 0.0001, R = 0.83", side = 1, line = -3, cex = 1)
 
-dev.copy2pdf(file= "output/WTCI_fluxmass.pdf")
+dev.copy2pdf(file= "master_scripts/paper_figs/WTCI_fluxmass.pdf")
 dev.off()
 
 
