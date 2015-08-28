@@ -3,7 +3,9 @@ library(wesanderson)
 
 leaflab <- expression(Leaf~Area~~(m^2))
 treefluxlab <- expression(Tree~Carbon~Uptake~~(g))
+
 tbcalab <- "TBCA  (g)"
+fslab <- expression(F[s]~residual)
 
 ypos <- c(2.5,1,0)
 
@@ -20,3 +22,5 @@ boxlab <- c(expression(atop(aCO[2],Drought)), expression(atop(aCO[2],Control)), 
 
 
 dayClab <- c("Carbon Flux", "Bole", "+Branch", " +Leaf and Litter", "  +Fine Root", "   +Coarse Root")
+
+belowfluxlab <- c("Tree Carbon Uptake", "TBCA", fslab)
