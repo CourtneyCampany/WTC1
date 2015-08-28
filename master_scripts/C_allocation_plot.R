@@ -1,4 +1,5 @@
 ###this script visualizes allocation to different components by treatment
+source("functions_and_packages/plot_objects.R")
 
 ##need final harvest values (not treatmen means)
 tree_C <- read.csv("master_scripts/harvest_chamber.csv")
@@ -33,27 +34,39 @@ at.y3 <- seq(.3, by=.1, length.out=3)
 at.x <- seq(1, by=.15, length.out = 4)
 
 ###Lets try a 3 panel box plotwith LMF, RMF, SMF by treatment
+##remove colors for now.. border=cols,
+##code to reduce plot size for spacing is at.x (took out atm)
+
 windows(7,7)
 
-par(cex.axis=1.51, cex.lab=1.51, las=1,mgp=c(4,1,0),mfrow=c(3,1),  omi=c(.5,0,0.1,0.1))  
-
-par(mar=c(0,7,2,2))
-with(tree_C, boxplot(lmf~treatment, border=cols, ylab=lmflab, boxwex = .1, xaxt='n',yaxt='n', xlab="",ylim=c(0, .125),
-                   whisklty=1, whisklwd=2, boxlwd=2, staplelwd=2, at=at.x, xlim=c(.9,1.5)))
-axis(2, at=at.y1, labels = TRUE)
+par(cex.axis=1.51, cex.lab=1.51, las=1,mgp=c(4,1,0),mfrow=c(3,1), oma =c(7, 0, 2, 0))  
 
 par(mar=c(0,7,0,2))
-with(tree_C, boxplot(smf~treatment, border=cols, ylab=smflab, boxwex = .1, xaxt='n',yaxt='n', xlab="", ylim=c(.4,.65),
-                     whisklty=1, whisklwd=2, boxlwd=2, staplelwd=2,at=at.x, xlim=c(.9,1.5)))
+with(tree_C, boxplot(lmf~treatment, ylab=lmflab, boxwex = .1, xaxt='n', xlab="",yaxt='n',
+                     whisklty=1.25, whisklwd=1.25, boxlwd=1.25, staplelwd=1.25))
+axis(2, at=at.y1, labels = TRUE)
+
+
+par(mar=c(0,7,0,2))
+with(tree_C, boxplot(smf~treatment,  ylab=smflab, boxwex = .1, xaxt='n', xlab="",yaxt='n',
+                     whisklty=1.25, whisklwd=1.25, boxlwd=1.25, staplelwd=1.25))
 axis(2, at=at.y2, labels = TRUE)
 
-par(mar=c(8.5,7,0,2))
-with(tree_C, boxplot(rmf~treatment, border=cols, ylab=rmflab, boxwex = .1, xaxt='n',yaxt='n', ylim=c(.25, .55),
-                     whisklty=1, whisklwd=2, boxlwd=2, staplelwd=2, show.names=TRUE,at=at.x, xlim=c(.9,1.5)))
-axis(1, at=at.x ,labels=FALSE)
+par(mar=c(0,7,0,2))
+with(tree_C, boxplot(rmf~treatment,  ylab=rmflab, boxwex = .1, xaxt='n',yaxt='n', ylim=c(.25, .55),
+                     whisklty=1.25, whisklwd=1.25, boxlwd=1.25, staplelwd=1.25, show.names=TRUE))
 axis(2, at=at.y3, labels = TRUE)
 
-text(at.x-.05 , .07,boxlab, xpd=TRUE, srt=45, cex=1.5)
+axis(1, at=c(1,2,3,4) ,labels=FALSE)
+mtext(boxlab, at= c(.255, .45, .64, .8325), line=3.5, side=1, cex=1, outer=TRUE)
+
+dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
+dev.off() 
+
+
+
+
+
 
 
 
@@ -62,7 +75,7 @@ at.y4 <- seq(.3, by=.1, length.out=4)
 at.y5 <- seq(0, by=.03, length.out=4)
 
 
-windows(7,7)
+windows(7,10)
 par(cex.axis=1.2, cex.lab=1.2, las=1,mgp=c(4,1,0),mfrow=c(2,1),  omi=c(.5,0,0.1,0.1))  
 
 par(mar=c(0,7,2,2))
