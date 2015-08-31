@@ -68,6 +68,12 @@ In a resource saturated environment a plant maximizes its growth rate by allocat
 With rising atmospheric [CO^2^], forest C allocation has drawn particular interest due to its potential effect on C sequestration and the global C balance [@franklin2012modeling]. Increasing [CO^2^]  has been shown to stimulate net primary production and belowground C allocation, but the flux to belowground increased twice as much as aboveground productivity, as reviewed across four forested free-air CO^2^ enrichment experiments [@palmroth2006aboveground]. Additionally, understanding the impacts of global climate change on forests requires investigation of various global change factors to tease apart multifaceted relationships [@rustad2008response]. In particular, as drought can limit plant productivity understanding potential interactions with the growth-stimulating effects of increasing [CO^2^]  requires further attention [@duursma2011rooting]. 
 
 \
+allocation and climate change
+The effects of eCO2 on plant C storage will differ considerably if the C is allocated towards long-lived plant tissue (i.e. woody components), where it remains sequestered over long time periods; or alternatively, if cycling of C through the system is increased via increased allocation to short-lived tissues or reduced tissue lifespan (Luo et al., 2003; Korner et al., 2005).
+
+eCO2 on LAI(*something else from paper on LAI*) depend on changes in NPP but also on changes in the fraction of C allocated to foliage vs other plant components (kauwe)
+
+\
 *TBCA* introduce some intro stuff from palmroth papers
 Allocation of C belowground remains one of the most difficult components of tree C budgets to calculate. In forest ecosystems, the flux of C belowground has been shown to be equal or greater than aboveground production [@law1999seasonal], yet the controls of this belowground flux are poorly understood [@raich1989belowground; @giardina2005response]. As trees allocate such a large portion of production belowground, the difficulty in accurately measuring this allocation has limited our understanding of C cycling [@giardina2002total]. Consequently, modeling attempts to describe the response of belowground C allocation to global change often assume that responses of aboveground tissues represent those of belowground tissues [@giardina2005response]. These issues with both measuring and modeling tree C allocation elucidate a vital need to utilize a model experimental system which couples continuous measurements of assimilation and respiratory fluxes with the ability to track growth above and belowground.
 
@@ -174,5 +180,20 @@ where F~[c,t]~ is the gross primary productivity (g C) of the each tree abovegro
 ```{r c_fluxmass, fig.width=8, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/harvestmass_Cflux_figure.R")
 ```
+
+\
+**Figure 3**. 
+```{r c_cumulative, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/cumulativecarbon_figure.R")
+```
+
+
+\
+**Figure 3**. 
+```{r c_allocation, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/C_allocation_figure.R")
+```
+
+
 
 # References {.unnumbered}

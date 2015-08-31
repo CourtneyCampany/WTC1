@@ -27,13 +27,12 @@ elevwet <- treeC[treeC$treatment == "elevated-wet",]
 ##plot bits
 xAT <- seq.Date(from=as.Date("2008-4-1"), length=13, by="month")
 LWD <- 2
-CEX <- 2 
-
-axis.Date(1, at = xAT, labels = T)
-mtext("Carbon (g)", side = 2, outer=TRUE, line = -2.5, cex = 1.3)
+ 
+#axis.Date(1, at = xAT, labels = T)
+#mtext("Carbon (g)", side = 2, outer=TRUE, line = -2.5, cex = 1.3)
 
 ##plot four panel with treatment means---------------------------------------------------------------------------------
-windows (7,10)
+#windows (7,10)
 
 par(mfrow=c(2,2), las=1, mgp=c(3.5,1,0))
 
@@ -90,7 +89,7 @@ text(x=14040, y=25000, label = boxlab[4],cex=1.25, font=2)
 points(aboveplusfine ~ Date , data = roots,subset = treatment == "elevated-wet", pch = 21, bg = "grey", cex=2)
 points(allC ~ Date , data = roots,subset = treatment == "elevated-wet",pch = 23, bg="grey", cex=2)
 
-dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")
-dev.off()
+# dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")
+# dev.off()
 
 

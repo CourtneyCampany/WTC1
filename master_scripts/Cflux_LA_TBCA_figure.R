@@ -38,7 +38,9 @@ flux_la <- merge(fluxC, leafarea_agg, all=FALSE)
   flux_la$Water_treatment <- gsub("elevated-", "", flux_la$Water_treatment)
   flux_la$Water_treatment <- as.factor(flux_la$Water_treatment)
   
-###plot relationships of TBCA and leaf area with CO2 flux
+write.csv(flux_la, "Stats/co2flux_leafarea.csv", row.names = FALSE)
+    
+###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------
 palette(c("black", "blue"))
 
 windows(7,7)
