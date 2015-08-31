@@ -25,7 +25,7 @@ leglab2 = c(expression(paste(aCO[2], " " ,"wet")), expression(paste(aCO[2], " " 
 
 palette (c("red", "blue"))
 
-windows (8,6)
+#windows (8,6)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3.5,1,0))
 
 plot(1,type='n', ylab = "",
@@ -42,7 +42,7 @@ points(treeC ~ Cflux, data = dayfluxtomass,pch=c(1,19)[CO2_treatment],col=Water_
 
 mtext("p < 0.0001, R = 0.83", side = 1, line = -3, cex = 1)
 
-dev.copy2pdf(file= "master_scripts/paper_figs/WTCI_fluxmass.pdf")
-dev.off()
+# dev.copy2pdf(file= "master_scripts/paper_figs/WTCI_fluxmass.pdf")
+# dev.off()
 
 
