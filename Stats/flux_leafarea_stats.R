@@ -27,7 +27,7 @@ leafarea <- read.csv("raw csv/HFE LA estimates alldates.csv")
 
 ##read in chamber flux and calculate TBCA
 treeflux <- read.csv("calculated_mass/chamber_C_flux.csv")
-  treeC$Date <- as.Date(treeC$Date)
+  treeflux$Date <- as.Date(treeflux$Date)
 
 
 ##merge flux data and leaf area 
@@ -41,8 +41,10 @@ fluxla_mod <- lm(CO2cum ~ LAestlin, data=flux_final)
 
 visreg(fluxla_mod)
 
-fluxla_mod2 <- lm(CO2cum ~ LAestlin+CO2_treatment+Water_treatment+LAestlin:CO2_treatment:Water_treatment , data=flux_final)
+fluxla_mod2 <- lm(CO2cum ~ LAestlin*CO2_treatment*Water_treatment , data=flux_final)
   summary(fluxla_mod2)
+
+  
 
 ###i dont think there is any interaction with the relationship between leafarea and co2 flux
 

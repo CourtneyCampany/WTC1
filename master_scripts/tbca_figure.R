@@ -1,5 +1,6 @@
 ### This script creates TBCA from the flux data and the biomass data
 source("functions_and_packages/functions.R")
+source("functions_and_packages/plot_objects.R")
 library(doBy)
 
 #1: Fc,t = GPP - (Rl + Rs,br) = total carbon flux by chamber
@@ -48,18 +49,20 @@ cols <- c("grey30", "grey55", "grey85")
 
 ###plot belowground flux
 
-windows(7,7)
-par(mar=c(5,5,1,1),las=1, mgp=c(3.5,1,0), cex.axis=1, cex.lab = 1.25)
+# windows(8,6)
+par(mar=c(5,6,1,1),las=1, mgp=c(3,1,0), cex.axis=1, cex.lab = 1.25)
+
 below_bar <- barplot(below_dat, beside=TRUE, names.arg=below_means$treatment, ylim=c(0, 27500), col=cols, 
-                     xaxt='n', ylab="Carbon  (g)")
+                     xaxt='n', ylab="")
 arrows(below_bar, means_dat2, below_bar, means_dat2+se_dat2, length=0.1, angle=90)
 arrows(below_bar, means_dat2, below_bar, means_dat2-se_dat2, length=0.1, angle=90)
 box()
 legend("topright",belowfluxlab, pch = 22,  bty='n', pt.bg=cols, cex=1.25)
 axis(side=1, at=c(2.5, 6.5, 10.5, 14.5), labels=boxlab, padj=.75, cex.axis=1.25)
+title(ylab="Carbon  (g)", mgp=c(4,1,0))
 
-dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots.pdf")
-dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots.pdf")
+# dev.off() 
 
 
   

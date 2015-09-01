@@ -26,26 +26,23 @@ xAT <- seq.Date(startday, by="month", length=12, format = "%Y-%m-%d")
 
 xlimdays <- c(xlim1, xlim2)
 
-ltys <- c(1,5)
-cols <- c("black", "red")
-
-palette(c("black", "blue"))
+palette (c("blue", "red"))
 
 ###plot leaf area----------------------------------------------------------------------------------------------------------
 
-windows(7,7)
+windows(8,6)
 
-par(mar=c(4,4,1,1), cex=1.25, las=1, cex.axis=.8, cex.lab=1, mgp=c(2.5,1,0))
+par(mar=c(4,5,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 
 plot(LAestlin ~ Date, data=leafarea, type='n',ylab=leaflab,  xaxt='n', xlab="", xlim=xlimdays, ylim=c(0, 70))  
   axis.Date(1, at=xAT, labels=TRUE) #axis needs no labels
   #points(LAestlin ~ Date, data=leafarea, type='l', subset=chamber=="ch04", col="green")
   
   for (i in unique(leafarea$chamber)){
-    points(LAestlin ~ Date, data=leafarea[leafarea$chamber == i,], col=CO2_treatment, type='l', lwd=2, lty=c(1,2)[Water_treatment])
+    points(LAestlin ~ Date, data=leafarea[leafarea$chamber == i,], col=CO2_treatment, type='l', lwd=2, lty=c(2,1)[Water_treatment])
   }
   
-legend("topleft", trtlab, pch=c(15, 15, -1, -1), lty=c(-1, -1, 1,2), col=c("black", "blue", "black", "black"), bty='n', inset=0.01)
+legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
   
 dev.copy2pdf(file="master_scripts/paper_figs/leafarea.pdf")
 dev.off() 

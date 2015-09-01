@@ -50,6 +50,12 @@ includeFigs <- TRUE
 # render("manuscript.Rmd", "word_document", "manuscript.docx")
 ```
 
+```{r, echo=FALSE}
+fluxmassfig <- "1"
+fluxmabfig <- "2"
+additivemassfig <- "3"
+```
+
 
 #Abstract
 
@@ -169,6 +175,13 @@ where F~[c,t]~ is the gross primary productivity (g C) of the each tree abovegro
 
 # Results
 
+## Total canopy carbon flux, leaf area and whole tree carbon
+There was a strong linear relationship between F~[c,t]~ and harvested whole tree carbon (Figure `r fluxmassfig`). Both F~[c,t]~ and whole tree carbon were reduced under elevated CO~2~ (30.5 and 31.8%, respectively) while no effects of the drought treatment were detected (Table 1). Overall, F~[c,t]~ was correlated with total leaf area at the final harvest (P < 0.001, R2 = 0.59).    
+
+## Tree carbon allocation
+
+## Total belowground carbon allocation
+
 # Discussion
 
 # List of Tables
@@ -179,6 +192,12 @@ where F~[c,t]~ is the gross primary productivity (g C) of the each tree abovegro
 **Figure 1**. 
 ```{r c_fluxmass, fig.width=8, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/harvestmass_Cflux_figure.R")
+```
+
+\
+**Figure 2**.
+```{r c_fluxmass, fig.width=8, fig.height=6, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/abovegroundmass_Cflux_figure.R")
 ```
 
 \
