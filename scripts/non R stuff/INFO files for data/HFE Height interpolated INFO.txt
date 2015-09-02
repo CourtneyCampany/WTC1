@@ -1,0 +1,8 @@
+
+Daily interpolated tree height and diameter data with three methods.
+
+Date - from 2007-5-17 to 2009-3-16
+chamber	
+heightloess	- Tree height interpolated with a loess smoother (m)
+heightlin - Linear interpolation
+heightcob - Interpolation with "Constrained B-Splines Nonparametric Regression Quantiles" (package 'cobs' in R)

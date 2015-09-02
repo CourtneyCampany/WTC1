@@ -1,0 +1,17 @@
+Estimates of tree leaf area of the chamber trees at the HFE between 2008-4-15 and 2009-3-16, 
+based on height growth, litterfall rates, and leaf area estimates at the two dates. For details see the pdf
+"Leaf area development at the HFE.pdf" in the DOCs subfolder. 
+
+Note: do not use height data from this file, because height growth was modelled for 4 trees after 2009-2-3, when these trees 
+reached the top of the chamber (9.2m).
+
+
+chamber, Date: chamber number (>12 = outside tree) and Date.
+
+diameterlin,heightlin: tree diameter (at 65cm) and height from linear interpolation.
+
+LApotlin: "potential" tree leaf area (standing leaf area + cumulative litterfall) from linear interpolations.
+
+LAlittercumlin : cumulative litterfall (m2)
+
+LAestlin : Estimate of tree leaf area (LApotlin - LAlittercumlin) (m2)

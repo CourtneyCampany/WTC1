@@ -1,0 +1,9 @@
+
+Heights of branch insertion. Measured in April 2008 (heightfloor1) and again partially at the final harvest.
+
+
+chamber
+stemnumber - Stem number for forked trees
+branchnumber - Sequential branch number
+heightfloor1 - April2008 measurement (cm height from floor)
+heightfloor2 - March2009 measurement

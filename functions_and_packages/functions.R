@@ -1,5 +1,6 @@
 se <- function(x) sd(x)/sqrt(length(x))
 getP <- function(x)anova(x)[[5]][1]
+getR <- function(x)summary(x)$r.squared
 
 #----------------------------------------------------------------------
 #to.pdf function

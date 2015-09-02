@@ -1,0 +1,5 @@
+
+chamber			- all 18 trees (12 chamber trees + 6 controls)
+Stemsegmnt		- stem number (for forked trees)
+layerno			- layer no (1-6, numbered from bottom up)
+layerheightground	- height from *ground* to top of layer (cm)

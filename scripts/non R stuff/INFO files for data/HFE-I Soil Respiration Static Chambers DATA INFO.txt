@@ -1,0 +1,20 @@
+Short Description:
+HFE-I Soil Respiration data from static chambers
+
+Original files:
+
+
+Data Owner:
+
+
+Methods:
+
+
+Variables:
+chamber
+Collar			- A or B
+Date			- YYYY-MM-DD
+SoilCO2Efflux	- Soil CO2 flux (mgCO2/m2/h)
+Tsoil          	- Soil Temperature (C°)
+VWC				- % Volumetric Soil Moisture
+

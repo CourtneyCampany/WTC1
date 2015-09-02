@@ -1,0 +1,22 @@
+
+Wood density of cookies taken at final harvest.
+
+chamber	
+layerno	
+Stemsegmnt	- Stem number (for forked trees)
+doverbark	- Diameter over bark (cm)
+dunderbark	- Diameter under bark (cm)
+barkfreshweight	- Bark fresh mass (g)
+woodfreshweight	- Wood fresh mass (g)
+freshvolume	- Fresh volume (cm3)
+wbark	- Bark dry mass (g)
+wwood	- Wood dry mass (g)
+disk2freezer	- If "Yes", disk was taken to freezer
+disk3airdried	- If "Yes", disk was air-dried
+disk4ANU	- If "Yes", disk was reserved for ANU anatomy work.
+MelsDisk	- ?
+Comments
+
+
+
+layer no.	stem no.	Dia over bark (cm)	Dia under bark (cm)	FM bark	FM wood	Fresh Volume wood (cm3)	DM bark	DM wood	disk 2 (freezer) taken	disk 3 (air dried) taken	disk 4 (ANU at base only)	Mel's Disk	Comments

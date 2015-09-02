@@ -1,5 +1,5 @@
 # read root mass and total treemass with C flux
-root <- read.csv("calculated mass/root_mass.csv")
+root <- read.csv("calculated_mass/root_mass.csv")
   root$Date <- as.Date(root$Date)
 
 #treeC <- read.csv("whole_tree_csv/Tree Flux and Mass.csv")
@@ -8,8 +8,8 @@ treeC <- read.csv("whole_tree_csv/tree_mass_Cflux.csv")
   treeC$Date <- as.Date(treeC$Date)
 
 ##source packages and functions
-source("functions and packages/load packages.R")
-source("functions and packages/HFEI quick graph functions.R")
+source("functions_and_packages/load_packages.R")
+source("functions_and_packages/HFEI quick graph functions.R")
 
 
 ## quick plotting using functions

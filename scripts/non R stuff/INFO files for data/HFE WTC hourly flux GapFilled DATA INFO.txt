@@ -1,0 +1,50 @@
+Data owner: Craig Barton
+
+Processing and gap-filling: Remko Duursma
+
+
+Chamber flux measurements for HFE-I. The raw 14-minutely data were averaged over an hourly timestep.
+All missing data are included (that is, all timesteps are included even if there is no data whatsoever).
+Date range is from 2008-4-14 to 2009-3-6.
+
+Gapfilling for H2O and CO2 fluxes was done with SOLO (self-organizing linear output map) (see Abramowitz et al. 2005, 
+doi:10.1029/2005GL024419 or original reference Hsu et al. 2002 therein). This is a neural network, a self-fitting
+model that predicts the flux as a function of PAR, Tair, VPD and DOY. For both H2O and CO2, the flux per unit leaf 
+area was fitted with SOLO (and converted back to the total flux).
+
+
+Variables:
+DateTime    - YYYY-MM-DD HH:MM:SS (Time at the end of the hourly timestep)
+chamber	    - one of 12 chambers
+Date	      - YYY-MM-DD
+DOY	        - Day of year
+FluxH2Otot	- Total H2O flux (mol hour-1)
+FluxCO2tot	- Total CO2 flux (mol hour-1)
+LAestlin	  - Estimated tree leaf area (m2)
+VPDwtc	    - VPD in the chamber (kPa)
+VPDrot	    - VPD in the control shed (kPa)
+PAR	        - Photosynthetically active radiation (mumol m-2 s-1)
+RefCO2      - reference [CO2] (ppm)
+CO2L        - [CO2] in the chamber (ppm)
+Patm        - Atmospheric pressure (kPa)
+etleaf	    - Canopy average H2O flux (mmol m-2 s-1)
+aleaf	      - Canopy average CO2 flux (mumol m-2 s-1)
+gcan	      - Calculated canopy conductance (mol m-2 s-1)
+sunrise	    - time of sunrise (hours)
+sunset	    - time of sunset (hours)
+daylength	  - day length (hours)
+TAref	      - Air temperature (degC)
+Tsoil       - Soil T at 10cm depth (degC)
+LWPpred     - For droughted chambers, interpolated pre-dawn leaf water potential (MPa)
+TairRef		- Reference Air temperature from met data (better averaging) (degC)
+TairMet		- Air temperature from weather station (degC)
+VPDdem		- VPD at the demountable (from weather station dataset) (kPa)
+VPDmet      - VPD at the weather station(from weather station dataset) (kPa)
+PARfilled	- 1 if Gapfilled (using weather station data), 0 if original data.
+VPDwtcfilled - 1 if Gapfilled (using demountable VPD and a chamber-specific correction), 0 if original data
+LAfilled	- 1 if Gapfilled (linear interpolation), 0 if original data.
+CO2filled	- 1 if Gapfilled (using SOLO), 0 if original data
+FluxCO2totSOLO - Prediction from SOLO for CO2 flux (using PAR, TAref, VPDwtc and DOY)
+H2Ofilled 	- 1 if Gapfille (using SOLO), 0 if original data.
+FluxH2OtotSOLO - Prediction from SOLO for H2O flux (using PAR, TAref, VPDwtc and DOY)
+

@@ -10,29 +10,26 @@ library(doBy)
 # read harvest totals of mass and C flux by chmaber
 harvest_C <- read.csv("master_scripts/harvest_chamber.csv")
 
-#read in Leaf Area
-
-
 ##caluclate TBCA-----------------------------------------------------------------------------------------------------
 
 harvest_C$TBCA <- with(harvest_C, CO2cum - treeC)
 
 harvest_C$Fs_resid <- with(harvest_C, TBCA - (frootC_all + CrootC))
 
-write.csv(harvest_C[, c(1:2, 7:9, 15:16)], "calculated_mass/TBCA.csv", row.names = FALSE)
+#write.csv(harvest_C[, c(1:2, 7:9, 15:16)], "calculated_mass/TBCA.csv", row.names = FALSE)
 
-boxplot(TBCA ~treatment, data=harvest_C)
+#boxplot(TBCA ~treatment, data=harvest_C)
 
 below_means <- summaryBy(CO2cum+TBCA+Fs_resid ~ treatment, data=harvest_C, FUN=c(mean, se))
 
 
 ##simple plotting of tbca and residual ---------------------------------------------------------------------------------
 
-bar(TBCA, c(treatment), harvest_C, col="grey", xlab="",legend=FALSE, ylim=c(0, 15000),
-    half.errbar=FALSE, mar=c(5,5,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(3,1,0))
-
-bar(Fs_resid, c(treatment), harvest_C, col="grey", xlab="",legend=FALSE, ylim=c(0, 15000),
-    half.errbar=FALSE, mar=c(5,5,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(3,1,0))
+# bar(TBCA, c(treatment), harvest_C, col="grey", xlab="",legend=FALSE, ylim=c(0, 15000),
+#     half.errbar=FALSE, mar=c(5,5,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(3,1,0))
+# 
+# bar(Fs_resid, c(treatment), harvest_C, col="grey", xlab="",legend=FALSE, ylim=c(0, 15000),
+#     half.errbar=FALSE, mar=c(5,5,1,1),las=1,cex.axis=.8, cex.lab=1, cex.names=1,mgp=c(3,1,0))
 
 ###bar with both
 
@@ -49,7 +46,7 @@ cols <- c("grey30", "grey55", "grey85")
 
 ###plot belowground flux
 
-# windows(8,6)
+windows(7,7)
 par(mar=c(5,6,1,1),las=1, mgp=c(3,1,0), cex.axis=1, cex.lab = 1.25)
 
 below_bar <- barplot(below_dat, beside=TRUE, names.arg=below_means$treatment, ylim=c(0, 27500), col=cols, 
@@ -61,8 +58,8 @@ legend("topright",belowfluxlab, pch = 22,  bty='n', pt.bg=cols, cex=1.25)
 axis(side=1, at=c(2.5, 6.5, 10.5, 14.5), labels=boxlab, padj=.75, cex.axis=1.25)
 title(ylab="Carbon  (g)", mgp=c(4,1,0))
 
-# dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots.pdf")
-# dev.off() 
+dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots.pdf")
+dev.off() 
 
 
   

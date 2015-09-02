@@ -1,0 +1,7 @@
+
+Repeated tree height measurements done by Burhan Amiji. 
+Original dataset was cleaned (obviously bad data were hand-corrected).
+
+Date
+chamber
+Height - Total tree height (m)

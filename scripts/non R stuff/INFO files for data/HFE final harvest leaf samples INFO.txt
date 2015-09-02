@@ -1,0 +1,12 @@
+
+From each layer ca. 100 leaves were sampled.
+
+layerno - 1-5, counting from bottom layer
+leafcount - number of leaves in the sample
+leafFW - total leaf fresh weight (g)
+laminaFW - total lamina fresh weight (g)
+petioleFW - total petiole fresh weight (g)
+laminaarea - lamina area (cm2)
+petioleweight - petiole dry weight (g)
+laminaweight - lamina dry weight (g)
+comments
