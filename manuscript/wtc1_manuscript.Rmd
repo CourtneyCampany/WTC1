@@ -53,7 +53,9 @@ includeFigs <- TRUE
 ```{r, echo=FALSE}
 fluxmassfig <- "1"
 fluxmabfig <- "2"
-additivemassfig <- "3"
+lafig <- "3"
+fluxlafig <- "4"
+additivemassfig <- "5"
 ```
 
 
@@ -176,11 +178,22 @@ where F~[c,t]~ is the gross primary productivity (g C) of the each tree abovegro
 # Results
 
 ## Total canopy carbon flux, leaf area and whole tree carbon
-There was a strong linear relationship between F~[c,t]~ and harvested whole tree carbon (Figure `r fluxmassfig`). Both F~[c,t]~ and whole tree carbon were reduced under elevated CO~2~ (30.5 and 31.8%, respectively) while no effects of the drought treatment were detected (Table 1). Overall, F~[c,t]~ was correlated with total leaf area at the final harvest (P < 0.001, R2 = 0.59).    
+There was a postive linear relationship between F~[c,t]~ and both whole tree carbon (R^2^ = 0.81, Figure `r fluxmassfig`) and  M~[ab,t]~ (R^2^ = 0.72, Figure `r fluxmabfig`). F~[c,t]~ was significantly reduced by 30.5% under elevated CO~2~ (P = 0.043), while no effects of the drought treatment were detected. Similarily, both whole tree carbon and M~[ab,t]~ were reduced under elevated CO~2~  by 25.6 and 31.1%, respectively (both P < 0.04).
 
-## Tree carbon allocation
+\
+Across the final year of the experiment leaf area was generally reduced under elevated CO2 and with reductions resulting from drought apparent over the final 5 months (Figure `r lafig`). Overall, F~[c,t]~ was postively correlated with total leaf area at the final harvest (P < 0.001, R2 = 0.59, Figure `r fluxlafig`).    
+
+## Tree carbon allocation (harvest)
+Allocation of above and belowground tissue components was affected differtially by CO~2~ and drought treatments, yet no interactions between the treatments were detected (Table 1). The harvested standing mass of bole carbon was significantly reduced under elevated CO~2~ by 34.1% (P = 0.008) and marginally reduced under drought by 22.7% (P = 0.061). Total branch carbon mass was not affected by either treatment.  Final leaf carbon mass was significantly reduced by 39.8% in drought (P = 0.028), yet was unaffected under elevated CO~2~. Belowground there were no effects of either treatment detected with coarse root carbon mass, however, fine root carbon mass was significantly reducted with drought by 24.8% (P = 0.016).
+
+lmf, rmf, smf...be specific here about where the carbon went
 
 ## Total belowground carbon allocation
+ 
+*where does additive figure go*
+
+where carbon went, was it fixed or not
+
 
 # Discussion
 

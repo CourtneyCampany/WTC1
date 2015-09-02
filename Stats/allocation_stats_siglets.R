@@ -12,11 +12,6 @@ tbca <- read.csv("calculated_mass/TBCA.csv")
 tree_C <- merge(tree_C, tbca)
 tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
 
-
-###component stats (test co2, water and then both)
-
-#lm for linear, nlme for not
-
 ##1. bole---------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$boleC) ##appears normal
 
@@ -35,7 +30,6 @@ bole_co2 <- lm(boleC ~ CO2_treatment, data=tree_C)
   boleco2_siglets<- cld(tukey_boleco2)
   boleco2_siglets2 <- boleco2_siglets$mcletters$Letters
   ## reductions in bole mass with Eco2 by 34.1%
-  (mean(tree_C[tree_C$CO2_treatment=="ambient", "boleC"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "boleC"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "boleC"])
 
 bole_h20 <- lm(boleC ~ Water_treatment, data=tree_C) 
   anova(bole_h20)
@@ -72,31 +66,52 @@ branch_h20 <- lm(branchC ~ Water_treatment, data=tree_C)
 ## branch C not different by drought treatment
 
 
-##3. leafC + litter C---------------------------------------------------------------------------------------------------------------------  
-ad.test(tree_C$leafC_litterC) ##appears normal
+##3. leafC---------------------------------------------------------------------------------------------------------------------  
+ad.test(tree_C$leafC) ##appears normal
   
-leaf_mod <- lm(leafC_litterC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+leaf_mod <- lm(leafC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
   anova(leaf_mod)
   summary(leaf_mod)
-  plot(leaf_mod)
-  visreg(leaf_mod)
+
   
 ##no interactions so run simple mod for sig letters
-with(tree_C, boxplot(leafC_litterC~treatment))  
+with(tree_C, boxplot(leafC~treatment))  
 
-leaf_co2 <- lm(leafC_litterC ~ CO2_treatment, data=tree_C) 
+leaf_co2 <- lm(leafC ~ CO2_treatment, data=tree_C) 
   anova(leaf_co2)
   tukey_leafco2<- glht(leaf_co2, linfct = mcp(CO2_treatment= "Tukey"))
   leafco2_siglets<- cld(tukey_leafco2)
   leafco2_siglets2 <- leafco2_siglets$mcletters$Letters
   ## no difference in branch carbon with eco2
 
-leaf_h20 <- lm(leafC_litterC ~ Water_treatment, data=tree_C) 
+leaf_h20 <- lm(leafC ~ Water_treatment, data=tree_C) 
   anova(leaf_h20)
   tukey_leafh20 <- glht(leaf_h20, linfct = mcp(Water_treatment= "Tukey"))
   leafh20_siglets<- cld(tukey_leafh20)
   leafh20_siglets2 <- leafh20_siglets$mcletters$Letters  
-  ## leaf C reducted by 39.6% in drought
+  ## leaf C reducted by 39.8% in drought
+(mean(tree_C[tree_C$Water_treatment=="wet", "leafC"]) - mean(tree_C[tree_C$Water_treatment=="dry", "leafC"]))/mean(tree_C[tree_C$Water_treatment=="wet", "leafC"])
+  
+  
+##3. litter C---------------------------------------------------------------------------------------------------------------------  
+ad.test(tree_C$litterC) ##appears normal
+  
+leaf_mod <- lm(litterC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+  anova(leaf_mod)
+  summary(leaf_mod)
+  
+##no interactions so run simple mod for sig letters
+litter_co2 <- lm(litterC ~ CO2_treatment, data=tree_C) 
+  tukey_litterco2<- glht(litter_co2, linfct = mcp(CO2_treatment= "Tukey"))
+  litterco2_siglets<- cld(tukey_litterco2)
+  litterco2_siglets2 <- litterco2_siglets$mcletters$Letters
+
+  
+litter_h20 <- lm(litterC ~ Water_treatment, data=tree_C) 
+  tukey_litterh20 <- glht(litter_h20, linfct = mcp(Water_treatment= "Tukey"))
+  litterh20_siglets<- cld(tukey_litterh20)
+  litterh20_siglets2 <- litterh20_siglets$mcletters$Letters  
+  
   
 
 ##3. Coarse Root---------------------------------------------------------------------------------------------------------------------  
@@ -106,8 +121,6 @@ with(tree_C, boxplot(CrootC~treatment))
 Croot_mod <- lm(CrootC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
   anova(Croot_mod)
   summary(Croot_mod)
-  plot(Croot_mod)
-  visreg(Croot_mod)  
   
 Croot_co2 <- lm(CrootC ~ CO2_treatment, data=tree_C)  
 Croot_h20 <- lm(CrootC ~ Water_treatment, data=tree_C)

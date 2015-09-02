@@ -6,6 +6,7 @@ library(RVAideMemoire)
 
 ##need final harvest values (not treatmen means)
 tree_C <- read.csv("master_scripts/harvest_chamber.csv")
+tree_C$totaltree <- with(tree_C, branchC+boleC+leafC_litterC+frootC_all+CrootC)
 
 ##need TBCA to add to roots
 tbca <- read.csv("calculated_mass/TBCA.csv")
@@ -13,12 +14,30 @@ tbca <- read.csv("calculated_mass/TBCA.csv")
 tree_C <- merge(tree_C, tbca)
 tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
 
+###total tree----------------------------------------------------------------------------------------------------------------
+ad.test(tree_C$totaltree) ##appears normal
+with(tree_C, boxplot(totaltree~treatment))
 
-###component stats (test co2, water and then both)
+tree_mod <- lm(totaltree ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+anova(tree_mod)
+summary(tree_mod)
+plotresid(tree_mod)
+visreg(tree_mod)
+       
+(mean(tree_C[tree_C$CO2_treatment=="ambient", "totaltree"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "totaltree"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "totaltree"])
 
-#lm for linear, nlme for not
+###M,ab----------------------------------------------------------------------------------------------------------------
+ad.test(tree_C$treeC) ##appears normal
+with(tree_C, boxplot(treeC~treatment))
 
-##1. co2 uptake------------------------------------------------------------------------------------------------------------------
+Mab_mod <- lm(treeC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+anova(Mab_mod)
+summary(Mab_mod)
+plotresid(Mab_mod)
+visreg(Mab_mod)
+
+
+##co2 uptake------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$CO2cum) ##appears normal
 with(tree_C, boxplot(CO2cum~treatment))
 
