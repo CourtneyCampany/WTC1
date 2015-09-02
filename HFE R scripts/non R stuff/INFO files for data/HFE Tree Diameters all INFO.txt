@@ -1,7 +1,0 @@
-
-Stem diameter measurements at various heights on the stem (taper data).
-
-Date,chamber
-Stemsegmnt - Stem number (for forked stems)
-Pathlength - Distance from ground (i.e. following leaning stems) (cm)
-Diameter - Stem diameter (cm)

@@ -1,7 +1,0 @@
-
-Tree diameters at 65cm above the ground - used as standard diameter because none of the trees (except tree nr 18!)
-have forks that low, and measurements a this height are available for a long period (unlike DBH, for example).
-
-Date	
-chamber	
-Diameter - Stem diameter (cm)

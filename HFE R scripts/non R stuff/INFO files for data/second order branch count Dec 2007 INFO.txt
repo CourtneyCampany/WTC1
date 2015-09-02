@@ -1,5 +1,0 @@
-species				
-chamber				Chamber number (> 12 = reference tree)
-treenumber			Sequential tree number
-branchnumber		Sequential branch number
-nbranches2			Number of 'side-branches', or second-order branches if branches coming from the stem are first-order branches.
