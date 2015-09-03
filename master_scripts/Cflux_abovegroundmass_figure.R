@@ -1,25 +1,16 @@
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
-library(plotrix)
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
+# library(plotrix)
 
 treeC <- read.csv("master_scripts/harvest_chamber.csv")
   treeC$Date <- as.Date(treeC$Date)
 
   
-#linear model to show fit on graph
-#   library(nortest) 
-#   ad.test(treeC$treeC)
-#   ad.test(treeC$CO2cum)  
-  
 diurnalmodel <- lm(treeC ~ CO2cum, data = treeC)
   summary(diurnalmodel)
   anova(diurnalmodel)
   
-# modeltrt<- lm(treeC ~ CO2cum*CO2_treatment*Water_treatment, data = treeC)
-#   anova(modeltrt)  
-###no treatment affects on correlation between co2flux and mass above ground
-  
-getP(diurnalmodel)
+# getP(diurnalmodel)
   
 ##plot with total flux
 palette (c("blue", "red"))
@@ -35,6 +26,6 @@ ablineclip(diurnalmodel, x1=min(treeC$CO2cum), x2=max(treeC$CO2cum),lwd=2)
 abline(0, 1, lty=3, lwd=2)
 points(treeC ~ CO2cum, data = treeC,pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5)
   
-#  dev.copy2pdf(file= "master_scripts/paper_figs/flux_abovemass.pdf")
-#  dev.off()
+# dev.copy2pdf(file= "master_scripts/paper_figs/flux_abovemass.pdf")
+# dev.off()
   

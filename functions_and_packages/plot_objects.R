@@ -11,8 +11,8 @@ ypos <- c(2.5,1,0)
 
 trtlab <-c(expression(aCO[2]),expression(eCO[2]), "Wet", "Dry")
 
-leglab2 = c(expression(paste(aCO[2], " " ,"wet")), expression(paste(aCO[2], " " ,"dry")),
-            expression(paste(eCO[2], " " ,"wet")), expression(paste(eCO[2], " " ,"dry")))
+leglab2 = c(expression(paste(aCO[2], ", " ,"wet")), expression(paste(aCO[2], ", " ,"dry")),
+            expression(paste(eCO[2], ", " ,"wet")), expression(paste(eCO[2], ", " ,"dry")))
 
 
 rmflab <- expression(RMF~~(g~g^-1))

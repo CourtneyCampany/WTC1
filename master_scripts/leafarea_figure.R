@@ -1,4 +1,4 @@
-source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/plot_objects.R")
 
 ##need to determine final leaves mass for correlations with GPP and TBCA
 
@@ -11,6 +11,9 @@ chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
   chambersumm <- droplevels(chambersumm[,1:3])
 
 leafarea <- merge(leafarea, chambersumm)
+
+# leafarea_final <- leafarea[leafarea$Date == max(leafarea$Date),]
+# write.csv(leafarea_final, "calculated_mass/leafarea_final.csv", row.names=FALSE)
 
 ##order by date
 leafarea <- leafarea[order(leafarea$Date),]
@@ -44,7 +47,7 @@ plot(LAestlin ~ Date, data=leafarea, type='n',ylab=leaflab,  xaxt='n', xlab="", 
   
 legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
   
-dev.copy2pdf(file="master_scripts/paper_figs/leafarea.pdf")
-dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figs/leafarea.pdf")
+# dev.off() 
   
 

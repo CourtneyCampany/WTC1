@@ -1,33 +1,32 @@
 ###this script visualizes allocation to different components by treatment
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
-library(plotrix)
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
+# library(plotrix)
 
 ##need final harvest values (not treatmen means)
 tree_C <- read.csv("master_scripts/harvest_chamber.csv")
 
 ##calculated component fractions
 tree_C$tree_total <- with(tree_C, branchC+boleC+leafC+litterC+frootC_all+CrootC)
-
-tree_C$lmf <- with(tree_C, leafC_litterC/tree_total)
-tree_C$smf <- with(tree_C, (branchC+boleC)/tree_total)
-tree_C$rmf <- with(tree_C, (frootC_all + CrootC)/tree_total)
+  tree_C$lmf <- with(tree_C, leafC_litterC/tree_total)
+  tree_C$smf <- with(tree_C, (branchC+boleC)/tree_total)
+  tree_C$rmf <- with(tree_C, (frootC_all + CrootC)/tree_total)
 
 ##order by treatment
 tree_C <- tree_C[order(tree_C$treatment),]
 
 #simple mode for abline and sig
 lmfmod <- lm(lmf ~ tree_total, data = tree_C)
-  plmf <- round(getP(lmfmod),3)
-  r2lmf <- round(getR(lmfmod),2)
+#   plmf <- round(getP(lmfmod),3)
+#   r2lmf <- round(getR(lmfmod),2)
 
 smfmod <- lm(smf~ tree_total, data = tree_C)
-  psmf <- round(getP(smfmod),3)
-  r2smf <- getR(smfmod)
+#   psmf <- round(getP(smfmod),3)
+#   r2smf <- getR(smfmod)
 
 rmfmod <- lm(rmf ~ tree_total, data = tree_C)
-  prmf <- round(getP(rmfmod),3)
-  r2rmf <- getR(rmfmod)
+#   prmf <- round(getP(rmfmod),3)
+#   r2rmf <- getR(rmfmod)
 
 
 ####plot bits (palette and custom axes)
@@ -38,11 +37,9 @@ at.y3 <- seq(.2, by=.1, length.out=5)
 
 at.x <- seq(5000, by=5000, length.out=5)
 
-###Lets try a 3 panel box plotwith LMF, RMF, SMF by treatment
-##remove colors for now.. border=cols,
-##code to reduce plot size for spacing is at.x (took out atm)
+###3 panel box plotwith LMF, RMF, SMF by treatment
 
-windows(7,7)
+# windows(7,7)
 
 par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(3,1), oma=c(5, 0, 2,0))  
 #lmf
@@ -69,6 +66,6 @@ axis(1, at=at.x ,labels=TRUE, outer=TRUE)
 title(ylab=rmflab, mgp=c(4,1,0))
 mtext(treeclab, side=1, outer=TRUE, line=3)
 
-dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
-dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
+# dev.off() 
    
