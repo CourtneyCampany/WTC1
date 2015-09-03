@@ -55,7 +55,8 @@ fluxmassfig <- "1"
 fluxmabfig <- "2"
 lafig <- "3"
 fluxlafig <- "4"
-additivemassfig <- "5"
+massfracfig <- "5"
+additivemassfig <- "6"
 ```
 
 
@@ -186,7 +187,7 @@ Across the final year of the experiment leaf area was generally reduced under el
 ## Tree carbon allocation (harvest)
 Allocation of above and belowground tissue components was affected differtially by CO~2~ and drought treatments, yet no interactions between the treatments were detected (Table 1). The harvested standing mass of bole carbon was significantly reduced under elevated CO~2~ by 34.1% (P = 0.008) and marginally reduced under drought by 22.7% (P = 0.061). Total branch carbon mass was not affected by either treatment.  Final leaf carbon mass was significantly reduced by 39.8% in drought (P = 0.028), yet was unaffected under elevated CO~2~. Belowground there were no effects of either treatment detected with coarse root carbon mass, however, fine root carbon mass was significantly reducted with drought by 24.8% (P = 0.016).
 
-lmf, rmf, smf...be specific here about where the carbon went
+Final LMF was marginally greater under elevated CO2 (P = 0.0557), largely due to reductions in LMF in drought treatments under ambient CO~2~ (Table). Final LMF was not correlated with F~[c,t]~ (R^2^ = 0.03, Figure `r massfracfig`a). Final SMF was reduced by 12% under elevated CO2 (P = 0.022), with no effect of the drought treatment detected.  Final SMF was postively correlated with F~[c,t]~ (R^2^ = 0.59, Figure `r massfracfig`b). There was a marginally interaction of drought and CO~2~ detected with final RMF as increases in RMF detected under elevated CO~2~ in wet treatments only (CO~2~ x Water, P = 0.064).  Final RMF was negatively correalted with F~[c,t]~ (R^2^ = -0.48, Figure `r massfracfig`c).
 
 ## Total belowground carbon allocation
  
