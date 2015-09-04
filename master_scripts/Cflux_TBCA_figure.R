@@ -1,7 +1,7 @@
 ##this scrpt visualizes the relationship between leaf area and TBCA and Cflux by treatment
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
-library(doBy)
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
+# library(doBy)
 
 ## treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
@@ -42,8 +42,8 @@ flux_la <- merge(fluxC, leafarea_agg, all=FALSE)
     
 ###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------
 palette(c("blue", "red"))
-
-windows(7,7)
+ 
+# windows(7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 plot(TBCA~CO2cum, data=flux_la,  type='n',ylab="", xlab=treefluxlab)
 
@@ -56,8 +56,8 @@ title(ylab=tbcalab, mgp=c(4,1,0))
 legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
 abline(0, 1, lty=3, lwd=2)
 
-dev.copy2pdf(file="master_scripts/paper_figs/tbca_cflux.pdf")
-dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figs/tbca_cflux.pdf")
+# dev.off() 
 
 ###all WTC-----------------
 # windows(7,7)
