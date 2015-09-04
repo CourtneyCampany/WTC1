@@ -1,6 +1,6 @@
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
-library(plotrix)
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
+# library(plotrix)
 
 #read data for cumulative C flux and harvest mass
 treeC <- read.csv("calculated_mass/chamber_carbon.csv")
@@ -21,7 +21,7 @@ palette (c("blue", "red"))
 
 #CO2 flux to harvest mass scatter plot--------------------------------------------------------------------------------------------
 
-windows (7,7)
+# windows (7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=.8,  mgp=c(3,1,0), mfrow=c(2,1), oma=c(5,6,1,1))
 
 #whole tree
@@ -49,7 +49,7 @@ plot(1,type='n', ylab = "",xlab="",xlim = c(0, 30000),ylim = c(0, 30000))
   points(Mab ~ Cflux, data = treeC,pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5)
   text(x=30000, y=27500, labels="(b)", cex=1.25)
  
- dev.copy2pdf(file= "master_scripts/paper_figs/flux_treecarbon.pdf")
- dev.off()
+#  dev.copy2pdf(file= "master_scripts/paper_figs/flux_treecarbon.pdf")
+#  dev.off()
 
 
