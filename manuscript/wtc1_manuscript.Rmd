@@ -34,6 +34,7 @@ opts_knit$set(root.dir = '../')
 source("functions_and_packages/plot_objects.R")
 source("functions_and_packages/functions.R")
 library(plotrix)
+library(doBy)
 ```
 
 
@@ -170,9 +171,6 @@ Dry root mass was calculated as a total standing crop from soil excavation durin
 ## Above and belowgrount chamber CO^2^ flux
 Chamber flux measurements were calculated as an hourly time step generated from the average of the raw 14 min (mol hour^-1^) from each chamber.  Missing CO~2~ flux data was gap filled r with SOLO (self-organizing linear output map) (see Abramowitz et al. 2005). This is a neural network, a self-fitting model that predicts the flux as a function of PAR, Tair, VPD and day of year. The flux per unit leaf area was fitted with SOLO and converted back to the total flux. For this analysis diurnal CO~2~ chamber fluxes, between sunrise and sunset, were converted to grams of carbon per chamber flux area (10 m^2^).  The daily cumulative sum of the chamber carbon flux was generated of the last year of the experiment to compare with carbon allocation of plant components.  
 
-\
-Soil respiration (g CO~2~ m^2^ h^-1^) over the analyses period was measured monthly from two soil collars measured by an IRGA (Vaisala) and static chambers ().  Both soil collars were averaged and one measurement per static chamber was recorded for each WTC.  It is assumed that measurements taken between the two methods are similar, which allows for a more integrated respiration flux to me estimated over the final year of the experiment. 
-
 ## TBCA
 As the installation of floors into each WTC seperated the aboveground carbon uptake from the soil carbon efflux total belowground carbon allocation (TBCA) was then calculated as:
 
@@ -202,55 +200,70 @@ Within individual treatments the additive carbon mass of each tree component (bo
 # Discussion
 
 # List of Tables
-# Tables {.unnumbered}
-# List of Figures
-# Figures {.unnumbered}
 
-**Figure 1**. 
-```{r c_fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+# Tables {.unnumbered}
+
+# List of Figures
+**Figure 1**.  Treatment means of harvested whole tree carbon mass (a) and abovegroudn carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid line represents the significant linear model fit (R^2^=0.81).
+
+**Figure 2**.
+
+# Figures {.unnumbered}
+```{r fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_harvestmass_figure.R")
 ```
-
 \
-**Figure 2**.
-```{r c_fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+**Figure 1**. 
+
+```{r fluxmab, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_abovegroundmass_figure.R")
 ```
-
 \
-**Figure 3**. 
+**Figure 2**.
+
 ```{r leafarea, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/leafarea_figure.R")
 ```
-
 \
-**Figure 4**. 
-```{r c_fluxla, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+**Figure 3**. 
+
+```{r fluxla, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_leafarea_figure.R")
 ```
 \
-**Figure 5**. 
+**Figure 4**. 
+
 ```{r c_allocation, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/C_allocation_figure.R")
 ```
-
 \
-**Figure 6**. 
-```{r c_cumulative, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+**Figure 5**. 
+
+```{r c_cumulative, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/cumulativecarbon_figure.R")
 ```
-
 \
-**Figure 7**. 
-```{r c_cumulative, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+**Figure 6**. 
+
+```{r belowbar, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/tbca_figure.R")
 ```
-
 \
-**Figure 8**. 
-```{r c_cumulative, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+**Figure 7**. 
+
+```{r tbcaflux, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_TBCA_figure.R")
 ```
+\
+**Figure 8**. 
+
+# Supporting Information {.unnumbered}
+
+```{r chambers, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+source("master_scripts/cumulativecarbon_cham_figure.R")
+```
+\
+**Figure S1**.
 
 
 # References {.unnumbered}

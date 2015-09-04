@@ -20,13 +20,13 @@ smflab <- expression(SMF~~(g~g^-1))
 lmflab <- expression(LMF~~(g~g^-1))
 
 
-boxlab <- c(expression(atop(aCO[2],Drought)), expression(atop(aCO[2],Control)), expression(atop(eCO[2],Drought)),
-            expression(atop(eCO[2],Control)))
+boxlab <- c(expression(atop(aCO[2], Dry)), expression(atop(aCO[2], Wet)), expression(atop(eCO[2], Dry)),
+            expression(atop(eCO[2], Wet)))
 
 
 dayClab <- c("Carbon Flux", "Bole", "+Branch", " +Leaf and Litter", "  +Fine Root", "   +Coarse Root")
 
 belowfluxlab <- c("Tree Carbon Flux", "TBCA", fslab)
 
-Mablab <- "Aboveground Carbon Mass  (g C)"
+Mablab <- "Aboveground Carbon  (g C)"
 treeclab <- "Whole Tree Carbon  (g C)"
