@@ -4,7 +4,7 @@
 #and/or when the tall tree surverys occured
 
 #read raw data
-source("HFE chamber read data.R")
+source("master_scripts/HFE_chamber_read_data.R")
 
 #choose dates with surveys over 310cm in last year
 selectdates <- as.Date(c("2003-03-04", "2008-03-11", "2008-03-18", "2008-03-25", 
@@ -17,10 +17,10 @@ stemD310 <- subset(stem_diameters, Date %in% selectdates)
 
 #Read tree top heights, convert to cm, set top height diameter to .001cm
 stemH1<-subset(stem_height, Date %in% selectdates)
-names(stemH1)[3] <- "Pathlength"
-stemH1$Pathlength <- stemH1$Pathlength*100
-stemH1$Diameter <- as.numeric(ifelse(stemH1$Pathlength >0, ".001", "NA"))
-stemH1$Stemsegmnt <- ifelse(stemH1$Pathlength >0, "1", "NA")
+  names(stemH1)[3] <- "Pathlength"
+  stemH1$Pathlength <- stemH1$Pathlength*100
+  stemH1$Diameter <- as.numeric(ifelse(stemH1$Pathlength >0, ".001", "NA"))
+  stemH1$Stemsegmnt <- ifelse(stemH1$Pathlength >0, "1", "NA")
 
 # merge stem diameters with top height data
 stem <- rbind(stemD310, stemH1)
@@ -29,19 +29,19 @@ stem <- stem[chamberorder,]
 
 #calcualte length each cookie represents above 65cm only
 stem_high <- subset(stem, stem$Pathlength > 65)
-stem_high$Lengthvalue <- ifelse(stem_high$Diameter == .001, 15, 30)
+  stem_high$Lengthvalue <- ifelse(stem_high$Diameter == .001, 15, 30)
 
 #calculate base stem metrics, add taper below 65cm
 stem_low <- subset(stem_diameters, stem_diameters$Pathlength == 65 & Date %in% selectdates)
 
 stemH2 <- subset(stem_height, Date %in% selectdates)
-stemH2$Height <- stemH2$Height * 100 #convert m to cm
+  stemH2$Height <- stemH2$Height * 100 #convert m to cm
 
 #estimate Diameter (from cone equations) for 30cm and base
 BaseDiameter <- merge(stem_low, stemH2)
-BaseDiameter$BaseD <- with(BaseDiameter, (((Diameter*Pathlength)+(Height*Diameter))/Height))
-BaseDiameter$MidPath <- 30
-BaseDiameter$MidD <- with(BaseDiameter, (((Diameter*MidPath)+(Height*Diameter))/Height))
+  BaseDiameter$BaseD <- with(BaseDiameter, (((Diameter*Pathlength)+(Height*Diameter))/Height))
+  BaseDiameter$MidPath <- 30
+  BaseDiameter$MidD <- with(BaseDiameter, (((Diameter*MidPath)+(Height*Diameter))/Height))
 
 #seperate, rename and bind diameters (<65cm) and pathlengths
 midDiameter <- BaseDiameter [, c("Date", "chamber", "MidPath", "MidD")]
@@ -52,18 +52,18 @@ stumpDiameter$Pathlength <- 5
 names(stumpDiameter)[4] <- "Diameter"
 
 mainstem <- rbind(midDiameter, trunkDiameter)
-mainstem <- rbind(mainstem, stumpDiameter)
-chamberorder <- order(mainstem$chamber, by=mainstem$Date)
-mainstem<-mainstem[chamberorder,]
-mainstem$Lengthvalue <- ifelse(mainstem$Pathlength == 65, 30, mainstem$Pathlength)
-mainstem$Stemsegmnt <- 1
+  mainstem <- rbind(mainstem, stumpDiameter)
+  chamberorder <- order(mainstem$chamber, by=mainstem$Date)
+  mainstem<-mainstem[chamberorder,]
+  mainstem$Lengthvalue <- ifelse(mainstem$Pathlength == 65, 30, mainstem$Pathlength)
+  mainstem$Stemsegmnt <- 1
 
 # merge base and stem diameters and calculate volume
 baseD <- subset(mainstem, select = c("Date", "chamber", "Pathlength", "Diameter", "Lengthvalue", "Stemsegmnt"))
 stemV <- rbind(stem_high, baseD)
-chamberorder<-order(stemV$chamber, by=stemV$Date)
-stemV <- stemV[chamberorder,]
-stemV$Volume <- ((((stemV$Diameter/2)^2)*(pi))*stemV$Lengthvalue)
+  chamberorder<-order(stemV$chamber, by=stemV$Date)
+  stemV <- stemV[chamberorder,]
+  stemV$Volume <- ((((stemV$Diameter/2)^2)*(pi))*stemV$Lengthvalue)
 
 #calculate stem density parameter
 #determine mass and densty per cm for each layer/stem segmnt
@@ -71,11 +71,11 @@ density <- subset(stem_density,select = c("chamber", "layerno", "Stemsegmnt",  "
 
 #density parameter calculations
 density$height_cookie <- density$freshvolume / (pi*((density$doverbark/2)^2))
-density$woodV <- (((density$dunderbark/2)^2)*pi)*density$height_cookie
-density$wood_density <- density$wwood / density$woodV
-density$BarkV <- density$freshvolume - density$woodV
-density$bark_density <- density$wbark / density$BarkV
-density$barkdiam <- with(density, doverbark - dunderbark)
+  density$woodV <- (((density$dunderbark/2)^2)*pi)*density$height_cookie
+  density$wood_density <- density$wwood / density$woodV
+  density$BarkV <- density$freshvolume - density$woodV
+  density$bark_density <- density$wbark / density$BarkV
+  density$barkdiam <- with(density, doverbark - dunderbark)
 
 #calculate bark:wood diamter ratio
 density$Bark_Wood <- with(density, barkdiam / dunderbark)
@@ -155,8 +155,6 @@ bole310_sp <- lapply(bole310_sp, function(z){
 })
 bole310_pred <- do.call(rbind, bole310_sp)
 
-#plot interpolated values
-plot(bole310_pred$Date, bole310_pred$bole_pred)
 
 #write to calcualted mass subfolder
 write.csv(Bole310_Mass, file = "calculated mass/bole310 mass.csv", row.names=FALSE)
