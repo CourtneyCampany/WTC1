@@ -1,15 +1,18 @@
 #read in calculated aboveground component masses, Cfluxes, and plot summary
 
-bole <- read.csv("calculated mass/bole310 mass.csv")
-branch <- read.csv("calculated mass/branch mass.csv")
-leaf <- read.csv("calculated mass/leaf mass.csv")
-Cflux <- read.csv("calculated mass/chamber C flux.csv")
-leafpercC <- read.csv("calculated mass/leaf percent carbon.csv")
+bole <- read.csv("calculated_mass/bole310 mass.csv")
+branch <- read.csv("calculated_mass/branch mass.csv")
+##litter , estimates vs harvest total???
+
+##i think cflux and leaf carbon is good
+Cflux <- read.csv("calculated_mass/chamber_C_flux.csv")
+leafcarbon <- read.csv("calculated_mass/leaf_carbon.csv")
+
 
 # chamber treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
-chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
-chambersumm <- droplevels(chambersumm[,1:3])
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
 
 
 #C MASS vs C FLUX

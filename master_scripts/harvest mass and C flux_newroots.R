@@ -1,14 +1,32 @@
+##Calculate carbon mass of each tissue compenent from final harvest
 
-#read data
-source("master_scripts/HFE chamber read data.R")
-leafpercC <- read.csv("calculated_mass/leaf percent carbon.csv")
+
+#read data------------------------------------------------------------------------------------------------------------------------
+
+# chamber treatments
+chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
+
+leafpercC <- read.csv("calculated_mass/leaf_percent_carbon.csv")
 treemass <- read.csv("raw csv/HFE final DM totals.csv")
 rootmass <- read.csv("calculated_mass/root_mass.csv")
 
 litter <- read.csv("calculated_mass/leafarea_final.csv")
 
+#extra biomas from CWD, damage, or removal
+extra_mass <- read.csv("raw csv/HFE extra plant mass.csv")
+  extra_mass$xleaf <- with(extra_mass,damage_leaf+ removed_leaf)
+  extra_mass$cwd <- with(extra_mass, damage_branch + branch_litter + bark_litter + harvest_branch_litter +
+                           harvest_bark_litter + removed_branch)
 
-#HARVEST mass data, add all components, subset totalmass and divide by .5 for carbon
+  
+##tree chamber flux
+source("component script/raw_flux_chamber.R")
+  
+
+#HARVEST mass data, add all components, subset totalmass and divide by .5 for carbon----------------------------------------------
+  
 treemass1<-subset(treemass, chamber %in% c("ch01", "ch02","ch03","ch04","ch05","ch06","ch07","ch08","ch09","ch10","ch11","ch12"))
 treemass1 <- droplevels(treemass1)
 
@@ -16,7 +34,7 @@ treemass1 <- droplevels(treemass1)
 moremass <- extra_mass[,c("chamber", "xleaf", "cwd")]
 treemass1 <- merge(treemass1, moremass, by = "chamber")
 
-  #for roots use data from root_mass script which is fine roots scales from cores
+  #for roots use data from root_mass script which is fine roots scaled from cores
   #and coarse roots summed from harvest and cores
   treemass1 <- merge(treemass1, rootmass[,1:3], by="chamber")
 
