@@ -1,10 +1,24 @@
-#all raw data here:
-source("HFE chamber read data.R")
+###read in chamber summary, harvest mass with leaf mass, leaf area est--------------------------------------------------------
 
-#LEAF MASS
+#chamber treatments
+chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
+
+#final harvest mass
+harvest_mass <- read.csv("raw csv/HFE final harvest biomass by layer.csv")
+  harvest_mass <- subset(harvest_mass, chamber %in% unique(chambersumm$chamber))
+  harvest_mass <- droplevels(harvest_mass)
+  
+#leaf area estimates
+leafA_est <- read.csv("raw csv/HFE LA estimates alldates.csv")
+  leafA_est$Date <- as.Date(leafA_est$Date)
+  
+#LEAF MASS over final year-------------------------------------------------------------------------------------------
+  
 # from harvest calculate SLA, assume SLA is constant through time to calculate mass from area
 leafM <- subset(harvest_mass, select =c("chamber",  "layerno", "LA", "Wleaf"))
-names(leafM)[3:4] <- c("leafarea", "leafmass")
+  names(leafM)[3:4] <- c("leafarea", "leafmass")
 
 ##tree totals(sum layers)
 leafM_agg <- aggregate(cbind(leafarea, leafmass) ~ chamber, FUN = sum, data = leafM)
@@ -20,4 +34,4 @@ leafA_est$leafmass <- with(leafA_est, (LAestlin / SLA)*1000)
 
 
 #write leaf mass to subfolder
-write.csv(leafA_est, file = "calculated mass/Leaf Mass.csv", row.names=FALSE)
+write.csv(leafA_est, file = "calculated_mass/Leaf Mass.csv", row.names=FALSE)
