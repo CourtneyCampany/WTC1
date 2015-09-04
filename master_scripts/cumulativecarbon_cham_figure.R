@@ -1,4 +1,4 @@
-source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/plot_objects.R")
 
 treeC <- read.csv("whole_tree_csv/tree_C_flux.csv")
   treeC$Date <- as.Date(treeC$Date)
@@ -24,9 +24,9 @@ LWD <- 2
 #axis.Date(1, at = xAT, labels = T)
 
 ##plot 12 panel with treatment means---------------------------------------------------------------------------------
-windows (8,11)
+# windows (8,11)
 
-par(mfrow=c(4,3), las=1, mgp=c(3.5,1,0), oma=c(5,5,1,1),mar=c(0,0,0,0))
+par(mfrow=c(4,3), las=1, mgp=c(3.5,1,0), oma=c(4,6,1,1),mar=c(0,0,0,0))
 
 #1: chamber1
 plot(CO2cum ~ Date, data = treeC[treeC$chamber == "ch01",], axes=FALSE, ylab="", xlab="",ylim=c(0, 27500),lwd=LWD, type = 'l')
@@ -71,6 +71,8 @@ points(bolebranch ~ Date , data = treeC[treeC$chamber == "ch04",], lwd=LWD,type 
 points(aboveC ~ Date , data = treeC[treeC$chamber == "ch04",], lwd=LWD,type = 'l',lty=5)
 box()
 text(x=14040, y=27500, label = "Chamber 4", cex=1.25, font=2) 
+mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.75)
+mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.25)
 
 points(aboveplusfine ~ Date , data = finalC[finalC$chamber == "ch04",], pch = 21, bg = "grey", cex=2)
 points(allC ~ Date , data = finalC[finalC$chamber == "ch04",],pch = 23, bg="grey", cex=2)
@@ -87,7 +89,7 @@ text(x=14040, y=27500, label = "Chamber 5", cex=1.25, font=2)
 points(aboveplusfine ~ Date , data = finalC[finalC$chamber == "ch05",], pch = 21, bg = "grey", cex=2)
 points(allC ~ Date , data = finalC[finalC$chamber == "ch05",],pch = 23, bg="grey", cex=2)
 
-#6: chmaber6
+#6: chamber6
 plot(CO2cum ~ Date, data = treeC[treeC$chamber == "ch06",], axes=FALSE, ylab="", xlab="",ylim=c(0, 27500),lwd=LWD, type = 'l')
 points(boleC ~ Date,  data = treeC[treeC$chamber == "ch06",],lwd=LWD,type = 'l',lty=3)
 points(bolebranch ~ Date , data = treeC[treeC$chamber == "ch06",], lwd=LWD,type = 'l',lty=2)
@@ -170,8 +172,7 @@ points(aboveplusfine ~ Date , data = finalC[finalC$chamber == "ch12",], pch = 21
 points(allC ~ Date , data = finalC[finalC$chamber == "ch12",],pch = 23, bg="grey", cex=2)
 axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
 
-
-dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily_chambers.pdf")
-dev.off()
+# dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily_chambers.pdf")
+# dev.off()
 
 
