@@ -5,28 +5,27 @@
 ##need to determine final leaves mass for correlations with GPP and TBCA
 
 leafarea <- read.csv("raw csv/HFE LA estimates alldates.csv")
-leafarea$Date <- as.Date(leafarea$Date)
+  leafarea$Date <- as.Date(leafarea$Date)
 
 ## treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
-chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
-chambersumm <- droplevels(chambersumm[,1:3])
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
 
 leafarea <- merge(leafarea, chambersumm)
 
 leafarea_final <- leafarea[leafarea$Date == max(leafarea$Date),]
 
 ##Read in total chamber flux
-treeC <- read.csv("master_scripts/harvest_chamber.csv")
-  treeC$Date <- as.Date(treeC$Date)
+treeC <- read.csv("calculated_mass/chamber_carbon.csv")
   
 ###merge leaf area with chamber flux
 
-leafflux <- merge(leafarea_final[,c(1,7:9)],treeC[, c(1,11)] )  
+leafflux <- merge(leafarea_final[,c(1,7:9)],treeC[, c(1:2)] )  
 
 #   library(nortest) 
 #   ad.test(leafflux$LAestlin)
-leaffluxlmodel <- lm(LAestlin ~ CO2cum, data = leafflux)
+leaffluxlmodel <- lm(LAestlin ~ Cflux, data = leafflux)
 getP(leaffluxlmodel)
 
 
@@ -40,8 +39,8 @@ plot(1,type='n', ylab = "",xlab=treefluxlab,xlim = c(0, 30000), ylim = c(0, 100)
 
 title(ylab=leaflab, mgp=c(4,1,0))
 legend("topleft", leglab2, pch=c(19,1, 19, 1), col=c("blue", "blue", "red", "red"), inset = 0.01, bty='n')
-ablineclip(leaffluxlmodel, x1=min(leafflux$CO2cum),x2=max(leafflux$CO2cum),lwd=2)
-points(LAestlin ~ CO2cum, data = leafflux,pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5)
+ablineclip(leaffluxlmodel, x1=min(leafflux$Cflux),x2=max(leafflux$Cflux),lwd=2)
+points(LAestlin ~ Cflux, data = leafflux,pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5)
 #mtext("p =0.001, R = 0.60", side = 1, line = -3, cex = 1)
 
 # dev.copy2pdf(file= "master_scripts/paper_figs/flux_leafarea.pdf")
