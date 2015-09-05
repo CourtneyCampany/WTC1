@@ -13,10 +13,13 @@ leaf_carbon$Date <- as.Date(leaf_carbon$Date)
 
 leaf_carbon$leafcarbon <- with(leaf_carbon, leafmass *(leafpercC/100))
 leaf_carbon$leafpot_carbon <- with(leaf_carbon, leafmass_pot *(leafpercC/100))
+leaf_carbon$littercarbon <- with(leaf_carbon, littermass *(leafpercC/100))
 
-# leaf_carbon$littermass <- with(leaf_carbon, (LAlittercumlin /SLA)*1000)
-# leaf_carbon$littercarbon <- with(leaf_carbon, littermass *(leafpercC/100))
+#order by date
+leaf_carbon <-leaf_carbon[order(leaf_carbon$Date),]
 
 ##save in calculated mass, same as leaf mass csv just now has leaf litter C
+litter_carbon <- leaf_carbon[, c(1:2,6,11,15)]
 
 write.csv(leaf_carbon, "calculated_mass/leaf_carbon.csv", row.names=FALSE)
+write.csv(litter_carbon, "calculated_mass/litter_carbon.csv", row.names=FALSE)

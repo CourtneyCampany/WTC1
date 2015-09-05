@@ -38,8 +38,10 @@ sladfr <- leafM_agg2[,c("chamber","SLA")]
 
 #calculate leaf mass through time
 leafA_est <- merge(leafA_est, sladfr, by="chamber")
-leafA_est$leafmass <- with(leafA_est, (LAestlin / SLA)*1000)
-leafA_est$leafmass_pot <- with(leafA_est, (LApotlin / SLA)*1000)
+  leafA_est$leafmass <- with(leafA_est, (LAestlin / SLA)*1000)
+  leafA_est$leafmass_pot <- with(leafA_est, (LApotlin / SLA)*1000)
+  #calculate leaf litter mass with sla
+  leafA_est$littermass <- with(leafA_est, (LAlittercumlin / SLA)*1000)
 
 ##check against harvest
 # leaflast <- leafA_est[leafA_est$Date == max(leafA_est$Date),]
