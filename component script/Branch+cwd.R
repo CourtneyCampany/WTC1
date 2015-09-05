@@ -26,6 +26,11 @@ branches <- read.csv("raw csv/HFE final harvest Sample Branches.csv", na.strings
 DWbranches <- read.csv("raw csv/HFE final harvest Sample Branches dry weight.csv")
   DWbranches <- subset(DWbranches, chamber %in% unique(chambersumm$chamber))
   DWbranches <- droplevels(DWbranches)
+  
+#extra biomas from CWD, damage, or removal
+extra_mass <- read.csv("raw csv/HFE extra plant mass.csv")
+  extra_mass$cwd <- with(extra_mass, damage_branch + branch_litter + bark_litter + harvest_branch_litter +
+                           harvest_bark_litter + removed_branch)
 
 #BRANCH MASS estimations-------------------------------------------------------------------------------------------------
 
@@ -34,7 +39,8 @@ DWbranches <- read.csv("raw csv/HFE final harvest Sample Branches dry weight.csv
 branchM <- subset(harvest_mass, select =c("chamber",  "layerno", "Wbrgt1" ,"Wbrlt1"))
   branchM$br_mass <- with(branchM, Wbrgt1 + Wbrlt1)
 
-#caculate branch volume from harvest branch diameterm length, and.75 shape factor
+
+#calculate branch volume from harvest branch diameterm length, and.75 shape factor
 br_volume_calc<- function(dfr) {
   volume_calc <- subset(dfr, dfr$Date == "2009-03-16")
   volume_calc <- subset(volume_calc, select = c("Date", "chamber", "stemnumber", "branchnumber", "diameter", "length", "branchBA"))
@@ -50,6 +56,9 @@ br_vol <- br_volume_calc(branch_allometry)
 br_mass_tot <- ddply(branchM, c("chamber"), function(x) data.frame(br_mass=sum(x$br_mass)))
 br_vol_tot <- ddply(br_vol, c("chamber"), function(x) data.frame(vol_tot=sum(x$Volume)))
 
+###now I add CWD from harvest (extra mass) and see if this improves measurements
+br_mass_tot$br_mass2 <- br_mass_tot$br_mass + extra_mass$cwd
+
 #calculate branch density
 br_density_calc <- function(volume, mass) {
   density_calc <- merge(volume, mass, by = "chamber")
@@ -58,7 +67,7 @@ br_density_calc <- function(volume, mass) {
   density_calc <- subset(density_calc, select = c("chamber" , "branch_density"))
 }
 
-br_density <- br_density_calc(br_vol_tot, br_mass_tot)
+br_density <- br_density_calc(br_vol_tot, br_mass_tot[c(1,3)])
 
 #branch mass across dates
 br_mass_dates_calc <- function(allometry, density){
@@ -82,4 +91,4 @@ branch_mass_total <- aggregate(branch_mass ~ chamber + Date, data = br_mass_date
 #plot(branch_mass_total$Date, branch_mass_total$branch_mass)
 
 #write to calcualted mass subfolder
-write.csv(branch_mass_total, file = "calculated_mass/branch mass.csv", row.names=FALSE)
+write.csv(branch_mass_total, file = "calculated_mass/branch_mass_cwd.csv", row.names=FALSE)

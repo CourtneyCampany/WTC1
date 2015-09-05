@@ -1,13 +1,13 @@
 #read in calculated aboveground component masses, Cfluxes, and plot summary
 
 bole <- read.csv("calculated_mass/bole310 mass.csv")
-branch <- read.csv("calculated_mass/branch mass.csv")
+
 ##litter , estimates vs harvest total???
 
-##i think cflux and leaf carbon is good
+##cflux, leaf carbon, branch C is good
 Cflux <- read.csv("calculated_mass/chamber_C_flux.csv")
 leafcarbon <- read.csv("calculated_mass/leaf_carbon.csv")
-
+branch <- read.csv("calculated_mass/branch_mass_cwd.csv")
 
 # chamber treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
