@@ -1,8 +1,7 @@
-###attempts to better estimate bole mass
+###simple bole mass calc
 
-###tree heights and diameter pathlenghts do not add up
-
-###here i will use only diameter and pathlengths to estimate volume, ignore top part for now
+###tree heights and diameter pathlengths do not always make sense (is pathlength > tree height) so ignore for now
+###use only diameter and pathlengths to estimate volume, ignore top part for now
 
 #read raw data--------------------------------------------------------------------------------------------------------------
 
