@@ -1,4 +1,5 @@
 ###simple bole mass calc
+library(doBy)
 
 ###tree heights and diameter pathlengths do not always make sense (is pathlength > tree height) so ignore for now
 ###use only diameter and pathlengths to estimate volume, ignore top part for now
@@ -66,20 +67,13 @@ density$bark_volume <- density$freshvolume - density$wood_volume
 
 density$bark_density <- density$wbark / density$bark_volume
 density$bark_diam <- with(density, doverbark - dunderbark)
-#calculate bark:wood diamter ratio
 
+#calculate bark:wood as ratio of dry weight instead of diameter
 density$Bark_Wood <- density$wbark / density$wwood
-
 #!!!density$Bark_Wood <- with(density, bark_diam / dunderbark)
+density$totaldens <- (density$wood_density + density$bark_density)/2
 
-### use volume and area of cookie to estimate cookie height, 
-### height and diameter to get volume of cookie without bark
-### density from dry mass and volume without bark
-### bark volume is then total volume - wood volume
-### bark density is bark dry mass / volume
-### calculate diameter contribution of bark and then bark:wood ratio
 
-  
 #weighted mean of density of bark, wood, and bark:wood
 density_sp <- split(density, density$chamber)
 
@@ -92,18 +86,14 @@ barkD_wm <- data.frame(chamber=names(barkMean), barkdensity_wm=as.vector(barkMea
 BWratio <- sapply(density_sp, function(x) weighted.mean(x$Bark_Wood, w = x$freshvolume))
 BWratio <- data.frame(chamber=names(BWratio), barktowood_ratio=as.vector(BWratio) )
 
-#dataframe with weighted avergages (from layers) of bark and wood density for each chamber, and diameter ratios
-wooddensity_wm <- merge(barkD_wm, woodD_wm, by = "chamber")
-wooddensity_wm <- merge(wooddensity_wm, BWratio, by = "chamber")
-
-
 totMean <- sapply(density_sp, function(x) weighted.mean(x$totaldens, w = x$wwood+x$wbark))
 totD_wm <- data.frame(chamber=names(totMean), density_wm=as.vector(totMean) )
 
-  
+#dataframe with weighted avergages (from layers) of bark and wood density for each chamber, and diameter ratios
+# wooddensity_wm <- merge(barkD_wm, woodD_wm, by = "chamber")
+# wooddensity_wm <- merge(wooddensity_wm, BWratio, by = "chamber")
 
 ###BOLE MASS----------------------------------------------------------------------------------------------------------------
-##assume density does not change through time
 
 #Merge stem density and volume dataframes
 stem_mass <- merge(stemD310, totD_wm, by = "chamber")
@@ -118,31 +108,20 @@ stem_mass$bole_mass <- with(stem_mass, density_wm * Volume)
 
 
 #stem mass calculation by chamber, add month and year metric
-Bole310_Mass <- aggregate(bole_mass ~ Date + chamber, data = stem_mass, FUN = sum)
+Bole310_Mass <- summaryBy(bole_mass ~ Date + chamber, data = stem_mass, FUN = sum, keep.names=TRUE)
 
 
-#plot bole mass
-plot(Bole310_Mass$Date, Bole310_Mass$bole_mass)
+fin <- subset(Bole310_Mass, Date == max(Date))
 
+treemass <- read.csv("calculated_mass/harvest_mass_new.csv")
+bole_harvest <- treemass[1:12, c("chamber",  "stem_mass_dry")]
 
-fin<- subset(Bole310_Mass, Date == max(Date))
-treemass <- read.csv("raw csv/HFE final DM totals.csv")
-bole_harvest <- treemass[1:12, c("chamber",  "ws")]
+#plot bole mass pred vs harvest
+plot(fin$bole_mass, bole_harvest$stem_mass_dry)
 
-
-findate <- as.Date("2009-03-16")
-
-h <- subset(stem_height, Date == findate)$Height
-d65 <- subset(stem_diameters, Date == findate & Pathlength == 65)$Diameter
-dens <- totD_wm$density_wm
-
-m_cyl <- (d65/2)^2 * h * 100 * dens
-m_cone <- (1/3) * (d65/2)^2 * h * 100 * dens
-m <- bole_harvest$ws
-
-di <- subset(stemD310, Date == findate)
-
-
+###make correction factor by chamber
+bole_corr <- merge(fin, bole_harvest)
+bole_corr$bole_offset <- with(bole_corr, (bole_mass-stem_mass_dry)/bole_mass)
 
 
 #LINEAR INTERPOLATION between allometry surveys---------------------------------------------------------------------------
@@ -174,6 +153,10 @@ bole310_sp <- lapply(bole310_sp, function(z){
 })
 bole310_pred <- do.call(rbind, bole310_sp)
 
+##now multiply by offest
+bole310_pred <- merge(bole310_pred, bole_corr[, c(1,5)], by="chamber")
+
+bole310_pred$bole_mass_adj <- with(bole310_pred, bole_pred * (1-bole_offset)) 
 
 #write to calcualted mass subfolder
 write.csv(bole310_pred, file = "calculated_mass/bole_mass_pred_simple.csv", row.names=FALSE)
