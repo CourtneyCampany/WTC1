@@ -1,10 +1,8 @@
-#This script calculates bole mass from only surveys which recorded 
-#stem diameters over 310 cm 
+#This script calculates bole mass from only surveys which recorded stem diameters over 310 cm 
 #had to manually determine the dates where trees were < 310cm tall
 #and/or when the tall tree surverys occured
 
 #read raw data--------------------------------------------------------------------------------------------------------------
-# source("master_scripts/HFE_chamber_read_data.R")
 
 # chamber treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
@@ -40,7 +38,7 @@ selectdates <- as.Date(c("2003-03-04", "2008-03-11", "2008-03-18", "2008-03-25",
 #stem volume (above and below 65cm seperately) 
 stemD310 <- subset(stem_diameters, Date %in% selectdates)
 
-#Read tree top heights, convert to cm, set top height diameter to .001cm
+#Read tree heights, convert to cm, set top height diameter to .001cm
 stemH1<-subset(stem_height, Date %in% selectdates)
   names(stemH1)[3] <- "Pathlength"
   stemH1$Pathlength <- stemH1$Pathlength*100
