@@ -1,13 +1,16 @@
 #read in calculated aboveground component masses, Cfluxes, and plot summary
 
-bole <- read.csv("calculated_mass/bole310 mass.csv")
+bole <- read.csv("calculated_mass/bole_mass_pred.csv")
+bole$Date <- as.Date(bole$Date)
 
-##litter , estimates vs harvest total???
-
-##cflux, leaf carbon, branch C is good
 Cflux <- read.csv("calculated_mass/chamber_C_flux.csv")
+Cflux$Date <- as.Date(Cflux$Date)
+
 leafcarbon <- read.csv("calculated_mass/leaf_carbon.csv")
-branch <- read.csv("calculated_mass/branch_mass_cwd.csv")
+leafcarbon$Date <- as.Date(leafcarbon$Date)
+
+branch <- read.csv("calculated_mass/branch_mass_pred.csv")
+branch$Date <- as.Date(branch$Date)
 
 # chamber treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
@@ -15,9 +18,10 @@ chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
   chambersumm <- droplevels(chambersumm[,1:3])
 
 
-#C MASS vs C FLUX
+#C MASS vs C FLUX-----------------------------------------------------------------------------------------------------------
+  
 #new dataframe 'treemass' with all components and chamber flux over all dates, used for linear interpolation
-tree_mass <- merge(branch, leaf, by = c("Date", "chamber"), all=TRUE)
+tree_mass <- merge(branch, leafcarbon, by = c("Date", "chamber"), all=TRUE)
 tree_mass <- merge(tree_mass, bole, by = c("Date", "chamber"), all=TRUE)
 
 #add Chamber carbon flux
@@ -25,88 +29,45 @@ tree_mass <- merge(tree_mass, Cflux, by = c("Date", "chamber"), all=TRUE)
 
 #subset the last year of the experiment
 tree_mass$Date <- as.Date(tree_mass$Date)
-tree_mass_yr <- subset(tree_mass, tree_mass$Date >= "2008-03-14")
+tree_mass_yr <- subset(tree_mass, tree_mass$Date >= "2008-03-16")
 
-
-#LINEAR INTERPOLATION of boles and branches between allometry surveys (1 year)
-
-#FIRST create dfr with all days for interpolation
-
-#empty list
-datels <- list()
-#date seq loop
-datemaker <- for (i in unique(chambersumm$chamber)){
-  datels[[i]] <- data.frame(Date = seq(from = as.Date("2008-3-14"), to = as.Date("2009-3-16"), by = "day"), 
-                            chamber = i)} #bole_mass = "")}
-
-# row-bind everything together:
-dateseq <- do.call(rbind,datels)
-
-#SECOND merge bole and branch dataset with dateseq dfr and interpolate
-treemass_alldays <- merge(dateseq, tree_mass_yr, by = c("Date", "chamber"), all=TRUE)
-
-#use dateseq for interpolation
-treemass_sp <- split(treemass_alldays, treemass_alldays$chamber)
-treemass_sp <- lapply(treemass_sp, function(z){
-  
-  apfun_bo310 <- approxfun(x=z$Date, y=z$bole_mass)
-  apfun_br <- approxfun(x=z$Date, y=z$branch_mass)
-  
-  z$bole_pred <- apfun_bo310(z$Date)
-  z$branch_pred <- apfun_br(z$Date)
-  
-  return(z)
-})
-treemass_pred <- do.call(rbind, treemass_sp)
 
 #subset data where leaf and branch mass surveys began
-treemass_pred <- subset(treemass_pred, Date >= "2008-04-15")
+treemass_pred <- subset(tree_mass_yr, Date >= "2008-04-15")
 
-treemass_test <- treemass_pred[,c(1:2, 7,10, 12:15)]
+###clean and have only predicted mass
+mass_pred <- treemass_pred[, c("Date", "chamber", "branch_pred",  "leafmass",  "littermass", "bole_mass_adj",  "CO2cum")]
+carbon_pred <- treemass_pred[, c("Date", "chamber", "branch_carbon",  "leafcarbon", "littercarbon",  "bole_carbon", "CO2cum")]
 
-mass_start <- subset(treemass_pred[,c(1:3, 7, 10, 14)], Date =="2008-04-15")
-names(mass_start)[3:6]<- c("branch_start", "litter_start", "leaf_start", "bole_start")
+###subset start values so can reset to 0 mass
+mass_start <- subset(mass_pred, Date =="2008-04-15")
+carbon_start <- subset(carbon_pred, Date =="2008-04-15")
 
-treemass_pred_yr <- merge(treemass_pred[,c(1:2, 7,10, 12:15)], mass_start[,2:6], by="chamber")
-#--------------------------------------------------------------------------------------------------
-#need to remove biomass before 2008-04-15 so subtract the amount from this date from everydate.
-remove_mass <- function(dfr){
+names(mass_start)[3:7]<- c("branch_start", "leaf_start", "litter_start",  "bole_start", "CO2start")
+names(carbon_start)[3:7]<- c("branch_start", "leaf_start", "litter_start",  "bole_start", "CO2start")
 
-  #create objects of start mass for leaf, litter, bole, branch
-  mass_start <- subset(dfr[,c(1:3, 7, 10, 14)], Date =="2008-04-15")
-  names(mass_start)[3:6]<- c("branch_start", "litter_start", "leaf_start", "bole_start")
-  
-  mass_calc <- merge(dfr[,c(1:2, 7,10, 12:15)], mass_start[,2:6], by="chamber")
-  
-  #now remove theses values from interpolated data over time, sets 2008-04-15 =0 
-  mass_calc$bole_yr <- with(mass_calc, bole_pred - bole_start) 
-  mass_calc$branch_yr <-  with(mass_calc, branch_pred - branch_start) 
-  mass_calc$leaf_yr <-  with(mass_calc, leafmass - leaf_start) 
-  mass_calc$litter_yr <-  with(mass_calc, LAlittercumlin - litter_start) 
-  
-  treemass_final <- mass_calc[,c(1:2,5:6, 13:16)]
-}
 
-treemass_final <- remove_mass(treemass_pred )
-#------------------------------------------------------------------------------------------------------
-#CALCULATE TREE CARBON, assume 50% for all components
+###merge back with pred and then substract this number from every value, should reset
+mass_pred_yr <- merge(mass_pred, mass_start[,2:7], by="chamber")  ###remove Date from start value
+mass_pred_yr <- mass_pred_yr[order(mass_pred_yr$Date),]
 
-tree_carbon_calc <- function(dfr, Cleaf_perc){
+mass_pred_yr$bole_yr <- mass_pred_yr$bole_mass_adj - mass_pred_yr$bole_start 
+mass_pred_yr$branch_yr <-  with(mass_pred_yr, branch_pred - branch_start) 
+mass_pred_yr$leaf_yr <-  with(mass_pred_yr, leafmass - leaf_start) 
+mass_pred_yr$litter_yr <-  with(mass_pred_yr, littermass - litter_start) 
 
-  dfr$branchC <- (dfr$branch_yr * .5)
-  dfr$boleC <- (dfr$bole_yr * .5)
-  
-  #add measured leaf percent carbon and convert
-  tree_carbon <- merge(dfr, Cleaf_perc, by = "chamber")
-  tree_carbon$leafC <- with(tree_carbon, leaf_yr * (leafpercC/100))
-  tree_carbon$litterC <- with(tree_carbon, litter_yr * (leafpercC/100))
-  
-  #order data, clean up, and write
-  tree_carbon <- tree_carbon[order(as.Date(tree_carbon$Date, format="%d/%m/%Y")),]
+##do the same for carbon
 
-}
-  
-tree_carbon <-tree_carbon_calc(treemass_final, leafpercC)
+carbon_pred_yr <- merge(carbon_pred, carbon_start[,2:7], by="chamber")  ###remove Date from start value
+carbon_pred_yr <- carbon_pred_yr[order(carbon_pred_yr$Date),]
+
+  carbon_pred_yr$boleC <- with(carbon_pred_yr, bole_carbon - bole_start) 
+  carbon_pred_yr$branchC <-  with(carbon_pred_yr, branch_carbon - branch_start) 
+  carbon_pred_yr$leafC <-  with(carbon_pred_yr, leafcarbon - leaf_start) 
+  carbon_pred_yr$litterC <-  with(carbon_pred_yr, littercarbon - litter_start) 
+
+#treemass_pred_yr <- merge(treemass_pred[,c(1:2, 7,10, 12:15)], mass_start[,2:6], by="chamber")
+
 
 #carbon data set
 write.csv(tree_carbon[, c(1:4, 9:10, 13:14)], file = "whole tree csv/tree_C_flux.csv", row.names=FALSE)

@@ -103,8 +103,10 @@ density$height_cookie <- density$freshvolume / (pi*((density$doverbark/2)^2))
   density$bark_density <- density$wbark / density$BarkV
   density$barkdiam <- with(density, doverbark - dunderbark)
 
-#calculate bark:wood diamter ratio
-density$Bark_Wood <- with(density, barkdiam / dunderbark)
+  
+#calculate bark:wood as ratio of dry weight instead of diameter
+density$Bark_Wood <- density$wbark / density$wwood
+density$totaldens <- (density$wood_density + density$bark_density)/2
 
 #chamber/treatment means
 # Tree_density_mean <- aggregate(cbind(bark_density , wood_density) ~ chamber, data=density, FUN=mean)
@@ -113,43 +115,60 @@ density$Bark_Wood <- with(density, barkdiam / dunderbark)
 #weighted mean of density bark, wood, and bark:wood
 density_sp <- split(density, density$chamber)
 
-woodMean <- sapply(density_sp, function(x) weighted.mean(x$wood_density, w = x$wwood))
-woodD_wm <- data.frame(chamber=names(woodMean), wooddensity_wm=as.vector(woodMean) )
+# woodMean <- sapply(density_sp, function(x) weighted.mean(x$wood_density, w = x$wwood))
+# woodD_wm <- data.frame(chamber=names(woodMean), wooddensity_wm=as.vector(woodMean) )
+# 
+# barkMean <- sapply(density_sp, function(x) weighted.mean(x$bark_density, w = x$wbark))
+# barkD_wm <- data.frame(chamber=names(barkMean), barkdensity_wm=as.vector(barkMean) )
 
-barkMean <- sapply(density_sp, function(x) weighted.mean(x$bark_density, w = x$wbark))
-barkD_wm <- data.frame(chamber=names(barkMean), barkdensity_wm=as.vector(barkMean) )
+# BWratio <- sapply(density_sp, function(x) weighted.mean(x$Bark_Wood, w = x$freshvolume))
+# BWratio <- data.frame(chamber=names(BWratio), barktowood_ratio=as.vector(BWratio) )
 
-BWratio <- sapply(density_sp, function(x) weighted.mean(x$Bark_Wood, w = x$freshvolume))
-BWratio <- data.frame(chamber=names(BWratio), barktowood_ratio=as.vector(BWratio) )
+totMean <- sapply(density_sp, function(x) weighted.mean(x$totaldens, w = x$wwood+x$wbark))
+totD_wm <- data.frame(chamber=names(totMean), density_wm=as.vector(totMean) )
 
 #dataframe with weighted avergages (from layers) of bark and wood density for each chamber, and diameter ratios
-wooddensity_wm <- merge(barkD_wm, woodD_wm, by = "chamber")
-wooddensity_wm <- merge(wooddensity_wm, BWratio, by = "chamber")
+# wooddensity_wm <- merge(barkD_wm, woodD_wm, by = "chamber")
+# wooddensity_wm <- merge(wooddensity_wm, BWratio, by = "chamber")
 
 #Merge stem density and volume dataframes, assume density does not change over time
-stem_mass <- merge(stemV, wooddensity_wm, by = "chamber")
+#stem_mass <- merge(stemV, wooddensity_wm, by = "chamber")
 
-# Fit power function instead???
-# windows()
-#with(density, plot(doverbark, barkdiam, xlim=c(0,15), ylim=c(0,3)))
-#abline(lm(barkdiam ~ doverbark, data=density))
 
-#diam_pwr <- nls(barkdiam ~ I(doverbark^power), data = density, start = list(power = 1), + trace = T)
 
-#calcualte mass
-stem_mass$bark_mass <- (stem_mass$Volume * stem_mass$barktowood_ratio) * stem_mass$barkdensity_wm
-stem_mass$wood_mass <- (stem_mass$Volume * (1 - stem_mass$barktowood_ratio)) * stem_mass$wooddensity_wm
-stem_mass$bole_mass <- stem_mass$bark_mass+stem_mass$wood_mass
+#BOle MASS------------------------------------------------------------------------------------------------------------
+
+##Merge stem density and volume dataframes
+##calculate mass from density weightedmean and volume
+
+stem_mass <- merge(stemV, totD_wm, by = "chamber")
+stem_mass$bole_mass <- with(stem_mass, density_wm * Volume)
 
 #stem mass calculation by chamber, add month and year metric
-Bole310_Mass <- aggregate(bole_mass ~ Date + chamber, data = stem_mass, FUN = sum)
+Bole310_Mass <- summaryBy(bole_mass ~ Date + chamber, data = stem_mass, FUN = sum, keep.names=TRUE)
+
+# stem_mass$bark_mass <- (stem_mass$Volume * stem_mass$barktowood_ratio) * stem_mass$barkdensity_wm
+# stem_mass$wood_mass <- (stem_mass$Volume * (1 - stem_mass$barktowood_ratio)) * stem_mass$wooddensity_wm
+# stem_mass$bole_mass <- stem_mass$bark_mass+stem_mass$wood_mass
 
 
-#plot bole mass
-plot(Bole310_Mass$Date, Bole310_Mass$bole_mass)
+#Mass correction----------------------------------------------------------------------------------------------------------
+
+lastdate <- subset(Bole310_Mass, Date == max(Date))
+
+treemass <- read.csv("calculated_mass/harvest_mass_new.csv")
+bole_harvest <- treemass[1:12, c("chamber",  "stem_mass_dry")]
+
+#plot bole mass pred vs harvest
+plot(lastdate$bole_mass, bole_harvest$stem_mass_dry)
+abline(0,1)
+
+###make correction factor by chamber
+bole_corr <- merge(lastdate, bole_harvest)
+bole_corr$bole_offset <- with(bole_corr, (bole_mass-stem_mass_dry)/bole_mass)
 
 
-#LINEAR INTERPOLATION of data inbetween allometry surveys
+#LINEAR INTERPOLATION of data inbetween allometry surveys--------------------------------------------------------------------
 
 #First I need dfr with all days for interpolation
 #cham <- subset(chambersumm, inside_or_outside_WTC == "inside")
@@ -182,7 +201,14 @@ bole310_sp <- lapply(bole310_sp, function(z){
 bole310_pred <- do.call(rbind, bole310_sp)
 
 
+##now multiply by offest----------------------------------------------------------------------------------------------------
+bole310_pred <- merge(bole310_pred, bole_corr[, c(1,5)], by="chamber")
+
+bole310_pred$bole_mass_adj <- with(bole310_pred, bole_pred * (1-bole_offset)) 
+bole310_pred$bole_carbon <- bole310_pred$bole_mass_adj * .5
+
+
 #write to calcualted mass subfolder
-write.csv(Bole310_Mass, file = "calculated mass/bole310 mass.csv", row.names=FALSE)
-write.csv(bole310_pred, file = "calculated mass/bole_mass_pred.csv", row.names=FALSE)
+write.csv(Bole310_Mass, file = "calculated_mass/bole310 mass.csv", row.names=FALSE)
+write.csv(bole310_pred, file = "calculated_mass/bole_mass_pred.csv", row.names=FALSE)
 

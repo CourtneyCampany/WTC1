@@ -153,10 +153,12 @@ bole310_sp <- lapply(bole310_sp, function(z){
 })
 bole310_pred <- do.call(rbind, bole310_sp)
 
-##now multiply by offest
+##now multiply by offest----------------------------------------------------------------------------------------------------
 bole310_pred <- merge(bole310_pred, bole_corr[, c(1,5)], by="chamber")
 
 bole310_pred$bole_mass_adj <- with(bole310_pred, bole_pred * (1-bole_offset)) 
+
+
 
 #write to calcualted mass subfolder
 write.csv(bole310_pred, file = "calculated_mass/bole_mass_pred_simple.csv", row.names=FALSE)

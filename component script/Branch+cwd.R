@@ -1,4 +1,4 @@
-
+library(doBy)
 library(plyr)
 
 #all raw data here:--------------------------------------------------------------------------------------------------
@@ -59,6 +59,7 @@ br_vol_tot <- ddply(br_vol, c("chamber"), function(x) data.frame(vol_tot=sum(x$V
 ###now I add CWD from harvest (extra mass) and see if this improves measurements
 br_mass_tot$br_mass2 <- br_mass_tot$br_mass + extra_mass$cwd
 
+
 #calculate branch density
 br_density_calc <- function(volume, mass) {
   density_calc <- merge(volume, mass, by = "chamber")
@@ -68,6 +69,7 @@ br_density_calc <- function(volume, mass) {
 }
 
 br_density <- br_density_calc(br_vol_tot, br_mass_tot[c(1,3)])
+
 
 #branch mass across dates
 br_mass_dates_calc <- function(allometry, density){
@@ -81,14 +83,42 @@ br_mass_dates_calc <- function(allometry, density){
 }
 
 br_mass_dates <-  br_mass_dates_calc(branch_allometry, br_density)
- 
 
 #total branch mass by chamber for each date
-branch_mass_total <- aggregate(branch_mass ~ chamber + Date, data = br_mass_dates, FUN = sum)
+branch_mass_total <- aggregate(branch_mass ~ Date + chamber, data = br_mass_dates, FUN = sum)
 
-#brd <- ddply(br_mass_dates, .(chamber,Date), function(x) data.frame(branch_mass=sum(x$branch_mass)))
+range(branch_mass_total$Date)
 
-#plot(branch_mass_total$Date, branch_mass_total$branch_mass)
+
+###linear interpolate between dates-------------------------------------------------------------------------------
+
+#empty list
+datels <- list()
+#date seq loop
+datemaker <- for (i in unique(chambersumm$chamber)){
+  datels[[i]] <- data.frame(Date = seq(from = as.Date("2008-04-15"), to = as.Date("2009-3-16"), by = "day"), 
+                            chamber = i)}
+
+# row-bind everything together:
+dateseq <- do.call(rbind,datels)
+
+#SECOND merge bole and branch dataset with dateseq dfr and interpolate
+branchmass_alldays <- merge(dateseq, branch_mass_total, by = c("Date", "chamber"), all=TRUE)
+
+#use dateseq for interpolation
+brmass_sp <- split(branchmass_alldays, branchmass_alldays$chamber)
+brmass_sp <- lapply(brmass_sp, function(z){
+  
+  apfun_br <- approxfun(x=z$Date, y=z$branch_mass)
+  z$branch_pred <- apfun_br(z$Date)
+  
+  return(z)
+})
+brmass_pred <- do.call(rbind, brmass_sp)
+
+brmass_pred$branch_carbon <- brmass_pred$branch_mass * .5
+
 
 #write to calcualted mass subfolder
 write.csv(branch_mass_total, file = "calculated_mass/branch_mass_cwd.csv", row.names=FALSE)
+write.csv(brmass_pred, file = "calculated_mass/branch_mass_pred.csv", row.names=FALSE)
