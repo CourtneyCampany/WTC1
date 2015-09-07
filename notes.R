@@ -1,6 +1,10 @@
 test <- read.csv("calculated_mass/chamber_carbon.csv")
 
 
+#####bole mass is only value not predicted from final harvest values thus it is the only one that needs to be corrected
+
+
+
 testleaf <- read.csv("calculated_mass/leaf_carbon.csv")
 testleaf$Date <- as.Date(testleaf$Date)
 
@@ -32,4 +36,5 @@ testlitter <-testlitter[order(testlitter$Date),]
 
 litterch2 <- testlitter[testlitter$chamber == "ch02",]
 ###should be good to use in harvest file if subtract from start date
+
 
