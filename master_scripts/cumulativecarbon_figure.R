@@ -1,7 +1,11 @@
-# source("functions_and_packages/plot_objects.R")
+source("functions_and_packages/plot_objects.R")
 
-treeC <- read.csv("calculated_mass/treeC_day.csv")
+#treeC <- read.csv("calculated_mass/treeC_day.csv")
+treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
 treeC$Date <- as.Date(treeC$Date)
+treeC$bolebranch <- with(treeC, boleC+branchC)
+
+treeC$treatment <- with(treeC, paste(CO2_treatment,Water_treatment, sep="-"))
 
 ##for ease of plotting seperate data by trt
 ambdry <- treeC[treeC$treatment == "ambient-dry",]
@@ -28,13 +32,13 @@ xAT <- seq.Date(from=as.Date("2008-4-1"), length=13, by="month")
 LWD <- 2
 
 ##plot four panel with treatment means---------------------------------------------------------------------------------
-# windows (7,10)
+windows (7,10)
 
 par(mfrow=c(2,2), las=1, mgp=c(3,1,0), oma=c(4,6,1,1))
 
 #1: ambient-wet
 par(mar=c(0,0,0,0))
-plot(CO2cum ~ Date, data = ambwet,axes=FALSE, ylab="Carbon  (g)", ylim=c(0, 25000),lwd=LWD, type = 'l')
+plot(fluxC ~ Date, data = ambwet,axes=FALSE, ylab="Carbon  (g)", ylim=c(0, 25000),lwd=LWD, type = 'l')
   points(boleC ~ Date,  data = ambwet,lwd=LWD,type = 'l',lty=3)
   points(bolebranch ~ Date , data = ambwet, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = ambwet, lwd=LWD,type = 'l',lty=5)
@@ -50,7 +54,7 @@ mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.75)
 
 #2: ambient-dry
 par(mar=c(0,0,0,0))
-plot(CO2cum ~ Date, data = ambdry,axes = FALSE, ann = FALSE, ylim=c(0, 25000),lwd=LWD, type = 'l')
+plot(fluxC ~ Date, data = ambdry,axes = FALSE, ann = FALSE, ylim=c(0, 25000),lwd=LWD, type = 'l')
   points(boleC ~ Date,  data = ambdry,lwd=LWD,type = 'l',lty=3)
   points(bolebranch ~ Date , data = ambdry, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = ambdry, lwd=LWD,type = 'l',lty=5)
@@ -62,7 +66,7 @@ points(allC ~ Date , data = roots,subset = treatment == "ambient-dry",pch = 23, 
 
 #3: elevated-dry
 par(mar=c(0,0,0,0))
-plot(CO2cum ~ Date, data = elevdry, axes=FALSE, xlab="", ylab="Carbon  (g)", ylim=c(0, 25000), lwd=LWD, type = 'l')
+plot(fluxC ~ Date, data = elevdry, axes=FALSE, xlab="", ylab="Carbon  (g)", ylim=c(0, 25000), lwd=LWD, type = 'l')
   points(boleC ~ Date,  data = elevdry,lwd=LWD,type = 'l',lty=3)
   points(bolebranch ~ Date , data = elevdry, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = elevdry, lwd=LWD,type = 'l',lty=5)
@@ -77,7 +81,7 @@ points(allC ~ Date , data = roots,subset = treatment == "elevated-dry",pch = 23,
 
 #4: elevated-wet
 par(mar=c(0,0,0,0))
-plot(CO2cum ~ Date, data = elevwet,axes = FALSE, ylab="", xlab="", ylim=c(0, 25000),lwd=LWD, type = 'l')
+plot(fluxC ~ Date, data = elevwet,axes = FALSE, ylab="", xlab="", ylim=c(0, 25000),lwd=LWD, type = 'l')
   points(boleC ~ Date,  data = elevwet,lwd=LWD,type = 'l',lty=3)
   points(bolebranch ~ Date , data = elevwet, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = elevwet, lwd=LWD,type = 'l',lty=5)
@@ -89,6 +93,6 @@ points(aboveplusfine ~ Date , data = roots,subset = treatment == "elevated-wet",
 points(allC ~ Date , data = roots,subset = treatment == "elevated-wet",pch = 23, bg="grey", cex=2)
 axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
 
-# dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")
-# dev.off()
+dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")
+dev.off()
 

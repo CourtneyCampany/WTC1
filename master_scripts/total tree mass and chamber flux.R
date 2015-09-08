@@ -55,6 +55,7 @@ mass_pred_yr$bole_yr <- mass_pred_yr$bole_mass_adj - mass_pred_yr$bole_start
 mass_pred_yr$branch_yr <-  with(mass_pred_yr, branch_pred - branch_start) 
 mass_pred_yr$leaf_yr <-  with(mass_pred_yr, leafmass - leaf_start) 
 mass_pred_yr$litter_yr <-  with(mass_pred_yr, littermass - litter_start) 
+mass_pred_yr$fluxC <-  with(mass_pred_yr, CO2cum - CO2start) 
 
 ##do the same for carbon
 
@@ -65,11 +66,13 @@ carbon_pred_yr <- carbon_pred_yr[order(carbon_pred_yr$Date),]
   carbon_pred_yr$branchC <-  with(carbon_pred_yr, branch_carbon - branch_start) 
   carbon_pred_yr$leafC <-  with(carbon_pred_yr, leafcarbon - leaf_start) 
   carbon_pred_yr$litterC <-  with(carbon_pred_yr, littercarbon - litter_start) 
+  carbon_pred_yr$fluxC <-  with(carbon_pred_yr, CO2cum - CO2start) 
+  
 
 #treemass_pred_yr <- merge(treemass_pred[,c(1:2, 7,10, 12:15)], mass_start[,2:6], by="chamber")
 
 
 #carbon data set
-write.csv(tree_carbon[, c(1:4, 9:10, 13:14)], file = "whole tree csv/tree_C_flux.csv", row.names=FALSE)
+write.csv(carbon_pred_yr, file = "whole_tree_csv/tree_C_flux.csv", row.names=FALSE)
 #mass data set
-write.csv(tree_carbon[, 1:8], file = "whole tree csv/tree_mass_Cflux.csv", row.names=FALSE)
+write.csv(mass_pred_yr, file = "whole_tree_csv/tree_mass_Cflux.csv", row.names=FALSE)

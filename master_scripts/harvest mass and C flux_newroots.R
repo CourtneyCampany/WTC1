@@ -59,10 +59,10 @@ treemass2 <- merge(treemass, moremass, by = "chamber")
   treemass4$branchC <- with(treemass4, (wbr+cwd) * .5)
   treemass4$boleC <- with(treemass4, stem_mass_dry * .5)
   
-  treemass4$Mab <- with(treemass4, branchC+boleC+leafcarbon+littercarbon)
+  treemass4$Cab <- with(treemass4, branchC+boleC+leafcarbon+littercarbon)
 
 #simplify for merging with flux
-treecarbon <- treemass4[, c("chamber", "frootC", "crootC", "branchC", "boleC", "leafcarbon","littercarbon","Mab","treeC")]
+treecarbon <- treemass4[, c("chamber", "frootC", "crootC", "branchC", "boleC", "leafcarbon","littercarbon","Cab","treeC")]
 
 ###Chamber FLux
 WTCflux<- flux[, c("Date","chamber","FluxCO2tot")]
