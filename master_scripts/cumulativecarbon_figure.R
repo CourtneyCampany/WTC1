@@ -22,10 +22,9 @@ elevwet <- treeC[treeC$treatment == "elevated-wet",]
   
   
 ##add roots and calculate final mass + fine and coarse roots
-  roots <- read.csv("master_scripts/harvest_trt_means.csv")
+roots <- read.csv("master_scripts/harvest_trt_means.csv")
   roots$Date <- as.Date("2009-03-16")
-  roots$aboveplusfine <- with(roots, treeC+FrootC)
-  roots$allC <- with(roots, aboveplusfine +CrootC)
+  roots$treeC <- with(roots, aboveC+rootC)
 
 ##plot bits
 xAT <- seq.Date(from=as.Date("2008-4-1"), length=13, by="month")
@@ -43,12 +42,12 @@ plot(fluxC ~ Date, data = ambwet,axes=FALSE, ylab="Carbon  (g)", ylim=c(0, 25000
   points(bolebranch ~ Date , data = ambwet, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = ambwet, lwd=LWD,type = 'l',lty=5)
 box()
-legend(x=13975, y=23500,dayClab, lty = c(1, 3, 2, 5, -1, -1), pch = c(-1, -1, -1, -1, 21, 23),lwd=LWD,  
-        bty='n', pt.cex=1,cex=1, pt.bg=c(-1, -1, -1, -1,"grey", "grey"))
+legend(x=13975, y=23500, dayClab, lty = c(1, 3, 2, 5, -1), pch = c(-1, -1, -1, -1, 21),lwd=LWD,  
+        bty='n', pt.cex=1,cex=1, pt.bg=c(-1, -1, -1, -1,"grey"))
 text(x=14025, y=25000, label = leglab2[1], cex=1.25, font=2) 
 ##add roots on last date
-points(aboveplusfine ~ Date , data = roots,subset = treatment == "ambient-wet", pch = 21, bg = "grey", cex=2)
-points(allC ~ Date , data = roots,subset = treatment == "ambient-wet",pch = 23, bg="grey", cex=2)
+points(treeC ~ Date , data = roots,subset = treatment == "ambient-wet", pch = 21, bg = "grey", cex=2)
+
 axis(2, labels=TRUE, outer=FALSE)
 mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.75)
 
@@ -61,8 +60,7 @@ plot(fluxC ~ Date, data = ambdry,axes = FALSE, ann = FALSE, ylim=c(0, 25000),lwd
 box()
 text(x=14025, y=25000, label = leglab2[2],cex=1.25, font=2)
 
-points(aboveplusfine ~ Date , data = roots,subset = treatment == "ambient-dry", pch = 21, bg = "grey", cex=2)
-points(allC ~ Date , data = roots,subset = treatment == "ambient-dry",pch = 23, bg="grey", cex=2)
+points(treeC ~ Date , data = roots,subset = treatment == "ambient-dry", pch = 21, bg = "grey", cex=2)
 
 #3: elevated-dry
 par(mar=c(0,0,0,0))
@@ -76,8 +74,7 @@ axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
 axis(2, labels=TRUE, outer=FALSE)
 mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.25)
 
-points(aboveplusfine ~ Date , data = roots,subset = treatment == "elevated-dry", pch = 21, bg = "grey", cex=2)
-points(allC ~ Date , data = roots,subset = treatment == "elevated-dry",pch = 23, bg="grey", cex=2)
+points(treeC ~ Date , data = roots,subset = treatment == "elevated-dry", pch = 21, bg = "grey", cex=2)
 
 #4: elevated-wet
 par(mar=c(0,0,0,0))
@@ -89,8 +86,7 @@ axis.Date(1, at = xAT, labels = TRUE)
 box()
 text(x=14025, y=25000, label = leglab2[4],cex=1.25, font=2)
 
-points(aboveplusfine ~ Date , data = roots,subset = treatment == "elevated-wet", pch = 21, bg = "grey", cex=2)
-points(allC ~ Date , data = roots,subset = treatment == "elevated-wet",pch = 23, bg="grey", cex=2)
+points(treeC ~ Date , data = roots,subset = treatment == "elevated-wet", pch = 21, bg = "grey", cex=2)
 axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
 
 dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")

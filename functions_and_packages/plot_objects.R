@@ -25,7 +25,7 @@ boxlab <- c(expression(atop(aCO[2], Dry)), expression(atop(aCO[2], Wet)), expres
             expression(atop(eCO[2], Wet)))
 
 
-dayClab <- c("Carbon Flux", "Bole", "+Branch", " +Leaf and Litter", "  +Fine Root", "   +Coarse Root")
+dayClab <- c("Carbon Flux", "Bole", "+Branch", " +Leaf and Litter", "  +Root")
 
 belowfluxlab <- c("Tree Carbon Flux", "TBCA", fslab)
 
