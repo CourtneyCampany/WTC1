@@ -16,9 +16,9 @@ tree_C$treatment <- with(tree_C, paste(CO2_treatment, Water_treatment, sep="-"))
 
 tree_C$TBCA <- with(tree_C, Cflux- treeC)
 
-tree_C$Fs_resid <- with(tree_C, TBCA - (frootC + crootC))
+tree_C$Fs_resid <- with(tree_C, TBCA - (rootC))
 
-#write.csv(harvest_C[, c(1:2, 7:9, 15:16)], "calculated_mass/TBCA.csv", row.names = FALSE)
+#write.csv(tree_C[, c(1:3, 13:14, 11:12)], "calculated_mass/TBCA.csv", row.names = FALSE)
 
 # boxplot(TBCA ~treatment, data=tree_C)
 

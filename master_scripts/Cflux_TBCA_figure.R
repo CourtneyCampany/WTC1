@@ -4,8 +4,8 @@ source("functions_and_packages/functions.R")
 library(doBy)
 
 ##read in chamber flux and calculate TBCA
-  #treeC <- read.csv("calculated_mass/treeC_day.csv")
-  treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
+#treeC <- read.csv("calculated_mass/treeC_day.csv")
+treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
   treeC$Date <- as.Date(treeC$Date)
     
   treeC$TBCA <- with(treeC, fluxC-aboveC)
