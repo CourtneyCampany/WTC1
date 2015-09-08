@@ -10,7 +10,7 @@ chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
 treemass <- read.csv("calculated_mass/harvest_mass_new.csv")
 #treemass <- read.csv("raw csv/HFE final DM totals.csv")
 
-rootmass <- read.csv("calculated_mass/root_mass.csv")
+rootmass <- read.csv("calculated_mass/root_mass_simple.csv")
 
 #extra biomas from CWD, damage, or removal
 extra_mass <- read.csv("raw csv/HFE extra plant mass.csv")
@@ -37,14 +37,14 @@ treemass2 <- merge(treemass, moremass, by = "chamber")
 
   #for roots use data from root_mass script which is fine roots scaled from cores
   #and coarse roots summed from harvest and cores
-  treemass3 <- merge(treemass2, rootmass[,1:3], by="chamber")
+  treemass3 <- merge(treemass2, rootmass[,1:2], by="chamber")
 
   ##leaf and litter Carbon
   treemass4 <- merge(treemass3, leaf_litter)
 
     
   #sum mass and change to carbon, leaves are seperate
-  treemass4$woodmass <- with(treemass4, fineroot_mass + coarseroot_mass + wbr + stem_mass_dry  + cwd)
+  treemass4$woodmass <- with(treemass4, root_mass + wbr + stem_mass_dry  + cwd)
   ##this includes above + belowground
   treemass4$leafmass <- with(treemass4, wf+xleaf)
  
@@ -53,8 +53,7 @@ treemass2 <- merge(treemass, moremass, by = "chamber")
   treemass4$woodC <- with(treemass4, woodmass * .5)
   treemass4$treeC <- with(treemass4, leafcarbon+woodC+littercarbon)
   
-  treemass4$frootC <- with(treemass4, fineroot_mass * .5)
-  treemass4$crootC <- with(treemass4, coarseroot_mass * .5)
+  treemass4$rootC <- with(treemass4, root_mass * .5)
   
   treemass4$branchC <- with(treemass4, (wbr+cwd) * .5)
   treemass4$boleC <- with(treemass4, stem_mass_dry * .5)
@@ -62,7 +61,7 @@ treemass2 <- merge(treemass, moremass, by = "chamber")
   treemass4$Cab <- with(treemass4, branchC+boleC+leafcarbon+littercarbon)
 
 #simplify for merging with flux
-treecarbon <- treemass4[, c("chamber", "frootC", "crootC", "branchC", "boleC", "leafcarbon","littercarbon","Cab","treeC")]
+treecarbon <- treemass4[, c("chamber", "rootC", "branchC", "boleC", "leafcarbon","littercarbon","Cab","treeC")]
 
 ###Chamber FLux
 WTCflux<- flux[, c("Date","chamber","FluxCO2tot")]
@@ -110,7 +109,7 @@ CFlux_mass <- merge(CFlux_mass, chambersumm, by = "chamber")
 #write.csv(CFlux_mass, file = "harvest mass and carbon flux_newroots.csv", row.names=FALSE)  
 
 ###made some additions so save it as something else
-write.csv(CFlux_mass[,c(1:2, 4:13)], file = "calculated_mass/chamber_carbon.csv", row.names=FALSE)   
+write.csv(CFlux_mass[,c(1:2, 4:12)], file = "calculated_mass/chamber_carbon.csv", row.names=FALSE)   
 
 
 

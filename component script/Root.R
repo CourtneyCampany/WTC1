@@ -15,6 +15,7 @@ treemass <- read.csv("raw csv/HFE final DM totals.csv")
 
 ###first get standing root crop from harvest
 root_mass <- treemass[, c(1,15)]
+names(root_mass)[2] <- "root_harvest"
 
 ###the roots sampled from cores (we will not be scaling)
 root_cores <- read.csv("raw csv/HFE Fine root cores final harvest.csv")
@@ -30,6 +31,8 @@ root_core_sum <- summaryBy(root_total ~ chamber, data=root_cores, FUN=sum, keep.
 root_cham <- merge(root_mass, root_core_sum)
 root_cham <- merge(root_cham, chambersumm)
 root_cham$treatment <- with(root_cham, paste(CO2_treatment, Water_treatment, sep="-"))  
+root_cham$root_mass <- with(root_cham, root_harvest+root_total)
+ 
 
-write.csv(root_mass, file = "calculated_mass/root_mass_simple.csv", row.names=FALSE)
+write.csv(root_cham[,c(1,7,4:6)], file = "calculated_mass/root_mass_simple.csv", row.names=FALSE)
 
