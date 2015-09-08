@@ -2,6 +2,7 @@ library(scales)
 library(wesanderson)
 
 leaflab <- expression(Leaf~Area~~(m^2))
+meanlalab <- expression(Daily~Leaf~Area~~(m^2))
 treefluxlab <- "Tree Carbon Flux  (g C)"
 
 tbcalab <- "TBCA  (g)"
