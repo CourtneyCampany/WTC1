@@ -48,6 +48,6 @@ plot(LAestlin ~ Date, data=leafarea, type='n',ylab=leaflab,  xaxt='n', xlab="", 
 legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
   
 # dev.copy2pdf(file="master_scripts/paper_figs/leafarea.pdf")
-# dev.off() 
+# dev.off()
   
 

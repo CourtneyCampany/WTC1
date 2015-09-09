@@ -59,14 +59,13 @@ includeFigs <- TRUE
 ```
 
 ```{r, echo=FALSE}
-fluxmassfig <- "1"
-fluxmabfig <- "2"
-lafig <- "3"
-fluxlafig <- "4"
-massfracfig <- "5"
-additivemassfig <- "6"
-belowbarfig <- "7"
-tbcafluxfig <- "8"
+fluxtreefig <  "1"
+lafig <- "2"
+fluxlafig <- "3"
+massfracfig <- "4"
+additivemassfig <- "5"
+belowbarfig <- "6"
+tbcafluxfig <- "7"
 ```
 
 
@@ -186,7 +185,7 @@ anova
 # Results
 
 ## Total canopy carbon flux, leaf area and whole tree carbon
-There was a postive linear relationship between F~[c,t]~ and both whole tree carbon (R^2^ = 0.81, Figure `r fluxmassfig`) and  M~[ab,t]~ (R^2^ = 0.72, Figure `r fluxmabfig`). F~[c,t]~ was significantly reduced by 30.5 % under elevated CO~2~ (P = 0.043), while no effects of the drought treatment were detected. Similarily, both whole tree carbon and M~[ab,t]~ were reduced under elevated CO~2~  by 25.6 and 31.1 %, respectively (both P < 0.04). Across the final year of the experiment leaf area was generally reduced under elevated CO~2~  and with reductions resulting from drought apparent over the final 5 months (Figure `r lafig`). Overall, F~[c,t]~ was postively correlated with total leaf area at the final harvest (P < 0.001, R2 = 0.59, Figure `r fluxlafig`).    
+There was a postive linear relationship between F~[c,t]~ and both whole tree carbon (R^2^ = 0.86, Figure `r fluxtreefig`,a) and  M~[ab,t]~ (R^2^ = 0.78, Figure `r fluxtreefig`,b). F~[c,t]~ was significantly reduced by 30.5 % under elevated CO~2~ (P = 0.043), while no effects of the drought treatment were detected. Similarily, both whole tree carbon and M~[ab,t]~ were reduced under elevated CO~2~ by ca. 32 % (both P < 0.03). Leaf area at the final harvest was significantly reduced by by 31.3% under elevated CO~2~ (p < 0.001), which was also evident across the final year of the experiment (Figure `r lafig`). Overall, F~[c,t]~ was postively correlated with mean daily leaf area (P < 0.001, R2 = 0.77, Figure `r fluxlafig`).    
 
 ## Tree carbon allocation (harvest)
 Allocation of above and belowground tissue components was affected differentially by CO~2~ and drought treatments, yet no interactions between the treatments were detected (Table 1). The harvested standing mass of bole carbon was significantly reduced under elevated CO~2~ by 34.1 % (P = 0.008) and marginally reduced under drought by 22.7 % (P = 0.061). Total branch carbon mass was not affected by either treatment.  Final leaf carbon mass was significantly reduced by 39.8 % in drought (P = 0.028), yet was unaffected under elevated CO~2~. Belowground there were no effects of either treatment detected with coarse root carbon mass, however, fine root carbon mass was significantly reducted with drought by 24.8 % (P = 0.016).
@@ -206,7 +205,7 @@ equation for root fitting needs to be added (potted plants and harvest)
 # Tables {.unnumbered}
 
 # List of Figures
-**Figure 1**.  Treatment means of harvested whole tree carbon mass (a) and abovegroudn carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid line represents the significant linear model fit (R^2^=0.81).
+**Figure 1**.  Treatment means of harvested whole tree carbon mass (a) and aboveground carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid line represents the significant linear model fit (R^2^=0.81).
 
 **Figure 2**.
 

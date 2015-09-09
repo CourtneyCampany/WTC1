@@ -38,6 +38,10 @@ la_co2 <- lm(LAestlin ~ CO2_treatment, data=leafarea_final)
   laco2_siglets<- cld(tukey_laco2)
   laco2_siglets2 <- laco2_siglets$mcletters$Letters
   ## reductions in leafarea in Eco2 by 31.3%
+(mean(leafarea_final[leafarea_final$CO2_treatment=="ambient", "LAestlin"]) - 
+  mean(leafarea_final[leafarea_final$CO2_treatment=="elevated", "LAestlin"]))/
+    mean(leafarea_final[leafarea_final$CO2_treatment=="ambient", "LAestlin"])
+  
 
 la_h20 <- lm(LAestlin ~ Water_treatment, data=leafarea_final) 
   anova(la_h20)

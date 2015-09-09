@@ -1,27 +1,25 @@
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
 library(plotrix)
 
 #read data for cumulative C flux and harvest mass
 treeC <- read.csv("calculated_mass/chamber_carbon.csv")
 
-
 #linear model to show fit on graph
 tree_mod <- lm(treeC ~ Cflux, data = treeC)
-  summary(tree_mod)
-  anova(tree_mod)
+  # summary(tree_mod)
+  # anova(tree_mod)
 
 mab_mod <- lm(Cab ~ Cflux, data = treeC)
-  summary(mab_mod)
-  anova(mab_mod)
-
+  # summary(mab_mod)
+  # anova(mab_mod)
 
 ##plot with total flux
 palette (c("blue", "red"))
 
 #CO2 flux to harvest mass scatter plot--------------------------------------------------------------------------------------------
 
- windows (7,7)
+# windows (7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=.8,  mgp=c(3,1,0), mfrow=c(2,1), oma=c(5,6,1,1))
 
 #whole tree
