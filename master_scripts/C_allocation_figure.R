@@ -1,7 +1,7 @@
 ###this script visualizes allocation to different components by treatment
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
-library(plotrix)
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
+# library(plotrix)
 
 #read data for cumulative C flux and harvest mass
 tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
@@ -42,7 +42,7 @@ at.x <- seq(5000, by=5000, length.out=4)
 
 ###3 panel box plotwith LMF, RMF, SMF by treatment
 
-windows(7,7)
+# windows(7,7)
 
 par(cex.axis=1.21, cex.lab=1.51, las=1,mgp=c(3,1,0),mfrow=c(3,1), oma=c(5, 0, 2,0))  
 
@@ -75,6 +75,6 @@ title(ylab=rmflab, mgp=c(4,1,0))
 mtext(treeclab, side=1, outer=TRUE, line=3)
 text(x=22500, y=0.29,labels="(c)", cex=1.5)
 
-dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
-dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
+# dev.off() 
    

@@ -1,26 +1,29 @@
 ###stats for component from final harvest including boles, branch, leaves, fine roots and coarse roots
+source("functions_and_packages/functions.R")
 library(visreg)
 library(nortest)
 library(multcomp)
+library(doBy)
 
 ##need final harvest values (not treatmen means)
-tree_C <- read.csv("master_scripts/harvest_chamber.csv")
+#tree_C <- read.csv("master_scripts/harvest_chamber.csv")
+tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
 
 ##calculated component fractions
-tree_C$tree_total <- with(tree_C, branchC+boleC+leafC+litterC+frootC_all+CrootC)
+tree_C$lmf <- with(tree_C, (leafcarbon+littercarbon)/treeC)
+tree_C$smf <- with(tree_C, (branchC+boleC)/treeC)
+tree_C$rmf <- with(tree_C, (rootC)/treeC)
 
-tree_C$lmf <- with(tree_C, leafC_litterC/tree_total)
-tree_C$smf <- with(tree_C, (branchC+boleC)/tree_total)
-tree_C$rmf <- with(tree_C, (frootC_all + CrootC)/tree_total)
+##calculate belowground flux
+tree_C$tbca <- with(tree_C, Cflux-Cab)
+tree_C$Fs_resid <- with(tree_C, Cflux - (Cab+rootC))
 
-##need TBCA to add to roots
-tbca <- read.csv("calculated_mass/TBCA.csv")
-
-tree_C <- merge(tree_C, tbca)
+tree_C$treatment <- with(tree_C, as.factor(paste(CO2_treatment, Water_treatment, sep="-")))
 tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
 
 ###analyze mass fractions.....individual components are then below
 
+frac_trts <- summaryBy(lmf+smf+rmf ~ treatment, data=tree_C, FUN=c(mean, se))
 
 #LMF----------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$lmf)
@@ -34,6 +37,9 @@ lmf_co2 <- lm(lmf ~ CO2_treatment, data=tree_C)
   tukey_lmfco2<- glht(lmf_co2, linfct = mcp(CO2_treatment= "Tukey"))
   lmfco2_siglets<- cld(tukey_lmfco2)
   lmfco2_siglets2 <- lmfco2_siglets$mcletters$Letters
+  
+(mean(tree_C[tree_C$CO2_treatment=="elevated", "lmf"]) - mean(tree_C[tree_C$CO2_treatment=="ambient", "lmf"]))/mean(tree_C[tree_C$CO2_treatment=="elevated", "lmf"])
+###lmf 15.2% higher in elevated CO2, no effect of h2o and no interation
 
 lmf_h20 <- lm(lmf_co2 ~ Water_treatment, data=tree_C) 
   anova(lmf_h20)
@@ -42,12 +48,12 @@ lmf_h20 <- lm(lmf_co2 ~ Water_treatment, data=tree_C)
   lmfh20_siglets2 <- lmfh20_siglets$mcletters$Letters  
 
 ##lmf vs co2 flux
-fluxlmf_mod <- lm(lmf ~ CO2cum, data=tree_C) 
+fluxlmf_mod <- lm(lmf ~ Cflux, data=tree_C) 
 summary(fluxlmf_mod)
 anova(fluxlmf_mod)
-# fluxlmf_mod2 <- lm(lmf ~ CO2cum*CO2_treatment*Water_treatment , data=tree_C)
-# summary(fluxlmf_mod2)
-# anova(fluxlmf_mod2)
+# fluxlmf_mod2 <- lm(lmf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
+#  summary(fluxlmf_mod2)
+#  anova(fluxlmf_mod2)
 
 
 #SMF----------------------------------------------------------------------------------------------------------------------
@@ -56,6 +62,7 @@ with(tree_C, boxplot(smf~treatment))
 
 smf_mod <- lm(smf ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
 anova(smf_mod)
+summary(smf_mod)
 
 smf_co2 <- lm(smf ~ CO2_treatment, data=tree_C) 
   anova(smf_co2)
@@ -63,17 +70,20 @@ smf_co2 <- lm(smf ~ CO2_treatment, data=tree_C)
   smfco2_siglets<- cld(tukey_smfco2)
   smfco2_siglets2 <- smfco2_siglets$mcletters$Letters
 
-  smf_h20 <- lm(smf ~ Water_treatment, data=tree_C) 
+smf_h20 <- lm(smf ~ Water_treatment, data=tree_C) 
   anova(smf_h20)
   tukey_smfh20 <- glht(smf_h20, linfct = mcp(Water_treatment= "Tukey"))
   smfh20_siglets<- cld(tukey_smfh20)
   smfh20_siglets2 <- smfh20_siglets$mcletters$Letters  
+##smf reduced by 8% in eco2, no interaction, no drought
+(mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "smf"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"])
   
-##lmf vs co2 flux
-fluxsmf_mod <- lm(smf ~ CO2cum, data=tree_C) 
+  
+##smf vs co2 flux
+fluxsmf_mod <- lm(smf ~ Cflux, data=tree_C) 
   summary(fluxsmf_mod)
   anova(fluxsmf_mod)
-fluxsmf_mod2 <- lm(smf ~ CO2cum*CO2_treatment*Water_treatment , data=tree_C)
+fluxsmf_mod2 <- lm(smf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
   summary(fluxsmf_mod2)
   anova(fluxsmf_mod2)
 
@@ -91,23 +101,23 @@ rmf_mod <- lm(rmf ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment,
   visreg(rmf_mod, xvar="Water_treatment", by="CO2_treatment", overlay=TRUE)
   
   ##Attempt to do post hoc compairsons on interactions
-  tree_C$CW<-interaction(tree_C$CO2_treatment,tree_C$Water_treatment)
-  rmf_mod2<-lm(rmf~CW, data=tree_C)
-  anova(rmf_mod2)
-  tukey_rmf<- glht(rmf_mod2, linfct = mcp(CW= "Tukey"))
-  rmf_siglets<- cld(tukey_rmf)
-  rmf_siglets2 <- rmf_siglets$mcletters$Letters
+  # tree_C$CW<-interaction(tree_C$CO2_treatment,tree_C$Water_treatment)
+  # rmf_mod2<-lm(rmf~CW, data=tree_C)
+  # anova(rmf_mod2)
+  # tukey_rmf<- glht(rmf_mod2, linfct = mcp(CW= "Tukey"))
+  # rmf_siglets<- cld(tukey_rmf)
+  # rmf_siglets2 <- rmf_siglets$mcletters$Letters
   
-  library(phia)
-  testInteractions(rmf_mod, pairwise="Water_treatment", across="CO2_treatment")
-  testInteractions(rmf_mod)
-  testFactors(rmf_mod, levels=c("Water_treatment","CO2_treatment"))
+  # library(phia)
+  # testInteractions(rmf_mod, pairwise="Water_treatment", across="CO2_treatment")
+  # testInteractions(rmf_mod)
+  # testFactors(rmf_mod, levels=c("Water_treatment","CO2_treatment"))
   
 ##rmf vs co2 flux
-  fluxrmf_mod <- lm(rmf ~ CO2cum, data=tree_C) 
+  fluxrmf_mod <- lm(rmf ~ Cflux, data=tree_C) 
   summary(fluxrmf_mod)
   anova(fluxrmf_mod)
-  fluxsmf_mod2 <- lm(smf ~ CO2cum*CO2_treatment*Water_treatment , data=tree_C)
+  fluxsmf_mod2 <- lm(smf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
   summary(fluxsmf_mod2)
   anova(fluxsmf_mod2)
 
