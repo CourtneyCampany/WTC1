@@ -1,7 +1,7 @@
 ### This script creates TBCA from the flux data and the biomass data
-source("functions_and_packages/functions.R")
-source("functions_and_packages/plot_objects.R")
-library(doBy)
+# source("functions_and_packages/functions.R")
+# source("functions_and_packages/plot_objects.R")
+# library(doBy)
 
 #1: Fc,t = GPP - (Rl + Rs,br) = total carbon flux by chamber
 #2: TBCA = Fc,t - Mab,t
@@ -14,9 +14,9 @@ tree_C$treatment <- with(tree_C, paste(CO2_treatment, Water_treatment, sep="-"))
 
 ##caluclate TBCA-----------------------------------------------------------------------------------------------------
 
-tree_C$TBCA <- with(tree_C, Cflux- treeC)
+tree_C$TBCA <- with(tree_C, Cflux- Cab)
 
-tree_C$Fs_resid <- with(tree_C, TBCA - (rootC))
+tree_C$Fs_resid <- with(tree_C, Cflux - treeC)
 
 #write.csv(tree_C[, c(1:3, 13:14, 11:12)], "calculated_mass/TBCA.csv", row.names = FALSE)
 
@@ -48,7 +48,7 @@ cols <- c("grey30", "grey55", "grey85")
 
 ###plot belowground flux
 
-windows(7,7)
+# windows(7,7)
 par(mar=c(5,6,1,1),las=1, mgp=c(3,1,0), cex.axis=1, cex.lab = 1.25)
 
 below_bar <- barplot(below_dat, beside=TRUE, names.arg=below_means$treatment, ylim=c(0, 27500), col=cols, 
@@ -60,8 +60,8 @@ legend("topright",belowfluxlab, pch = 22,  bty='n', pt.bg=cols, cex=1.25)
 axis(side=1, at=c(2.5, 6.5, 10.5, 14.5), labels=boxlab, padj=.75, cex.axis=1.25)
 title(ylab="Carbon  (g)", mgp=c(4,1,0))
 
-dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots.pdf")
-dev.off() 
+# dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots.pdf")
+# dev.off() 
 
 
   
