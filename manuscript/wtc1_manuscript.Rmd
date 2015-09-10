@@ -59,7 +59,7 @@ includeFigs <- TRUE
 ```
 
 ```{r, echo=FALSE}
-fluxtreefig <  "1"
+fluxtreefig <-  "1"
 lafig <- "2"
 fluxlafig <- "3"
 massfracfig <- "4"
@@ -179,8 +179,13 @@ As the installation of floors into each WTC seperated the aboveground carbon upt
 
 where F~[c,t]~ is the gross primary productivity (g C) of the each tree aboveground minus respirtaion of leaves, stems and branches and M~[ab,t]~ is the total standing crop biomass (g C) of stems, branches, leaves and cumulative leaf litterfall at the final harvest.  As the final standing crop of fine and coarse roots were excaavted, TBCA can be further broken down into the total final carbon mass of roots (M~r~) and the residual belowground carbon flux which includes; root respiration, soil respiration, root turnover and root exudation (F~[s,r]~). The use of aboveground allometry to interpolate M~[ab,t]~ through time combined with F~s~ allowed TBCA to be estimated daily over the final year of the experiment while F~[s,r]~ was calculated following the final harvest.
 
+##carbon allocation through time???
+equation for root fitting needs to be added (potted plants and harvest)
+
 ## Data analysis
 anova
+
+planned comparisons with interactiosn with p-values adjusted Benjamini & Hochberg (1995) ("BH")
 
 # Results
 
@@ -188,15 +193,15 @@ anova
 There was a postive linear relationship between F~[c,t]~ and both whole tree carbon (R^2^ = 0.86, Figure `r fluxtreefig`,a) and  M~[ab,t]~ (R^2^ = 0.78, Figure `r fluxtreefig`,b). F~[c,t]~ was significantly reduced by 30.5 % under elevated CO~2~ (P = 0.043), while no effects of the drought treatment were detected. Similarily, both whole tree carbon and M~[ab,t]~ were reduced under elevated CO~2~ by ca. 32 % (both P < 0.03). Leaf area at the final harvest was significantly reduced by by 31.3% under elevated CO~2~ (p < 0.001), which was also evident across the final year of the experiment (Figure `r lafig`). Overall, F~[c,t]~ was postively correlated with mean daily leaf area (P < 0.001, R2 = 0.77, Figure `r fluxlafig`).    
 
 ## Tree carbon allocation (harvest)
-Allocation of above and belowground tissue components was affected differentially by CO~2~ and drought treatments, yet no interactions between the treatments were detected (Table 1). The harvested standing mass of bole carbon was significantly reduced under elevated CO~2~ by 34.1 % (P = 0.008) and marginally reduced under drought by 22.7 % (P = 0.061). Total branch carbon mass was not affected by either treatment.  Final leaf carbon mass was significantly reduced by 39.8 % in drought (P = 0.028), yet was unaffected under elevated CO~2~. Belowground there were no effects of either treatment detected with coarse root carbon mass, however, fine root carbon mass was significantly reducted with drought by 24.8 % (P = 0.016).
+Carbon allocation to individual tissue components were affected differentially by CO~2~ and drought treatments (Table 1). 
+There was a marginal interaction of elevated CO~2~ and drought on harvested bole carbon mass (p = 0.075). Elevated CO~2~ reduced bole carbon mass only in wet treatments (P = 0.041), while drought was found to reduce bole carbon mass in ambient CO~2~ treatments only (P = 0.051). Total branch carbon mass was marginally reduced under elevated CO~2~ (P = 0.086) but not affected by drought. Neither leaf or litter carbon mass were affected by elevated CO~2~ and drought treatments.  Toot root carbon mass was marginally reduced under elevated CO~2~ but not affected by drought.
 
 \
 Final LMF was increased by 15.2% under elevated CO~2~ (P = 0.031) but not affected by the drought treatment. Final LMF was negatively correlated with F~[c,t]~ (R^2^ = -0.62, Figure `r massfracfig`a). Final SMF was reduced by 8% under elevated CO~2~ (P = 0.014), with no effect of the drought treatment detected.  Final SMF was postively correlated with F~[c,t]~ (R^2^ = 0.37, Figure `r massfracfig`b). Final RMF was not affected by either treatment nor related to F~[c,t]~ (Figure `r massfracfig`c).
 
 ## Total belowground carbon allocation
-Within individual treatments the additive carbon mass of each tree component (boles, branches, leaves and roots) did not account for F~[c,t]~ (Figure `r additivemassfig`).  The difference between F~[c,t]~ and M~[ab,t]~ represents TBCA and the difference with harvested whole tree carbon mass respresents F~[s,r]~. Neither TBCA nor F~[s,r]~ were affected by CO~2~ or drought treatments (Figure `r belowbarfig`).  Thus, as F~[c,t]~ and individual tissue components were affected by the treatments the allocation of of carbon belowground did not change.  Final TBCA and F~[c,t]~ were still postively correlated (R^2^ = 0.74, P < 0.001), but the proportion of C allocated belowground was relatively constant through time and between treatments (Figure `r tbcafluxfig`). Additionally, final TBCA and leaf area were not correlated.
+Within each treatment combination the cumulative carbon mass of each tree component (boles, branches, leaves and roots) did not achieve mass balance with F~[c,t]~ (Figure `r additivemassfig`).  It was therefore necessary to accoutn for allocation to both TBCA and F~[s,r]~. Neither TBCA nor F~[s,r]~ were affected by CO~2~ or drought treatments (Figure `r belowbarfig`). Thus, even though F~[c,t]~ and allocation to aboveground tissue components were affected by the treatments the allocation of of carbon belowground was relatively constant at the final harvest. Total belowground carbon allocation and F~[c,t]~ were postively correlated at the final harvest (R^2^ = 0.65, P < 0.001) and the proportion of C allocated belowground was relatively constant through time and between treatments (Figure `r tbcafluxfig`). TBCA had a weak postive correlation with mean daily leaf area (R^2^ = 0.26, P = 0.093), while F~[s,r]~ and leaf area were not related.
 
-equation for root fitting needs to be added (potted plants and harvest)
 
 # Discussion
 
@@ -205,58 +210,73 @@ equation for root fitting needs to be added (potted plants and harvest)
 # Tables {.unnumbered}
 
 # List of Figures
-**Figure 1**.  Treatment means of harvested whole tree carbon mass (a) and aboveground carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid line represents the significant linear model fit (R^2^=0.81).
+**Figure 1**. Treatment means of harvested whole tree carbon mass (a) and aboveground carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid lines represent the significant linear model fit for whole tree carbon (R^2^ = 0.86) and aboveground caron mass (R^2 = 0.78).
 
-**Figure 2**.
+\
+**Figure 2**. Estimated tree leaf area for each chamber trees between 2008-4-15 and 2009-3-16.  Esimates are based on height growth, litterfall rates, and leaf area estimates at two dates. Color and and line type distinguish the treatment combination for each individual chamber.
+
+\
+**Figure 3**. Treatment means of cumulative canopy carbon flux as a function on mean daily leaf area over the final year of the experiment. The solid line represents the significant linear model fit (R^2^ = 0.77).
+
+\
+**Figure 4**. Treatment means of carbon mass partitioning to leaves (a), boles + branches (b) and roots (c) at final harvest as a function of tree size (total tree carbon). Solid lines represent model fit for either LMF, SMF or RMF (R^2^ = -0.55, 0.55 and 0.01, respectively).
+
+\
+**Figure 5**. Cumulative canopy carbon flux and additive carbon mass partitioning of individual tree components from 2008-4-15 and 2009-3-16 for each treatment combination. Both carbon flux and tissue carbon paritioning where set to 0 on 2008-4-15 in order to track allocation of new C uptake on a daily time scale.  Total root carbon mass, predicted from the log relationship between above and belowground mass partitioning of pre-planting seedlings and harvested trees, is shown on the last date.
+
+\
+**Figure 6**. Treatment means &pm; 1 standard error of cumulative canopy carbon flux, total belowground carbon allocation, and the residual belowground C flux at the final harvest.  
+
+\
+**Figure 7**. Total belowground carbon allocation as a function of cumulative canopy carbon flux across the final year of the experiment. Carbon allocation aboveground was estimated from allometric surveys, interpolated on a daily time scale and then removed from the cumulative canopy carbon flux to then quantify TBCA. Individual lines represent treatment means and the dotted line is the 1:1 relationship.
+
+\
+**Figure S1**.
+Cumulative canopy carbon flux and additive carbon mass partitioning of individual tree components from 2008-4-15 and 2009-3-16 for each individual WTC. Both carbon flux and tissue carbon paritioning where set to 0 on 2008-4-15 in order to track allocation of new C uptake on a daily time scale.  Total root carbon mass, predicted from the log relationship between above and belowground mass partitioning of pre-planting seedlings and harvested trees, is shown on the last date.
+
 
 # Figures {.unnumbered}
 ```{r fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
-source("master_scripts/Cflux_harvestmass_figure.R")
+source("master_scripts/Cflux_treecarbon_figure.R")
 ```
 \
 **Figure 1**. 
-
-```{r fluxmab, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
-source("master_scripts/Cflux_abovegroundmass_figure.R")
-```
-\
-**Figure 2**.
 
 ```{r leafarea, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/leafarea_figure.R")
 ```
 \
-**Figure 3**. 
+**Figure 2**. 
 
 ```{r fluxla, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_leafarea_figure.R")
 ```
 \
-**Figure 4**. 
+**Figure 3**. 
 
 ```{r c_allocation, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/C_allocation_figure.R")
 ```
 \
-**Figure 5**. 
+**Figure 4**. 
 
 ```{r c_cumulative, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/cumulativecarbon_figure.R")
 ```
 \
-**Figure 6**. 
+**Figure 5**. 
 
 ```{r belowbar, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/tbca_figure.R")
 ```
 \
-**Figure 7**. 
+**Figure 6**. 
 
 ```{r tbcaflux, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_TBCA_figure.R")
 ```
 \
-**Figure 8**. 
+**Figure 7**. 
 
 # Supporting Information {.unnumbered}
 

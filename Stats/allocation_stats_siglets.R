@@ -4,6 +4,7 @@ library(visreg)
 library(nortest)
 library(multcomp)
 library(doBy)
+library(RVAideMemoire)
 
 ##need final harvest values (not treatmen means)
 #tree_C <- read.csv("master_scripts/harvest_chamber.csv")
@@ -100,19 +101,6 @@ rmf_mod <- lm(rmf ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment,
   visreg(rmf_mod)
   visreg(rmf_mod, xvar="Water_treatment", by="CO2_treatment", overlay=TRUE)
   
-  ##Attempt to do post hoc compairsons on interactions
-  # tree_C$CW<-interaction(tree_C$CO2_treatment,tree_C$Water_treatment)
-  # rmf_mod2<-lm(rmf~CW, data=tree_C)
-  # anova(rmf_mod2)
-  # tukey_rmf<- glht(rmf_mod2, linfct = mcp(CW= "Tukey"))
-  # rmf_siglets<- cld(tukey_rmf)
-  # rmf_siglets2 <- rmf_siglets$mcletters$Letters
-  
-  # library(phia)
-  # testInteractions(rmf_mod, pairwise="Water_treatment", across="CO2_treatment")
-  # testInteractions(rmf_mod)
-  # testFactors(rmf_mod, levels=c("Water_treatment","CO2_treatment"))
-  
 ##rmf vs co2 flux
   fluxrmf_mod <- lm(rmf ~ Cflux, data=tree_C) 
   summary(fluxrmf_mod)
@@ -123,30 +111,85 @@ rmf_mod <- lm(rmf ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment,
 
 ##Bole---------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$boleC) ##appears normal
+boxplot(tree_C$boleC~tree_C$treatment)
 
 bole_mod <- lm(boleC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
   anova(bole_mod)
   summary(bole_mod)
-  plot(bole_mod)
+  plotresid(bole_mod)
   visreg(bole_mod)
+  confint(bole_mod)
   
-##no interactions so run simple mod for each treatment
-with(tree_C, boxplot(boleC~treatment))  
+###use one-way anova to test each pairwise comparisons  
+ambdry_ambwet <- tree_C[tree_C$treatment == "ambient-dry" |tree_C$treatment == "ambient-wet", c("boleC", "treatment")]
+ambdry_eledry <- tree_C[tree_C$treatment == "ambient-dry" |tree_C$treatment == "elevated-dry", c("boleC", "treatment")]
+ambdry_elewet <- tree_C[tree_C$treatment == "ambient-dry"|tree_C$treatment == "elevated-wet", c("boleC", "treatment")]
+elewet_eledry <- tree_C[tree_C$treatment == "elevated-wet"|tree_C$treatment == "elevated-dry", c("boleC", "treatment")]
+elewet_ambwet <- tree_C[tree_C$treatment == "elevated-wet"|tree_C$treatment == "ambient-wet", c("boleC", "treatment")]
+eledry_ambwet <- tree_C[tree_C$treatment == "elevated-dry"|tree_C$treatment == "ambient-wet", c("boleC", "treatment")]
 
-bole_co2 <- lm(boleC ~ CO2_treatment, data=tree_C) 
-  anova(bole_co2)
-  tukey_boleco2<- glht(bole_co2, linfct = mcp(CO2_treatment= "Tukey"))
-  boleco2_siglets<- cld(tukey_boleco2)
-  boleco2_siglets2 <- boleco2_siglets$mcletters$Letters
-  ## reductions in bole mass with Eco2 by 34.1%
+###eCO2 effects
 
-bole_h20 <- lm(boleC ~ Water_treatment, data=tree_C) 
-  anova(bole_h20)
-  tukey_boleh20 <- glht(bole_h20, linfct = mcp(Water_treatment= "Tukey"))
-  boleh20_siglets<- cld(tukey_boleh20)
-  boleh20_siglets2 <- boleco2_siglets$mcletters$Letters  
-  ## bole C reduced in drought treatments by 22.7%
+##within wet treatments: YES
+AwetEwet <- lm(boleC ~ treatment, data=elewet_ambwet)
+anova(AwetEwet) 
+confint(AwetEwet)
+P1 <- getP(AwetEwet)
+
+##within dry treatments: NO
+AdryEdry <- lm(boleC ~ treatment, data=ambdry_eledry)
+anova(AdryEdry) 
+P2 <- getP(AdryEdry)
+
+####Drought
+##within eCO2: NO
+EdryEwet_mod <- lm(boleC ~ treatment, data=elewet_eledry)
+anova(EdryEwet_mod) 
+P3 <- getP(EdryEwet_mod)
+
+##within aCO2: YES  
+AdryAwet_mod <- lm(boleC ~ treatment, data=ambdry_ambwet)
+anova(AdryAwet_mod) ###yes
+confint(AdryAwet_mod)
+P4 <- getP(AdryAwet_mod)
+
+P_raw <- c(P1, P2, P3, P4)
+##adjust pvalue with BH corrections
+P_corr <- p.adjust(P_raw, method="BH")
+
+
+##Attempt to do post hoc compairsons on interactions
+bole_mod2<-lm(boleC~treatment, data=tree_C)
+anova(bole_mod2)
+tukey_bole<- glht(bole_mod2, linfct = mcp(treatment= "Tukey"))
+bole_siglets<- cld(tukey_bole)
+bole_siglets2 <- bole_siglets$mcletters$Letters
+
+
+
+
+library(phia)
+bole.means <- interactionMeans(bole_mod)
+plot(bole.means)
+##test simple main effects
+testInteractions(bole_mod,  fixed = "CO2_treatment", across="Water_treatment") 
+testInteractions(bole_mod,  fixed = "Water_treatment", across="CO2_treatment")
+testInteractions(bole_mod, pairwise="CO2_treatment", across ="Water_treatment")
+
+testInteractions(bole_mod)
+
+custom.contr <- contrastCoefficients(
+  CO2_treatment ~ ambient - elevated,
+  Water_treatment ~ dry - wet,
+  data=tree_C, normailize=TRUE
+)
+custom.contr$CO2_treatment
+custom.contr$Water_treatment
+
+names(custom.contr$CO2_treatment) <- "ambient vs elevated"
+names(custom.contr$Water_treatment) <- "dry vs wet"
   
+testInteractions(bole_mod, custom=custom.contr)
 
 ##2. branch---------------------------------------------------------------------------------------------------------------------  
 ad.test(tree_C$branchC) ##appears normal
@@ -154,15 +197,15 @@ ad.test(tree_C$branchC) ##appears normal
 branch_mod <- lm(branchC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
   anova(branch_mod)
   summary(branch_mod)
-  plot(branch_mod)
+  plotresid(branch_mod)
   visreg(branch_mod)
   
 ##no interactions so run simple mod for each treatment
 with(tree_C, boxplot(branchC~treatment))  
 
 branch_co2 <- lm(branchC ~ CO2_treatment, data=tree_C) 
-  anova(branchC_co2)
-  tukey_branchco2<- glht(branchC_co2, linfct = mcp(CO2_treatment= "Tukey"))
+  anova(branch_co2)
+  tukey_branchco2<- glht(branch_co2, linfct = mcp(CO2_treatment= "Tukey"))
   branchco2_siglets<- cld(tukey_branchco2)
   branchco2_siglets2 <- branchco2_siglets$mcletters$Letters
   ## no difference in branch carbon with eco2
@@ -176,24 +219,24 @@ branch_h20 <- lm(branchC ~ Water_treatment, data=tree_C)
 
 
 ##3. leafC---------------------------------------------------------------------------------------------------------------------  
-ad.test(tree_C$leafC) ##appears normal
+ad.test(tree_C$leafcarbon) ##appears normal
   
-leaf_mod <- lm(leafC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+leaf_mod <- lm(leafcarbon ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
   anova(leaf_mod)
   summary(leaf_mod)
 
   
 ##no interactions so run simple mod for sig letters
-with(tree_C, boxplot(leafC~treatment))  
+with(tree_C, boxplot(leafcarbon~treatment))  
 
-leaf_co2 <- lm(leafC ~ CO2_treatment, data=tree_C) 
+leaf_co2 <- lm(leafcarbon ~ CO2_treatment, data=tree_C) 
   anova(leaf_co2)
   tukey_leafco2<- glht(leaf_co2, linfct = mcp(CO2_treatment= "Tukey"))
   leafco2_siglets<- cld(tukey_leafco2)
   leafco2_siglets2 <- leafco2_siglets$mcletters$Letters
   ## no difference in branch carbon with eco2
 
-leaf_h20 <- lm(leafC ~ Water_treatment, data=tree_C) 
+leaf_h20 <- lm(leafcarbon ~ Water_treatment, data=tree_C) 
   anova(leaf_h20)
   tukey_leafh20 <- glht(leaf_h20, linfct = mcp(Water_treatment= "Tukey"))
   leafh20_siglets<- cld(tukey_leafh20)
@@ -202,64 +245,42 @@ leaf_h20 <- lm(leafC ~ Water_treatment, data=tree_C)
   
   
 ##3. litter C---------------------------------------------------------------------------------------------------------------------  
-ad.test(tree_C$litterC) ##appears normal
+ad.test(tree_C$littercarbon) ##appears normal
   
-leaf_mod <- lm(litterC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+leaf_mod <- lm(littercarbon ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
   anova(leaf_mod)
   summary(leaf_mod)
   
 ##no interactions so run simple mod for sig letters
-litter_co2 <- lm(litterC ~ CO2_treatment, data=tree_C) 
+litter_co2 <- lm(littercarbon ~ CO2_treatment, data=tree_C) 
   tukey_litterco2<- glht(litter_co2, linfct = mcp(CO2_treatment= "Tukey"))
   litterco2_siglets<- cld(tukey_litterco2)
   litterco2_siglets2 <- litterco2_siglets$mcletters$Letters
 
   
-litter_h20 <- lm(litterC ~ Water_treatment, data=tree_C) 
+litter_h20 <- lm(littercarbon ~ Water_treatment, data=tree_C) 
   tukey_litterh20 <- glht(litter_h20, linfct = mcp(Water_treatment= "Tukey"))
   litterh20_siglets<- cld(tukey_litterh20)
   litterh20_siglets2 <- litterh20_siglets$mcletters$Letters  
   
   
 
-##3. Coarse Root---------------------------------------------------------------------------------------------------------------------  
-ad.test(tree_C$CrootC) ##appears normal
-with(tree_C, boxplot(CrootC~treatment))  
+##3. Root---------------------------------------------------------------------------------------------------------------------  
+  ##all roots pooled
+ad.test(tree_C$rootC) ##appears normal
+with(tree_C, boxplot(rootC~treatment))  
   
-Croot_mod <- lm(CrootC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
-  anova(Croot_mod)
-  summary(Croot_mod)
-  
-Croot_co2 <- lm(CrootC ~ CO2_treatment, data=tree_C)  
-Croot_h20 <- lm(CrootC ~ Water_treatment, data=tree_C)
-summary(Croot_co2)
-summary(Croot_h20)
+root_mod <- lm(rootC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+  anova(root_mod)
+  summary(root_mod)
+  visreg(root_mod)
+  plotresid(root_mod)
+
+  root_co2 <- lm(rootC ~ CO2_treatment, data=tree_C)  
+root_h20 <- lm(rootC ~ Water_treatment, data=tree_C)
+summary(root_co2)
+summary(root_h20)
   
 ###no effect of either treatment on coarse root C mass
 
-
-##3. Fine Root---------------------------------------------------------------------------------------------------------------------  
-ad.test(tree_C$frootC_all) ##appears normal
-with(tree_C, boxplot(frootC_all~treatment))  
-
-froot_mod <- lm(frootC_all ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
-  anova(froot_mod)
-  summary(froot_mod)
-  plot(froot_mod)
-  visreg(froot_mod)  
-
-Froot_co2 <- lm(frootC_all ~ CO2_treatment, data=tree_C)  
-  summary(Froot_co2)
-
-Froot_h20 <- lm(frootC_all ~ Water_treatment, data=tree_C)
-  summary(Froot_h20)
-  anova(Froot_h20)
-  tukey_frooth20 <- glht(Froot_h20, linfct = mcp(Water_treatment= "Tukey"))
-  frooth20_siglets<- cld(tukey_leafh20)
-  frooth20_siglets2 <- frooth20_siglets$mcletters$Letters  
-##no effect of elevated CO2 on fine root C mass
-##fine root C reduced by 24.8% in drought treatments
-  
-#(mean(tree_C[tree_C$Water_treatment=="wet", "frootC_all"]) - mean(tree_C[tree_C$Water_treatment=="dry", "frootC_all"]))/mean(tree_C[tree_C$Water_treatment=="wet", "frootC_all"])
-  
   
