@@ -30,11 +30,14 @@ library(knitr)
 opts_knit$set(root.dir = '../')
 ```
 
+
 ```{r global sourcing , include=FALSE}
 source("functions_and_packages/plot_objects.R")
 source("functions_and_packages/functions.R")
 library(plotrix)
 library(doBy)
+library(pixiedust)
+source("master_scripts/treecarbon_table.R")
 ```
 
 
@@ -208,6 +211,17 @@ Within each treatment combination the cumulative carbon mass of each tree compon
 # List of Tables
 
 # Tables {.unnumbered}
+
+\
+**Table 1**.
+```{r, echo=FALSE,warning=FALSE, message=FALSE}
+dust(tree_table) + 
+    sprinkle(rows= 1, part="head",bold=TRUE)+
+
+sprinkle_print_method("markdown")
+```
+
+
 
 # List of Figures
 **Figure 1**. Treatment means of harvested whole tree carbon mass (a) and aboveground carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid lines represent the significant linear model fit for whole tree carbon (R^2^ = 0.86) and aboveground caron mass (R^2 = 0.78).

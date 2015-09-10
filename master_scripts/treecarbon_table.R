@@ -10,6 +10,7 @@ table_means <- table[, c(2:3, 6,8:9)]
 table_se <- table[, c(10:11, 14, 16:17)]
 
 trts <- table[, 1]
+trts2 <- c("aCO2-dry", "aCO2-wet", "eCO2-dry", "eCO2-wet")
 
 ###paste and round means and se together
 v1 <- data.frame(paste0(sprintf("%4.1f", round(table_means[,1], 1)), " (", sprintf("%3.1f", round(table_se[,1],1)),")"))
@@ -20,7 +21,7 @@ v5 <- data.frame(paste0(sprintf("%5.1f",round(table_means[,5], 1)), " (", sprint
 # v6 <- data.frame(paste0(sprintf("%4.1f",round(table_means[,6],1)), " (", sprintf("%3.1f",round(table_se[,6],1)),")"))
 # v7 <- data.frame(paste0(sprintf("%4.1f",round(table_means[,7], 1)), " (", sprintf("%3.1f",round(table_se[,7],1)),")"))
 
-tree_table <- cbind(trts, v1)
+tree_table <- cbind(trts2, v1)
 tree_table <- cbind(tree_table, v2)
 tree_table <- cbind(tree_table, v3)
 tree_table <- cbind(tree_table, v4)
@@ -39,24 +40,24 @@ colnames(tree_table) <- vars
 
 ##Add siglettters eventually
 
-write.csv(tree_table, "master_scripts/data_table.csv", row.names=FALSE)
+# write.csv(tree_table, "master_scripts/data_table.csv", row.names=FALSE)
 
 ##make manuscript table-----------------------------------------------------------------------------------------------------
 ##Here: print to console but then in manuscript use in code chunk to hopefully print in word
 
 
-library(pixiedust)
-
-tree_table2 <- dust(tree_table)
-tree_table2 <- tree_table2 + sprinkle(part="head", bold=TRUE)
-tree_table2 <- tree_table2 + sprinkle(part="body", valign="left")
-
-tree_table2 <- tree_table2 + sprinkle(part="head", border="bottom", border_thickness=2, valign="middle")
-tree_table2 <- tree_table2 + sprinkle(part="head", border="bottom", border_thickness=2, valign="middle")
-
-tree_table2 <- tree_table2 + sprinkle_colnames
-
-print(tree_table2)
+# library(pixiedust)
+# 
+# tree_table2 <- dust(tree_table)
+# tree_table2 <- tree_table2 + sprinkle(part="head", bold=TRUE)
+# tree_table2 <- tree_table2 + sprinkle(part="body", valign="left")
+# 
+# tree_table2 <- tree_table2 + sprinkle(part="head", border="bottom", border_thickness=2, valign="middle")
+# tree_table2 <- tree_table2 + sprinkle(part="head", border="bottom", border_thickness=2, valign="middle")
+# 
+# tree_table2 <- tree_table2 + sprinkle_colnames
+# 
+# print(tree_table2)
 
 
 
