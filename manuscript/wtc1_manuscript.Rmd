@@ -79,6 +79,21 @@ additivechamfig <- "S1"
 
 # Introduction
 
+The specific objective of this study was to determine the response of C allocation among foliage, aboveground woody components and roots of a native Australian tree species to changes in both atmospheric CO~2~ and altered water availability. Specifically we tested whether cumulative net aboveground C gain was correlated to whole tree carbon mass increment, as a function of tree size, affected by the interaction of drought and elevated CO~2~.  Through a mass balance approach, coming carbon flux data with biomass allometry, we were able to track the distribution of carbon above and belowground over a one year period.
+
+\
+(1)	Overall, the effects of drought and elevated CO~2~were expected to alter partitioning of C among biomass components from ambient conditions, which are commonly considered fixed in applied forest C models. 
+
+\
+(2)	As productivity and growth must be coordinated over long time periods we expected to find agreement with the harvested carbon mass tissue pools and cumulative total aboveground net canopy carbon uptake.
+
+\
+(3)	Interruptions to this coordination, via the effects of the drought or elevated ~CO2~, across shorter time scales could then be accounted for in the simulations of daily carbon allocation above and belowground utilizing mass balance approaches.
+
+\
+(4)	TBCA was hypothesized to be inversely proportional to leaf area as previously reported by Palmroth et al. [-@palmroth2006aboveground], yet the impacts of the climate change treatments were still expected to affect carbon allocation to roots. 
+
+
 # Methods
 
 ## Whole tree chamber experimental design
@@ -93,25 +108,28 @@ A final destructive harvest was completed in mid-March 2009. Each tree was harve
 \
 Carbon mass was assumed to be 50% of dry biomass for all non-leaf tissue components and this conversion was performed for all harvest and survey (below) data. Leaf and litter carbon mass was calculated by multiplying harvested or estimated biomass by the WTC specific mean leaf carbon content (%). Leaf carbon content was determined from a subsample of leaves at the final harvest determined using a Leco TruSpec Micro elemental analyzer (LECO corporation, MI, USA). Mass fractions of leaves, boles+branches and roots were calculated by dividing their respective carbon mass by total carbon mass for each tree.
 
-## Tree Allometric Relationships 
-Tree height was measured bi-weekly and stem diameters were recorded monthly at regular intervals (30 cm) along the main bole and split stems. Tree diameters at 65 cm height were used as the standard diameter because none of the trees had split stems at this height. Diameter and length for every branch, including forked branches, were surveyed across seven dates over the final year of the experiment. Branch diameter measurements were recorded at 5 cm from their individual insertion points. Leaf litter was collected from the chambers bi-weekly, oven-dried and weighed.
-
-\
-During the final harvest 1 cm sections were removed from the bole, along regular intervals, to determine the mass contributions of bark and wood for each tree. The mean total bole density for each tree ($\rho_{bo}$) was calculated as the contribution of bark mass and wood mass, weighted by the total diameter of each section. Additionally, final harvest basal area and length of each branch were measured and used to calculate the total branch volume. A volume shape factor, from Makela et al. [-@makela1997carbon], was applied to each branch volume to designate each branch as an intermediate shape between a volumetric cone and a cylinder ($\rho_{br}$, 0.75). A wood density parameter for branches ($\rho_{br}$) in each WTC was calculated as the total branch dry mass divided by the cumulative branch volume. Due to a thin bark layer on branches a separate bark density parameter was not created.
-
-\
-Final harvest total leaf area and dry mass were measured for each of the five canopy layers. Specific leaf area (SLA, cm^2^ g^-1^) was calculated by dividing cumulative tree leaf area by leaf mass for each canopy layer. Mean SLA for each chamber was obtained by weighting SLA of each of the 5 layers by their foliage mass fraction. Estimates of standing leaf area were also obtained in April 2008 from leaf counts for each tree, multiplied by tree-specific mean leaf size (based on a sub-sample). 
-
 \
 Additionally, prior to the initiation of the experiment a subset of additional potted plants of *Eucalyptus saligna* (n=17) were harvested to develop relationships between above and belowground biomass. These seedlings were grown in 25 l pots inside each WTC, while chamber conditions were maintained, until the experiment was started. 
 
+## Tree Allometric Surverys
+Tree height was measured bi-weekly and stem diameters were recorded monthly at regular intervals (30 cm) along the main bole and split stems. Tree diameters at 65 cm height were used as the standard diameter because none of the trees had split stems at this height. Diameter and length for every branch, including forked branches, were surveyed across seven dates over the final year of the experiment. Branch diameter measurements were recorded at 5 cm from their individual insertion points. Leaf litter was collected from the chambers bi-weekly, oven-dried and weighed.
+
 ## Bole Carbon
+During the final harvest 1 cm sections were removed from the bole, along regular intervals, to determine the mass contributions of bark and wood for each tree. The mean total bole density for each tree ($\rho_{bo}$) was calculated as the contribution of bark mass and wood mass, weighted by the total diameter of each section. 
+
+\
 For boles, individual volume units were constructed as concentric cylinders between diameter intervals from base to tip for each monthly survey. This approach assumed any bole taper was accounted for in the difference in volume between bole sections. The last section including the top of the tree was calculated as a cone with a tip radius of .001 cm.  The volume below the standard diameter (65 cm) was calculated separately in order to interpolate taper into this section. Using the height of the tree and the standard diameter, the diameters at 30cm and base were estimated by extending the length of the pre-existing cone. This resulted in two additional stem sections with taper assumed as previously stated. All volume units were then summed, including split stems, to calculate total tree volume. Bole mass was calculated as total volume multiplied by WTC specific $\rho_{bo}$.
 
 ## Branch Carbon
+Additionally, final harvest basal area and length of each branch were measured and used to calculate the total branch volume. A volume shape factor, from Makela et al. [-@makela1997carbon], was applied to each branch volume to designate each branch as an intermediate shape between a volumetric cone and a cylinder ($\rho_{br}$, 0.75). A wood density parameter for branches ($\rho_{br}$) in each WTC was calculated as the total branch dry mass divided by the cumulative branch volume. Due to a thin bark layer on branches a separate bark density parameter was not created.
+
+\
 To obtain branch mass during each survey period, volume of all individual branches were calculated as outlined above. As diameters were not recorded at branch insertion points, 5 cm were added back to each branch length in order to represent the entire branch volume. Branch mass, at any time point, was the individual branch volume multiplied by WTC specific $\rho_{br}$. We assumed that neither $\rho_{bo}$ nor $\rho_{br}$ calculated from the final harvest changed through time. 
 
 ## Leaf area and carbon
+Final harvest total leaf area and dry mass were measured for each of the five canopy layers. Specific leaf area (SLA, cm^2^ g^-1^) was calculated by dividing cumulative tree leaf area by leaf mass for each canopy layer. Mean SLA for each chamber was obtained by weighting SLA of each of the 5 layers by their foliage mass fraction. Estimates of standing leaf area were also obtained in April 2008 from leaf counts for each tree, multiplied by tree-specific mean leaf size (based on a sub-sample). 
+
+\
 Canopy leaf area was modeled on daily times steps using the leaf count census and harvest leaf area estimates, along with height growth and litter fall rates. Leaf growth was assumed to coincide with height growth, so that no leaf growth occurred when height growth had ceased. This method assumes that total cumulative leaf area (i.e. standing leaf area plus that produced by litter fall) followed and allometric relationship with tree height [@barton2010whole] such that: 
 
 \
@@ -145,7 +163,7 @@ There was a positive linear relationship between $\text{F}_{c,t}$ and both whole
 
 ## Tree carbon allocation
 Carbon allocation to individual tissue components were affected differentially by CO~2~ and drought treatments (Table 1). 
-There was a marginal interaction of elevated CO~2~ and drought on harvested bole carbon mass (p = 0.075). Elevated CO~2~ reduced bole carbon mass only in wet treatments (P = 0.041), while drought was found to reduce bole carbon mass in ambient CO~2~ treatments only (P = 0.051). Total branch carbon mass was marginally reduced under elevated CO~2~ (P = 0.086) but was not affected by drought. Neither leaf or litter carbon mass were affected by elevated CO~2~ and drought treatments. Total root carbon mass was marginally reduced under elevated CO~2~ but not affected by drought.
+There was a marginal interaction of elevated CO~2~ and drought on harvested bole carbon mass (p = 0.075). Elevated CO~2~ reduced bole carbon mass only in wet treatments (P = 0.041), while drought was found to reduce bole carbon mass in ambient CO~2~ treatments only (P = 0.051). Total branch carbon mass was marginally reduced under elevated CO~2~ (P = 0.086) but was not affected by drought. Neither leaf or litter carbon mass were affected by elevated CO~2~ and drought treatments. Total root carbon mass was marginally reduced under elevated CO~2~ (P = 0.091) but not affected by drought.
 
 \
 Final LMF was increased by 15.2% under elevated CO~2~ (P = 0.031) but not affected by the drought treatment. Final LMF was negatively correlated with $\text{F}_{c,t}$ (R^2^ = -0.62, Figure `r massfracfig`a). Final SMF was reduced by 8% under elevated CO~2~ (P = 0.014), with no effect of the drought treatment detected.  Final SMF was positively correlated with F~[c,t]~ (R^2^ = 0.37, Figure `r massfracfig`b). Final RMF was not affected by either treatment nor related to $\text{F}_{c,t}$(Figure `r massfracfig`c).

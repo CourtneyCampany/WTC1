@@ -44,8 +44,8 @@ leafA_est <- merge(leafA_est, sladfr, by="chamber")
   leafA_est$littermass <- with(leafA_est, (LAlittercumlin / SLA)*1000)
 
 ##check against harvest
-# leaflast <- leafA_est[leafA_est$Date == max(leafA_est$Date),]
-# ##equal so did it correctly
+ leaflast <- leafA_est[leafA_est$Date == max(leafA_est$Date),]
+ ##equal so did it correctly
 
 #write leaf mass to subfolder
 write.csv(leafA_est, file = "calculated_mass/leaf_mass.csv", row.names=FALSE)
