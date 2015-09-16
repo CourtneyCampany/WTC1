@@ -1,6 +1,7 @@
 #This script calculates bole mass from only surveys which recorded stem diameters over 310 cm 
 #had to manually determine the dates where trees were < 310cm tall
 #and/or when the tall tree surverys occured
+library(doBy)
 
 #read raw data--------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +104,6 @@ density$height_cookie <- density$freshvolume / (pi*((density$doverbark/2)^2))
   density$bark_density <- density$wbark / density$BarkV
   density$barkdiam <- with(density, doverbark - dunderbark)
 
-  
 #calculate bark:wood as ratio of dry weight instead of diameter
 density$Bark_Wood <- density$wbark / density$wwood
 density$totaldens <- (density$wood_density + density$bark_density)/2
