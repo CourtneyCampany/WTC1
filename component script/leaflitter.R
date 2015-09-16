@@ -6,7 +6,7 @@ litter <- read.csv("raw csv/HFE leaf litter 2008-2009.csv")
 litter_harvest <- read.csv("raw csv/HFE Litter after final harvest.csv")
 names(litter_harvest)[2] <-"leaflitter_harvest"
 
-litter_cham <- summaryBy(leaflitter ~ chamber, data=litter, FUN=mean, keep.names = TRUE)
+litter_cham <- summaryBy(leaflitter ~ chamber, data=litter, FUN=sum, keep.names = TRUE)
 
 litter_cham2 <- merge(litter_cham, litter_harvest[, 1:2])
 

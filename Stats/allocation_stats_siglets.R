@@ -213,18 +213,19 @@ flux_siglets2 <- flux_siglets$mcletters$Letters
 ###need vector of sig letters 
 
 ###variable order = bole, br, leaf, litter, root, flux
+Pinter <- as.vector(c(Pbo, Pbr, Pl, Pli, Pr, Pf))
+Pco2 <- as.vector(c(Pbo_co2, Pbr_co2, Pl_co2, Pli_co2, Pr_co2, Pf_co2))
+Ph20 <- as.vector(c(Pbo_h20, Pbr_h20, Pl_h20, Pli_h20, Pr_h20, Pf_co2))
 
-Pinter <- c(Pbo, Pbr, Pl, Pli, Pr, Pf)
-Pco2 <- c(Pbo_co2, Pbr_co2, Pl_co2, Pli_co2, Pr_co2, Pf_co2)
-Ph20 <- c(Pbo_h20, Pbr_h20, Pl_h20, Pli_h20, Pr_h20, Pf_co2)
-
-sigs_ls <- list(bole_siglets2,branch_siglets2,leaf_siglets2,litter_siglets2,root_siglets2,flux_siglets2)
+sigletters<- data.frame(bole = bole_siglets2, branch = branch_siglets2,leaf = leaf_siglets2,
+                         litterfall=litter_siglets2,root = root_siglets2,cflux = flux_siglets2)
 
 
 write.csv(Pinter, "Stats/p_sigs/P_interactions.csv", row.names = FALSE)
 write.csv(Pco2, "Stats/p_sigs/P_co2.csv", row.names = FALSE)
 write.csv(Ph20, "Stats/p_sigs/P_h20.csv", row.names = FALSE)
 
+write.csv(sigletters, "Stats/p_sigs/sigletters.csv", row.names = FALSE)
 
 
 

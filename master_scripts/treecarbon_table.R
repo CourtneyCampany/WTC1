@@ -40,6 +40,7 @@ tree_table <- cbind(tree_table, v5)
 tree_table <- cbind(tree_table, v6)
 # tree_table <- cbind(tree_table, v7)
 
+
 ##order the variables
 tree_table <- tree_table[, c(1,5,4,6,7,3,2)]
 
@@ -49,13 +50,43 @@ vars <- c("Treatment", "Bole", "Branch", "Leaf", "Litter", "Root", "Tree C flux"
 
 colnames(tree_table) <- vars
 
+
+##add sigletters
+siglets <- read.csv("Stats/p_sigs/sigletters.csv")
+
+tree_table[[2]] <- paste(tree_table[[2]], siglets[[1]])
+tree_table[[3]] <- paste(tree_table[[3]], siglets[[2]])
+tree_table[[4]] <- paste(tree_table[[4]], siglets[[3]])
+tree_table[[5]] <- paste(tree_table[[5]], siglets[[4]])
+tree_table[[6]] <- paste(tree_table[[6]], siglets[[6]])
+tree_table[[7]] <- paste(tree_table[[7]], siglets[[6]])
+
 ###three columns with P by treatments and interactions
 ###sigletters by numbers as done previously
 
-##Add siglettters eventually
+Pinter <- read.csv("Stats/p_sigs/P_interactions.csv")
+Pinter <- round(Pinter, 3)
+
+Pco2 <- read.csv("Stats/p_sigs/P_co2.csv")
+Pco2 <- round(Pco2, 3)
+
+Ph2o <- read.csv("Stats/p_sigs/P_h20.csv")
+Ph2o <- round(Ph2o, 3)
+
+plab1 <- as.character(expression(paste(CO[2]),"* Drought (P)", sep=" "))
+plab2 <- expression(paste(CO[2]),"treatment (P)", sep=" ")
+plab3 <- "Drought treatment (P)"
+
+P1 <- c(plab1, Pinter[,1])
+P2 <- c(plab2, Pco2[,1])
+P3 <- c(plab3, Ph2o[,1])
+
+
+tree_table$Treatment <- as.character(tree_table$Treatment)
+
+tree_table2 <- rbind(tree_table, P3)
 
 # write.csv(tree_table, "master_scripts/data_table.csv", row.names=FALSE)
-
 
 
 
