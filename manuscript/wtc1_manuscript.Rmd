@@ -1,5 +1,5 @@
 ---
-title: "Elevated atmospheric CO~2~ and drought alters carbon allocation patterns in *Eucalyptus saligna*."
+title: "Elevated atmospheric CO~2~ and drought alter carbon allocation above but not belowground in *Eucalyptus saligna*"
 author: ""
 date: ""
 output:
