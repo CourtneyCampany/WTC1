@@ -64,39 +64,39 @@ tree_table[[7]] <- paste(tree_table[[7]], siglets[[6]])
 ###three columns with P by treatments and interactions
 ###sigletters by numbers as done previously
 
-Pinter <- read.csv("Stats/p_sigs/P_interactions.csv")
-Pinter <- round(Pinter, 3)
-
-Pco2 <- read.csv("Stats/p_sigs/P_co2.csv")
-Pco2 <- round(Pco2, 3)
-Pco2a <- as.character(Pco2)
-
-Ph2o <- read.csv("Stats/p_sigs/P_h20.csv")
-Ph2o <- round(Ph2o, 3)
-
-plab1 <- expression(paste(CO[2]),"* Drought (P)", sep=" ")
-
-plab2 <- expression(paste(CO[2]),"treatment (P)", sep=" ")
-plab3 <- "Drought treatment (P)"
-
-# P1 <- c(plab1, Pinter[,1])
-P2 <- as.expression(c(plab2, Pco2[,1]))
-P2a <- as.character(P2)
-P3 <- c(plab3, Ph2o[,1])
-
-
-tree_table$Treatment <- as.character(tree_table$Treatment)
-
-tree_table2 <- rbind(tree_table, P3)
-tree_table3 <- rbind(tree_table2, lab3)
-
-
-
-lab <- expression(CO[2],a)
-
-lab1 <- as.character(lab)
-
-P="P"
+# Pinter <- read.csv("Stats/p_sigs/P_interactions.csv")
+# Pinter <- round(Pinter, 3)
+# 
+# Pco2 <- read.csv("Stats/p_sigs/P_co2.csv")
+# Pco2 <- round(Pco2, 3)
+# Pco2a <- as.character(Pco2)
+# 
+# Ph2o <- read.csv("Stats/p_sigs/P_h20.csv")
+# Ph2o <- round(Ph2o, 3)
+# 
+# plab1 <- expression(paste(CO[2]),"* Drought (P)", sep=" ")
+# 
+# plab2 <- expression(paste(CO[2]),"treatment (P)", sep=" ")
+# plab3 <- "Drought treatment (P)"
+# 
+# # P1 <- c(plab1, Pinter[,1])
+# P2 <- as.expression(c(plab2, Pco2[,1]))
+# P2a <- as.character(P2)
+# P3 <- c(plab3, Ph2o[,1])
+# 
+# 
+# tree_table$Treatment <- as.character(tree_table$Treatment)
+# 
+# tree_table2 <- rbind(tree_table, P3)
+# tree_table3 <- rbind(tree_table2, lab3)
+# 
+# 
+# 
+# lab <- expression(CO[2],a)
+# 
+# lab1 <- as.character(lab)
+# 
+# P="P"
 # lab2 <- bquote(paste(CO[2]~treatment~.(P)*","*.(Pco2[1,])*","*.(Pco2[2,])*","*.(Pco2[3,])*","*.(Pco2[4,])*","*.(Pco2[5,])*","*.(Pco2[6,])))
 # 
 # lab3 <- bquote(CO[2]~treatment~.(P)*","*.(Pco2[1,])*","*.(Pco2[2,])*","*.(Pco2[3,])*","*.(Pco2[4,])*","*.(Pco2[5,])*","*.(Pco2[6,]))
