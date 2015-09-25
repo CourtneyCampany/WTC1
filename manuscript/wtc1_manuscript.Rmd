@@ -215,7 +215,6 @@ sprinkle_print_method("markdown")
 ```
 
 
-
 # List of Figures
 **Figure 1**. Treatment means of harvested whole tree carbon mass (a) and aboveground carbon mass (b) as a function of cumulative canopy carbon flux over the final year of the experiment. The dotted line is the 1:1 relationship and the solid lines represent the significant linear model fit for whole tree carbon (R^2^ = 0.86) and aboveground carbon mass (R^2 = 0.78).
 
