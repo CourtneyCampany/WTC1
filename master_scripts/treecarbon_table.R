@@ -21,7 +21,7 @@ table_means <- treeC_agg[, c(2:9)]
 table_se <- treeC_agg[, c(10:17)]
 
 trts <- treeC_agg[, 1]
-trts2 <- c("aCO2-dry", "aCO2-wet", "eCO2-dry", "eCO2-wet")
+trts2 <- c("aCO~2~-dry", "aCO~2~-wet", "eCO~2~-dry", "eCO~2~-wet")
 
 ###paste and round means and se together
 v1 <- data.frame(paste0(sprintf("%5.1f", round(table_means[,1], 1)), " (", sprintf("%4.1f", round(table_se[,1],1)),")"))
@@ -102,7 +102,7 @@ tree_table[[7]] <- paste(tree_table[[7]], siglets[[6]])
 # lab3 <- bquote(CO[2]~treatment~.(P)*","*.(Pco2[1,])*","*.(Pco2[2,])*","*.(Pco2[3,])*","*.(Pco2[4,])*","*.(Pco2[5,])*","*.(Pco2[6,]))
 
 
-# write.csv(tree_table, "master_scripts/data_table.csv", row.names=FALSE)
+write.csv(tree_table, "master_scripts/data_table.csv", row.names=FALSE)
 
 
 
