@@ -139,8 +139,7 @@ During the final harvest, diameter measurements were recorded as described above
 For boles, individual volume units were constructed as concentric cylinders between diameter intervals from base to tip for each monthly survey. This approach assumed any bole taper was accounted for in the difference in volume between bole sections. The top section was calculated as a cone with a tip radius of .001 cm.  The volume below the reference diameter (65 cm) was calculated separately in order to interpolate taper into this section. Using the height of the tree and the standard diameter, the diameters at 30cm and base were estimated by extending the length of the pre-existing cone (from tree top to 65 cm). This resulted in two additional stem sections with taper assumed as above. All bole volume units were then summed (including forked stems) to calculate total tree volume. Bole mass was calculated as total volume multiplied by WTC specific $\rho_{bo}$.
 
 ## Branch carbon
-First, the basal area and length of every individual branch was from the final harvest was multipled to estimate individual branch volume, which was summed for each tree (V~br~, cm^3^). The product of two parameters, a geometric form factor from Makela et al. [-@makela1997carbon] ($\phi_{br}$) and the total branch density ($\rho_{br}$, g cm^-3^) was calculated as:
-
+First, the basal area and length of every individual branch was from the final harvest was multipled to estimate individual branch volume, which was summed for each tree (V~br~, cm^3^). The product of two parameters, a geometric form factor from Mäkelä et al. [-@makela1997carbon] ($\phi_{br}$) and the total branch density ($\rho_{br}$, g cm^-3^) was calculated as:
 \
 (1)
 $$\phi_{br}\rho_{br} = \frac{M_{br}}{V_{br}} $$
