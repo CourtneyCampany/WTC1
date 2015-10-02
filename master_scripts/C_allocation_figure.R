@@ -1,7 +1,7 @@
 ###this script visualizes allocation to different components by treatment
-# source("functions_and_packages/plot_objects.R")
-# source("functions_and_packages/functions.R")
-# library(plotrix)
+source("functions_and_packages/plot_objects.R")
+source("functions_and_packages/functions.R")
+library(plotrix)
 
 #read data for cumulative C flux and harvest mass
 tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
@@ -76,5 +76,5 @@ mtext(treeclab, side=1, outer=TRUE, line=3)
 text(x=22500, y=0.29,labels="(c)", cex=1.5)
 
 # dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
-# dev.off() 
+# dev.off()
    
