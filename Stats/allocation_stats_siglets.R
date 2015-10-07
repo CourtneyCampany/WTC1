@@ -14,6 +14,7 @@ tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
 ##calculate belowground flux
 tree_C$tbca <- with(tree_C, Cflux-Cab)
 tree_C$Fs_resid <- with(tree_C, Cflux - (Cab+rootC))
+tree_C$stemC <- with(tree_C, boleC + branchC)
 
 tree_C$treatment <- with(tree_C, as.factor(paste(CO2_treatment, Water_treatment, sep="-")))
 tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
@@ -178,6 +179,9 @@ roots_mod2 <- lm(Cflux ~ treatment, data=tree_C)
   tukey_root <- glht(roots_mod2, linfct = mcp(treatment= "Tukey"))
   root_siglets<- cld(tukey_root)
   root_siglets2 <- root_siglets$mcletters$Letters
+  
+(mean(tree_C[tree_C$CO2_treatment=="ambient", "rootC"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "rootC"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "rootC"])
+  
 
 ###use treatments to get sig letters when there is not interaction
 
@@ -226,6 +230,26 @@ write.csv(Pco2, "Stats/p_sigs/P_co2.csv", row.names = FALSE)
 write.csv(Ph20, "Stats/p_sigs/P_h20.csv", row.names = FALSE)
 
 write.csv(sigletters, "Stats/p_sigs/sigletters.csv", row.names = FALSE)
+
+
+####wood (boles+branches)
+ad.test(tree_C$stem) ##appears normal
+
+stem_mod <- lm(stemC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+anova(stem_mod)
+summary(stem_mod)
+plotresid(stem_mod)
+visreg(stem_mod)
+
+##no interactions so run simple mod for each treatment
+with(tree_C, boxplot(stemC~treatment))  
+
+stem_co2 <- lm(stemC ~ CO2_treatment, data=tree_C) 
+anova(stem_co2)
+
+
+stem_h20 <- lm(stemC ~ Water_treatment, data=tree_C) 
+anova(stem_h20)
 
 
 
