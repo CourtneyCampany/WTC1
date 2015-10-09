@@ -6,6 +6,11 @@ library(multcomp)
 library(doBy)
 library(RVAideMemoire)
 
+##some text to save from results
+#Elevated CO~2~ reduced bole C mass only in wet treatments (P = 0.041), 
+#while drought reduced bole C mass in ambient CO~2~ treatments only (P = 0.051). 
+#Total branch C mass was marginally reduced under eC~a~ (P = 0.086) but was not affected by drought.
+
 ##need final harvest values (not treatmen means)
 #tree_C <- read.csv("master_scripts/harvest_chamber.csv")
 tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
