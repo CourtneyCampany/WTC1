@@ -4,6 +4,7 @@ library(wesanderson)
 leaflab <- expression(Leaf~Area~~(m^2))
 meanlalab <- expression(Daily~Leaf~Area~~(m^2))
 treefluxlab <- "Tree Carbon Flux  (g C)"
+treefluxlab2 <- "Total Tree Carbon Flux  (g C)"
 
 tbcalab <- "TBCA  (g)"
 fslab <- expression(F[s]~residual)
@@ -19,6 +20,9 @@ leglab2 = c(expression(paste(aCO[2], ", " ,"wet")), expression(paste(aCO[2], ", 
 rmflab <- expression(RMF~~(g~g^-1))
 smflab <- expression(SMF~~(g~g^-1))
 lmflab <- expression(LMF~~(g~g^-1))
+
+leafalloclab <- "Leaf C Allocation  (%)"
+stemalloclab <- "Stem C Allocation  (%)"
 
 
 boxlab <- c(expression(atop(aCO[2], Dry)), expression(atop(aCO[2], Wet)), expression(atop(eCO[2], Dry)),

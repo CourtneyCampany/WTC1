@@ -1,4 +1,4 @@
-###this script visualizes allocation to different components by treatment
+###this script visualizes partitioning to different components by treatment
 source("functions_and_packages/plot_objects.R")
 source("functions_and_packages/functions.R")
 library(plotrix)
@@ -75,6 +75,6 @@ title(ylab=rmflab, mgp=c(4,1,0))
 mtext(treeclab, side=1, outer=TRUE, line=3)
 text(x=22500, y=0.29,labels="(c)", cex=1.5)
 
-# dev.copy2pdf(file="master_scripts/paper_figs/c_allocation.pdf")
+# dev.copy2pdf(file="master_scripts/paper_figs/massfractions.pdf")
 # dev.off()
    

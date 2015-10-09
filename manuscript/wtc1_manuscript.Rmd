@@ -141,14 +141,17 @@ During the final harvest, diameter measurements were recorded as described above
 For boles, individual volume units were constructed as concentric cylinders between diameter intervals from base to tip for each monthly survey. This approach assumed any bole taper was accounted for in the difference in volume between bole sections. The top section was calculated as a cone with a tip radius of .001 cm.  The volume below the reference diameter (65 cm) was calculated separately in order to interpolate taper into this section. Using the height of the tree and the standard diameter, the diameters at 30cm and base were estimated by extending the length of the pre-existing cone (from tree top to 65 cm). This resulted in two additional stem sections with taper assumed as above. All bole volume units were then summed (including forked stems) to calculate total tree volume. Bole mass was calculated as total volume multiplied by WTC specific $\rho_{bo}$.
 
 ## Branch carbon
-First, the basal area and length of every individual branch was from the final harvest was multiplied to estimate individual branch volume, which was summed for each tree (V~br~, cm^3^). The product of two parameters, a geometric form factor from Mäkelä et al. [-@makela1997carbon] ($\phi_{br}$) and the total branch density ($\rho_{br}$, g cm^-3^) was calculated as:
-\
-(1)
-$$\phi_{br}\rho_{br} = \frac{M_{br}}{V_{br}} $$
-where M~br~ is summed dry mass of harvested branches, $\phi$ corrects branch volume estimates to an intermediate shape between a cone and a cylinder and $\rho_{br}$ resprsents the combined density of wood and bark. 
+Measured dry mass, length and basal area of harvested branches was used to determine the branch density as well as a geometric shape factor [see @makela1997carbon] for each WTC by rearranging the equation:
 
 \
-To obtain branch mass during each survey period, volume of all individual branches were calculated as outlined above. As diameters were not recorded at branch insertion points, 5 cm were added back to each branch length in order to represent the entire branch volume. Branch mass, at any time point, was the individual branch volume multiplied by the product of $\phi_{br}$ and $\rho_{br}$, specific to each WTC. We assumed that $\rho_{br}$ did not change through time.
+(1)
+$$M_{br} = L_{br}A_{br}\rho_{br}\phi$$
+
+where $\text{M}_{br}$ is summed dry mass of all harvested branches, $\text{L}_{br}$ is total branch length (cm), $\text{A}_{br}$ is total basal area (cm^3^), $\rho_{br}$ respresents the combined density of wood and bark and $\phi$ corrects branch volume estimates to an intermediate shape between a cone and a cylinder.
+
+\
+During each survey period, M~br~ was estimated by solving the above equation with $\text{L}_{br}$ and $\text{A}_{br}$ for individual branches with $\phi_{br}$$\rho_{br}$ specific to each WTC. As diameters were not recorded at branch insertion points, 5 cm were added back to each branch length in order to represent the entire branch volume. We assumed that $\rho_{br}$ did not change through time.
+Total dry branch mass at each survey point was the summed mass of all indiviudal branches.
 
 ## Leaf area and carbon
 Final harvest total leaf area and dry mass were measured for each of the five canopy layers. Specific leaf area (SLA, cm^2^ g^-1^) was calculated by dividing cumulative tree leaf area by leaf mass for each canopy layer. Mean SLA for each chamber was obtained by weighting SLA of each of the 5 layers by their foliage mass fraction. Estimates of standing leaf area were also obtained in April 2008 from leaf counts for each tree, multiplied by tree-specific mean leaf size (based on a sub-sample). 
@@ -166,16 +169,31 @@ where $\text{A}_{L,T}$ is the total 'potential' leaf area (m^2^), a and b are tr
 $$A_{L} = a~H(t)^b - \int_{t=0}^t L(dt)dt$$
 where $\text{L(t)}$ is the litterfall (m^2^ t^-1^) rate at time t. Litter was assumed to be produced by all canopy layers. The daily leaf area contribution of litterfall is the difference between  $\text{A}_{L,T}$ and  $\text{A}_{L}$. The mean SLA for each harvested tree was multiplied by daily estimates leaf and litterfall area to calculate biomass. Specific leaf area was assumed to be constant over the final year of the experiment.
 
+## Calculating C allocation and mass partitioning
+
+The effects of elevated C~a~ and drought on C mass paritioning The fractions of mass F~m~ at 
+
+$$dM_{f}/dt = a_{f}~F_{,c,d} - \Lambda M_{f}$$
+
+$$M_{f,t} = \int a_{f} F_{,c,d} - \int \Lambda M_{f}$$
+
+$$M_{f,t} = a_{f} F_{c,T} - L_{f,t}$$
+
+$$a_{f} = (M_{f,t} - L_{f,t}) / F_{c,t}$$
+
+
+allocation could be caluculated for leaves and abovegroend woody mass but not for R as we have no estimate of  $\Lambda$
+
 ## Total belowground carbon allocation
 As the installation of chamber floors into each WTC separated the aboveground CO~2~ uptake from the soil CO~2~ efflux, total belowground C allocation (TBCA) at any time point was calculated as:
 
 \
 (4)
-$$TBCA = \int F_{c,t}(dt) - C_{ab}$$
-where $\text{F}_{c,t}$ is the gross primary productivity (g C) of each tree aboveground minus respiration of leaves, stems and branches and $\text{C}_{ab}$ is the aboveground standing crop C mass (g C) of stems, branches, leaves and cumulative leaf litterfall. As the final standing crop of root biomass was known, TBCA could be further broken down into the total C mass of roots ($\text{C}_{r,t}$) and the residual belowground C flux ($\text{F}_{c,r}$). The residual belowground C flux includes; root and soil respiration, root turnover, root exudation and any unaccounted for root C mass. The use of aboveground allometry to interpolate $\text{C}_{ab}$ through time combined with F~c~ allowed TBCA to be estimated on daily time steps over the final year of the experiment while $\text{F}_{c,r}$ was calculated at the final harvest.
+$$TBCA = \int F_{c,d}(dt) - C_{ab}$$
+where $\text{F}_{c,d}$ is the gross primary productivity (g C) of each tree aboveground minus respiration of leaves, stems and branches and $\text{C}_{ab}$ is the aboveground standing crop C mass (g C) of stems, branches, leaves and cumulative leaf litterfall. As the final standing crop of root biomass was known, TBCA could be further broken down into the total C mass of roots ($\text{C}_{r,T}$) and the residual belowground C flux ($\text{F}_{c,r}$). The residual belowground C flux includes; root and soil respiration, root turnover, root exudation and any unaccounted for root C mass. The use of aboveground allometry to interpolate $\text{C}_{ab}$ through time combined with F~c~ allowed TBCA to be estimated on daily time steps over the final year of the experiment while $\text{F}_{c,r}$ was calculated at the final harvest.
 
 ## Mass balance relationships between $\text{F}_{c,d}$ and C allocation.
-The cumulative sum of $\text{F}_{c,d}$, at any given time point, represented the net C uptake for each WTC. Daily allocation of C to boles and branches was estimated by linear interpolation between survey measurements and the final harvest, starting at the first branch survey (April 2008). Daily modeled estimates of leaf and litter C were added to bole and branch C mass to estimate $\text{C}_{ab}$ on any given day. The contribution of each aboveground component to the cumulative sum of $\text{F}_{c,d}$ were then tracked from April 2008 to March 2009. The initial estimated C mass of each aboveground component and $\text{F}_{c,d~}$ on the first day were subtracted from all respective daily values so mass balance could be tracked with a 0 starting value. This allowed daily estimates of TBCA to be generated across the final 11 months of the experiment. Additionally, the significant log-linear relationship between aboveground mass of both harvested trees and potted seedlings (R^2^ = 0.98) was used to predict $\text{C}_{r,t}$ on the last day from final $\text{C}_{ab}$. At the end of the time period, correlations between $\text{C}_{ab}$, whole tree C mass and leaf area with $\text{F}_{c,t}$ were tested.
+The cumulative sum of $\text{F}_{c,d}$, at any given time point, represented the net C uptake for each WTC. Daily allocation of C to boles and branches was estimated by linear interpolation between survey measurements and the final harvest, starting at the first branch survey (April 2008). Daily modeled estimates of leaf and litter C were added to bole and branch C mass to estimate $\text{C}_{ab}$ on any given day. The contribution of each aboveground component to the cumulative sum of $\text{F}_{c,d}$ were then tracked from April 2008 to March 2009. The initial estimated C mass of each aboveground component and $\text{F}_{c,d~}$ on the first day were subtracted from all respective daily values so mass balance could be tracked with a 0 starting value. This allowed daily estimates of TBCA to be generated across the final 11 months of the experiment. Additionally, the significant log-linear relationship between aboveground mass of both harvested trees and potted seedlings (R^2^ = 0.98) was used to predict $\text{C}_{r,t}$ on the last day from final $\text{C}_{ab}$. At the end of the time period, correlations between $\text{C}_{ab}$, whole tree C mass and leaf area with $\text{F}_{c,T}$ were tested.
 
 ## Data analysis
 Differences in experimental parameters to the interaction of C~a~ and drought treatments at the final harvest were analysed using two-way ANOVA in R [@RDevelopmentCoreTeam2011]. If interactions were present, planned pairwise comparisons were analyzed using one-way ANOVA and p-values were adjusted as in Benjamini & Hochberg [-@benjamini1995controlling]. Results were considered significant at P &leq; 0.05.
@@ -265,7 +283,7 @@ source("master_scripts/Cflux_leafarea_figure.R")
 **Figure 3**. 
 
 ```{r c_allocation, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
-source("master_scripts/C_allocation_figure.R")
+source("master_scripts/fractionallocation_fig.R")
 ```
 \
 **Figure 4**. 
