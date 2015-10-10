@@ -52,10 +52,10 @@ plot(fluxC ~ Date, data = ambwet,axes=FALSE, ylab="Carbon  (g)", ylim=c(0, 25000
 box()
 legend(x=13975, y=23500, dayClab, lty = c(1, 3, 2, 5, -1), pch = c(-1, -1, -1, -1, 21),lwd=LWD,  
         bty='n', pt.cex=1,cex=1, pt.bg=c(-1, -1, -1, -1,"grey"))
-text(x=14025, y=25000, label = leglab2[1], cex=1.25, font=2) 
+text(x=14035, y=25000, label = leglab2[1], cex=1.25, font=2) 
 ##add roots on last date
 points(treeC ~ Date , data = mab_final,subset = treatment == "ambient-wet", pch = 21, bg = "grey", cex=2)
-
+axis(1, labels=FALSE, tcl=.5)
 axis(2, labels=TRUE, outer=FALSE)
 mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.75)
 
@@ -66,8 +66,9 @@ plot(fluxC ~ Date, data = ambdry,axes = FALSE, ann = FALSE, ylim=c(0, 25000),lwd
   points(bolebranch ~ Date , data = ambdry, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = ambdry, lwd=LWD,type = 'l',lty=5)
 box()
-text(x=14025, y=25000, label = leglab2[2],cex=1.25, font=2)
-
+text(x=14035, y=25000, label = leglab2[2],cex=1.25, font=2)
+axis(1, labels=FALSE,tcl=.5)
+axis(2, labels=FALSE,tcl=.5)
 points(treeC ~ Date , data = mab_final,subset = treatment == "ambient-dry", pch = 21, bg = "grey", cex=2)
 
 #3: elevated-dry
@@ -77,7 +78,7 @@ plot(fluxC ~ Date, data = elevdry, axes=FALSE, xlab="", ylab="Carbon  (g)", ylim
   points(bolebranch ~ Date , data = elevdry, lwd=LWD,type = 'l',lty=2)
   points(aboveC ~ Date , data = elevdry, lwd=LWD,type = 'l',lty=5)
 box()
-text(x=14025, y=25000, label = leglab2[3],cex=1.25, font=2)
+text(x=14035, y=25000, label = leglab2[3],cex=1.25, font=2)
 axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
 axis(2, labels=TRUE, outer=FALSE)
 mtext("Carbon  (g)", side=2, line=4, outer=TRUE, las=0, at=.25)
@@ -92,10 +93,11 @@ plot(fluxC ~ Date, data = elevwet,axes = FALSE, ylab="", xlab="", ylim=c(0, 2500
   points(aboveC ~ Date , data = elevwet, lwd=LWD,type = 'l',lty=5)
 axis.Date(1, at = xAT, labels = TRUE)
 box()
-text(x=14025, y=25000, label = leglab2[4],cex=1.25, font=2)
+text(x=14035, y=25000, label = leglab2[4],cex=1.25, font=2)
 
 points(treeC ~ Date , data = mab_final,subset = treatment == "elevated-wet", pch = 21, bg = "grey", cex=2)
 axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
+axis(2, labels=FALSE,tcl=.5)
 
 # dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")
 # dev.off()
