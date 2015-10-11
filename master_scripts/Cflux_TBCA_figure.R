@@ -1,6 +1,6 @@
 ##this scrpt visualizes the relationship between leaf area and TBCA and Cflux by treatment
-# source("functions_and_packages/plot_objects.R")
-# source("functions_and_packages/functions.R")
+source("functions_and_packages/plot_objects.R")
+source("functions_and_packages/functions.R")
 library(doBy)
 
 ##read in chamber flux and calculate TBCA
@@ -18,7 +18,7 @@ palette(c("blue", "red"))
  
 # windows(7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
-plot(TBCA ~ fluxC, data=treeC,  type='n',ylab="", xlab=treefluxlab)
+plot(TBCA ~ fluxC, data=treeC,  type='n',ylab="", xlab=treefluxlab2)
 
 for(i in unique(treeC$treatment)){
   points(TBCA ~ fluxC, data=treeC[treeC$treatment == i,], col=as.factor(CO2_treatment), 
