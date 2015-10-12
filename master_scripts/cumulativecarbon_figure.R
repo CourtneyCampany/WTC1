@@ -1,4 +1,5 @@
 # source("functions_and_packages/plot_objects.R")
+# library(doBy)
 
 #treeC <- read.csv("calculated_mass/treeC_day.csv")
 treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
@@ -8,16 +9,32 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
 treeC$treatment <- with(treeC, paste(CO2_treatment,Water_treatment, sep="-"))
 
 ###use Mab to predict roots since roots are not reset to zeo
-rooteq <- read.csv("stats/rootshootmodel.csv")
-
-mab_final <- treeC[treeC$Date == max(treeC$Date), c(1:3,9,11)]
-  mab_final$rootmass_pred <- with(mab_final, rooteq[2,1]*(log10(aboveC*2)) + rooteq[1,1])
-  mab_final$rootmass_pred2 <- 10^(mab_final$rootmass_pred)
-  mab_final$rootC_pred <- mab_final$rootmass_pred2 * .5
-  mab_final$treeC <- with(mab_final, rootC_pred+aboveC)
+# rooteq <- read.csv("stats/rootshootmodel.csv")
+# 
+# mab_final <- treeC[treeC$Date == max(treeC$Date), c(1:3,9,11)]
+#   mab_final$rootmass_pred <- with(mab_final, rooteq[2,1]*(log10(aboveC*2)) + rooteq[1,1])
+#   mab_final$rootmass_pred2 <- 10^(mab_final$rootmass_pred)
+#   mab_final$rootC_pred <- mab_final$rootmass_pred2 * .5
+#   mab_final$treeC <- with(mab_final, rootC_pred+aboveC)
 
 ##add roots to double check predicted values
 # roots <- read.csv("master_scripts/harvest_trt_means.csv")
+  
+##Read pre-calculated root mass over 11 months from root predict component script
+roots <- read.csv("calculated_mass/rootallometry.csv")  
+
+## treatments
+chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
+  chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+  chambersumm <- droplevels(chambersumm[,1:3])
+
+roots <- merge(roots, chambersumm)  
+roots$treatment <- with(roots, paste(CO2_treatment,Water_treatment, sep="-"))
+roots_agg <- summaryBy(. ~ treatment, data=roots, FUN=mean, keep.names = TRUE)
+
+finalC <- subset(treeC, Date=="2009-03-16")
+  mab_final <- merge(roots_agg[,c(1,4)], finalC[,c(1,9,11)])
+  mab_final$treeC <- with(mab_final, root11+aboveC)  
 
 
 ##for ease of plotting seperate data by trt
@@ -99,6 +116,6 @@ points(treeC ~ Date , data = mab_final,subset = treatment == "elevated-wet", pch
 axis.Date(1, at = xAT, labels = TRUE, outer=FALSE)
 axis(2, labels=FALSE,tcl=.5)
 
-# dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily.pdf")
+# dev.copy2pdf(file= "master_scripts/paper_figs/treecarbon_daily2.pdf")
 # dev.off()
 

@@ -79,10 +79,10 @@ additivechamfig <- "S1"
 
 
 #Abstract
-Accurately measuring tree carbon (C) allocation above and belowground remains a difficult empirical task and is thus challenging to capture in applied models of forest C cycling. Understanding how global change impacts the distribution of tree photosynthetic is an essential process in determining future terrestrial C balance. This study investigated how treatment manipulations of CO~2~ and drought affected the partitioning of photosynthetic C to biomass components of *Eucalyptus tereticornis* trees grown in climate-controlled whole tree chambers (WTC). It was hypothesized that that both drought and elevated CO~2~ would alter partitioning of C among biomass components. We then utilized the WTC design to provide measurements of aboveground net CO~2~ flux, which were expected to correlate to harvested tree C mass. For each WTC, total belowground C allocation was then calculated as the residual between the aboveground net CO~2~ flux and aboveground C mass. At the end of the experiment we observed that C allocation to aboveground woody tissue components was affected by the climate change treatments, while allocation to leaves and roots were not affected. The measured cumulative aboveground tree net CO~2~, after 18 months, correlated positively to both whole tree C mass and mean leaf area over the study period. Additionally, over the final 11 months of the experiment the daily fraction of C uptake allocated belowground remained relatively constant, regardless of climate change treatment or tree size. These results reveal how elevated CO~2~ and drought can impact the investment of photosynthetic C in a Eucalyptus tree species and provide further empirical evidence to aid model predictions of forest productivity. The WTC also provide a novel framework to evaluate C allocation belowground.
+Accurately measuring tree carbon (C) allocation above and belowground remains a difficult empirical task and is challenging to accurately represent in applied models of forest C cycling. Understanding how global change impacts the distribution of tree photosynthetic C is an essential process in determining future terrestrial C balance. We utilized climate-controlled whole tree chambers (WTC) to measure aboveground net CO~2~ fluxes of*Eucalyptus tereticornis* trees, which were expected to correlate to harvested tree C mass. This study investigated how treatment manipulations of CO~2~ and drought affected both tree biomass partitioning and the allocation of photosynthetic C to various above and bewloground pools. For each WTC, we calculated total belowground C allocation (TBCA) as the residual between the aboveground net CO~2~ flux and aboveground C mass. It was hypothesized that that both drought and elevated CO~2~ would increase both partitioning of biomass to roots and TBCA. The measured cumulative aboveground tree net CO~2~ flux correlated positively to both whole tree C mass and mean leaf area over the final 11 months of the experiment. Surprisingly, biomass partitioning to roots was not affected by elevated CO~2~ or drought.  Instead, increases in biomass partitioning to leaves and decreases in aboveground wood were detected under elevated CO~2~. Total C allocation to leaves was increased under elevated CO~2~, while allocation to aboveground wood and TBCA were not affected by either treatment. Across, the final 11 months of the experiment the daily fraction of C uptake allocated belowground remained relatively constant, regardless of climate change treatment or tree size. Overall, we show that elevated CO~2~ affects biomass partitioning, beyond ontogeny, aboveground instead of belowground. In addition, the unique design of the WTC also provides evidence that elevated CO~2~ may not always enhance C allocation belowground, as has been previosuly shown. These results reveal how climate change factors can impact the investment of photosynthetic C in a Eucalyptus tree species and provide an empirical framework to improve model representations of tree C allocation. 
 
 ##Key Words
-carbon allocation, whole tree chambers, elevated CO~2~, drought
+carbon allocation, biomass partitioning, whole tree chambers, elevated CO~2~, drought
 
 # Introduction
 Carbon (C) allocation in trees encompasses investment into biomass production above and belowground as well as fluxes including tissue respiration and exudation [@litton2007carbon]. Trees must allocate C to maximize competitive fitness, reproduction and growth across their life cycle [@dickson1989carbon]. In resource saturated environments plant should maximizes growth by allocating new C to leaves to increase C acquisition [@monsi2005factor]. Environmental stresses such as water, nutrient and light availability, however, may cause plants to invest in roots for belowground resources or stem elongation for increased light harvesting [@friedlingstein1999toward]. These potential changes in C investment are part of a dynamic system:  as the tree grows or sink activities are altered, the fate of C assimilate can shift through time. Understanding allocation is vital, as partitioning among plant organs and their feedback processes profoundly impacts plant growth [@friedlingstein1999toward; @lacointe2000carbon; @shipley2002balanced].
@@ -107,10 +107,10 @@ The whole-tree chambers (WTC), located at the Hawkesbury Forest Experiment, were
 Previous findings in this experiment have shown that trees grown under elevated C~a~ were smaller than ambient trees and also that larger trees had a smaller reduction in canopy transpiration in drought conditions, via deeper rooting access to water resources [@duursma2011rooting]. Therefore, the specific objectives of this study were to determine the response of C allocation among foliage, aboveground woody components and roots of a native Australian tree species to changes in C~a~ and altered water availability. Utilizing the unique WTC design we aimed to test how cumulative net aboveground C gain correlates to whole tree C mass increment, as a function of tree size. We then applied a mass balance approach to track the distribution of C above and belowground across the final eleven months of the experiment.
 
 \
-(1) At then end of the 2 year experiment we expected partitioning of C to roots to increase under elevated C~a~, similar to previous studies. We also expected increases in partitioning to roots under drought treatments, as trees should attempt to reduce water limitation.
+(1) As C uptake and growth should be coordinated over long time periods, we expected both total leaf area and harvested tree C mass to correlate with cumulative total aboveground net canopy C uptake.
 
 \
-(2) As C uptake and growth should be coordinated over long time periods, we expected both total leaf area and harvested tree C mass to correlate with cumulative total aboveground net canopy C uptake.
+(2) At then end of the 2 year experiment we expected partitioning of C to roots to increase under elevated C~a~, similar to previous studies. We also expected increases in partitioning to roots under drought treatments, as trees should attempt to reduce water limitation.
 
 \
 (3) As shifts in partitioning to root biomass were hypothesized, we expected TBCA to vary through time as cumulative tree C flux was affected by elevated C~a~ and drought.  Additionally, we expected C allocation to leaves and woody tissue components aboveground to remain constant over the final eleven months of the experiment.
@@ -119,7 +119,6 @@ Previous findings in this experiment have shown that trees grown under elevated 
 
 ##Terms
 *Mass partitioning*:  the relative distribution of biomass between different tree tissue components such as leaves, branches, boles and roots.
-
 \
 *Carbon allocation*: the fraction of net primary productivity distributed to different ecosystem components such as specific tissue components or total belowground pools.
 
@@ -226,22 +225,19 @@ Differences in experimental parameters to the interaction of C~a~ and drought tr
 Over the final year of the experiment, $\text{F}_{c,t}$ was significantly reduced by 30.5 % under eC~a~ (P = 0.043), while no effects of the drought treatment were detected. Similarly, both whole tree C and $\text{C}_{ab}$ from the final harvest were reduced under eC~a~ by ca. 32 % (both P < 0.03). Integrated over the final 11 months of the experiment, $\text{F}_{c,t}$ was positively correlated with both whole tree C (R^2^ = 0.74, Figure `r fluxtreefig`,a) and $\text{C}_{ab}$ (R^2^ = 0.69, Figure `r fluxtreefig`,b). Leaf area at the final harvest was significantly reduced by by 31.3% under eC~a~ (p < 0.001), which was observed across the final eleven months of the experiment (Figure `r lafig`). Overall, $\text{F}_{c,t}$ was positively correlated with mean daily leaf area (P < 0.001, R2 = 0.77, Figure `r fluxlafig`).    
 
 ## Tree carbon mass partitioning
-Carbon mass partitioning to individual tissue components, at then end of the experiment, was affected differentially by the C~a~ and drought treatments (Table 1).  Aboveground woody C mass were (boles+branches) was reduced 37% under eC~a~ (P = 0.0151). Neither leaf or litterfall C mass were affected by C~a~ and drought treatments. Total root C mass was marginally reduced under eC~a~ (P = 0.091) but not affected by drought.
+Carbon mass partitioning to individual tissue components, at then end of the experiment, was affected differentially by the C~a~ and drought treatments (Table 1).  Aboveground woody C mass was (boles+branches) was reduced 37% under eC~a~ (P = 0.0151). Neither leaf or litterfall C mass were affected by C~a~ and drought treatments. Total root C mass was marginally reduced under eC~a~ (P = 0.091) but not affected by drought.
 
 \
 The C mass fractions of leaves, stems and roots, at then end of the experiment, were also affected differentially by the C~a~ and drought treatments. Leaf mass fraction was increased by 15.2% under eC~a~ (P = 0.031) but was not affected by the drought treatment. 
-Leaf mass fraction was negatively correlated with whole tree C (P= 0.004, Figure `r massfracfig`a). Stem mass fraction was reduced by 8% under elevated CO~2~ (P = 0.014), with no effect of the drought treatment detected. Stem mass fraction was was positively correlated with whole tree C (P = 0.008, Figure `r massfracfig`b). Root mass fraction was not affected by either treatment and was not correlated to whole tree C (Figure `r massfracfig`c). Integrated over the final 11 months of the experiment, LMF was negatively correlated with adjusted $\text{F}_{c,t}$ (R^2^ = -0.54, P = 0.006). Neither SMF nor RMF were correlated with adjusted F~[c,t]~ during this time period.
+Leaf mass fraction was negatively correlated with whole tree C (P= 0.004, Figure `r massfracfig`a). Stem mass fraction was reduced by 8% under elevated CO~2~ (P = 0.014), with no effect of the drought treatment detected. Stem mass fraction was was positively correlated with whole tree C (P = 0.008, Figure `r massfracfig`c). Root mass fraction was not affected by either treatment and was not correlated to whole tree C (Figure `r massfracfig`e). Integrated over the final 11 months of the experiment, LMF was negatively correlated with adjusted $\text{F}_{c,t}$ (R^2^ = -0.54, P = 0.006). Neither SMF nor RMF were correlated with adjusted F~[c,t]~ during this time period.
 
-## Tree carbon allocation
+## Aboveground carbon allocation
+At the end of the experiment, the total C allocation to leaves was increased by 28% under eC~a~ (P = 0.037), with no effect of the drought treatment detected. Leaf C allocation was was negatively correlated with adjusted $\text{F}_{c,t}$ (P = 0.031, Figure `r massfracfig`b). Alternatively, C allocation to aboveground wood was not affected by either treatment and was not correlated to whole tree C (Figure `r massfracfig`d).
 
-## Total belowground carbon allocation
-Within each treatment combination the cumulative C mass of each tree component (boles, branches, leaves and roots) did not achieve mass balance with $\text{F}_{c,t}$ (Figure `r additivemassfig`). Across a large range in tree size, similar patterns were detected in each individual WTC (Figure `r additivechamfig`). It was therefore necessary to account for allocation to both TBCA and $\text{F}_{c,r}$. Neither TBCA nor $\text{F}_{c,r}$ were affected by C~a~ or drought treatments (Figure `r belowbarfig`). Total belowground C allocation and $\text{F}_{c,t}$ were positively correlated at the final harvest (R^2^ = 0.65, P < 0.001) and the proportion of C allocated belowground was relatively constant through time and between treatments (Figure `r tbcafluxfig`). TBCA had a weak positive correlation with mean daily leaf area (R^2^ = 0.26, P = 0.093), while F~[s,r]~ and leaf area were not related.
+## Belowground carbon allocation
+Within each treatment combination the cumulative C mass of each tree component (boles, branches, leaves and roots) did not achieve mass balance with $\text{F}_{c,t}$ (Figure `r additivemassfig`). Across a large range in tree size, similar patterns were detected in each individual WTC (Figure `r additivechamfig`). It was therefore necessary to account for allocation to TBCA and $\text{F}_{c,r}$. Neither TBCA nor $\text{F}_{c,r}$ were affected by C~a~ or drought treatments (Figure `r belowbarfig`). TBCA and adjusted $\text{F}_{c,t}$ were positively correlated over the final 11 months of the experiment (R^2^ = 0.78, P < 0.001) and the proportion of C allocated belowground was relatively constant through time and between treatments (Figure `r tbcafluxfig`). TBCA was positively correlated with mean daily leaf area (R^2^ = 0.44, P = 0.019).
 
 # Discussion
-
-
-##TBCA
-Additionally, modelling efforts predicting responses of belowground C allocation to global change often assume that responses of aboveground tissues represent those of belowground tissues [@giardina2005response]. Generalizations of relationships between aboveground and belowground factors should be made with caution as substantial variation has been reported across forest types [@giardina2005response and references therein].
 
 # List of Tables
 **Table 1**.  Final harvest C mass of above and belowground tissues and cumulative aboveground tree C flux. Each value represents the mean (&pm; 1 standard error) for each treatment combination and units for all values are g C. For each component, different letters represent significant differences between treatments with the overall model which includes C~a~ * Drought interactions. Each P value represent overall differences within individual components of the main treatment effects of the C~a~ or Drought and treatment interactions of eC~a~ and Drought.
@@ -256,7 +252,7 @@ Additionally, modelling efforts predicting responses of belowground C allocation
 **Figure 3**. Treatment means of cumulative aboveground C flux as a function on mean daily leaf area over the final year of the experiment. The solid line represents the significant linear model fit (R^2^ = 0.77).
 
 \
-**Figure 4**. Treatment means of C mass fractions of leaves (a), boles + branches (b) and roots (c) at final harvest as a function of tree size, via total tree carbon mass. Solid lines represent model fit for either LMF, SMF or RMF (R^2^ = -0.57, 0.52 and 0.02, respectively).
+**Figure 4**. Treatment means of C mass fractions of leaves (a), stems (boles + branches) (c) and roots (e) at final harvest as a function of tree size, via total tree carbon mass. Treatment means of total C allocation to leaves (b) and stems (d) as a function of total tree carbon flux. Root C allocation could not be estimated as root turnover was not known. Solid lines respresent overall model fit for leaf, stem and root mass fractions (R^2^ = -0.57, 0.52 and 0.02, respectively), as well as leaf and stem C alloction (R^2^ = -0.39, 0.01, respectively).
 
 \
 **Figure 5**. Cumulative aboveground C flux and additive C allocation to individual tree components from 2008-4-15 to 2009-3-16. Each panel represents mean values for each treatment combination (n=3). Both C flux and tissue C allocation where set to 0 on 2008-4-15 in order to track the allocation of C in daily time steps. Total root C mass, predicted from the log relationship between above and belowground mass partitioning of pre-planting seedlings and harvested trees, is shown on the last date.
@@ -317,7 +313,7 @@ source("master_scripts/cumulativecarbon_figure.R")
 **Figure 5**. 
 
 ```{r belowbar, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
-source("master_scripts/tbca_figure.R")
+source("master_scripts/tbca_figure2.R")
 ```
 \
 **Figure 6**. 
@@ -331,7 +327,7 @@ source("master_scripts/Cflux_TBCA_figure.R")
 # Supporting Information {.unnumbered}
 
 ```{r chambers, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
-source("master_scripts/cumulativecarbon_cham_figure.R")
+source("master_scripts/cumulativecarbon_cham_figure2.R")
 ```
 \
 **Figure S1**.

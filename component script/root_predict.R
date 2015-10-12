@@ -47,6 +47,7 @@ visreg(rs_mod)
 rs_mod_coef <-data.frame(coef(rs_mod))
 
 ##ploting
+windows(7,7)
 with(rootshoot, plot(log10(root_mass)~log10(Mab), axes=FALSE, type='n'))
 ablineclip(rs_mod, lwd=2, col="grey35",x1=min(log10(rootshoot$Mab)), x2=max(log10(rootshoot$Mab)))
 with(rootshoot, points(log10(root_mass)~log10(Mab), pch=c(1,19)[Water_treatment],col=CO2_treatment,cex=2))
@@ -54,6 +55,49 @@ magaxis(side=c(1,2), unlog=c(1,2), frame.plot=TRUE)
 
 #save coefficients and use them to predict with additive figures
 write.csv(rs_mod_coef, "stats/rootshootmodel.csv", row.names = FALSE)
+
+
+
+###predict root at start of allometry (4/15-2008 for use with cumulative figure)---------------------------------------------
+
+
+###C mass interpolated
+allomC <- read.csv("whole_tree_csv/tree_C_flux.csv")
+allomC$Date <- as.Date(allomC$Date)
+
+allomfirst <- allomC[allomC$Date == "2008-04-15",c(1:2, 8:12)]
+#these starting values will need to be removed from harvest mass
+
+##ROOTS: will have to use R:S relationship to predict root from starting value R:S ratio
+rooteq <- read.csv("stats/rootshootmodel.csv")
+
+###to be correct do it with mass pred instead of C and double check results (rooteq based off mass not C)
+allomM <- read.csv("whole_tree_csv/tree_mass_Cflux.csv")
+allomM$Date <- as.Date(allomM$Date)
+massfirst <- allomM[allomM$Date == "2008-04-15",c(1:2, 8:12)]
+massfirst$aboveM <- with(massfirst, branch_start+leaf_start+litter_start+bole_start)
+massfirst$rootmass_pred <- with(massfirst, rooteq[2,1]*(log10(aboveM)) + rooteq[1,1])
+massfirst$rootmass_pred2 <- 10^(massfirst$rootmass_pred)
+massfirst$root_start <- massfirst$rootmass_pred2 * .5
+
+##add predicted root C mass back to allomc C dfr
+allomstart <- merge(allomfirst, massfirst[, c(1, 11)])
+
+###know we need to subtract start mass from harvest mass b4 we can compare with Cflux
+harvest <- read.csv("calculated_mass/chamber_carbon.csv") 
+harvest_corr <- merge(harvest, allomstart)
+
+##calculate root mass during 11 month period
+harvest_corr$root11 <- with(harvest_corr, rootC-root_start)
+
+root_aprmar <- harvest_corr[, c(1, 3, 18:19)]
+
+write.csv(root_aprmar, "calculated_mass/rootallometry.csv", row.names = FALSE)
+
+
+
+
+
 
 
 

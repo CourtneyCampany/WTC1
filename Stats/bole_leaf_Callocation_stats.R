@@ -24,8 +24,10 @@ alloc_C <- alloc_C[order(alloc_C$treatment),]
 
 
 ##stats and regression lines---------------------------------------------------------------------------------------------
-ad.test(alloc_C$stemallocation) ##appears normal
 
+##stems
+ad.test(alloc_C$stemallocation) ##appears normal
+boxplot(alloc_C$stemallocation~alloc_C$treatment)
 
 stem_mod <- lm(stemallocation ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=alloc_C)
 anova(stem_mod)
@@ -43,10 +45,10 @@ anova(stem_co2)
 visreg(stem_co2)
 
 
-###allocation higher in elevated CO2 but not different
-
+###leaves
 
 ad.test(alloc_C$leafallocation) ##appears normal
+boxplot(alloc_C$leafallocation~alloc_C$treatment)
 
 leaf_mod <- lm(leafallocation ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=alloc_C)
 anova(leaf_mod)
@@ -55,9 +57,12 @@ plotresid(leaf_mod)
 visreg(leaf_mod)
 
 
-leaf_co2 <- lm(leafallocation ~ Water_treatment, data=alloc_C) 
+leaf_co2 <- lm(leafallocation ~ CO2_treatment, data=alloc_C) 
 anova(leaf_co2)
 visreg(leaf_co2)
+
+(mean(alloc_C[alloc_C$CO2_treatment=="elevated", "leafallocation"]) - mean(alloc_C[alloc_C$CO2_treatment=="ambient", "leafallocation"]))/mean(alloc_C[alloc_C$CO2_treatment=="elevated", "leafallocation"])
+
 
 leaf_water<- lm(leafallocation ~ Water_treatment, data=alloc_C) 
 anova(leaf_water)

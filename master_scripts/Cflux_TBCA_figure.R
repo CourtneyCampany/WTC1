@@ -1,7 +1,7 @@
 ##this scrpt visualizes the relationship between leaf area and TBCA and Cflux by treatment
-source("functions_and_packages/plot_objects.R")
-source("functions_and_packages/functions.R")
-library(doBy)
+# source("functions_and_packages/plot_objects.R")
+# source("functions_and_packages/functions.R")
+# library(doBy)
 
 ##read in chamber flux and calculate TBCA
 #treeC <- read.csv("calculated_mass/treeC_day.csv")
@@ -11,6 +11,8 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
   treeC$TBCA <- with(treeC, fluxC-aboveC)
   
   treeC$treatment <-with(treeC, paste(CO2_treatment, Water_treatment, sep="-"))
+  
+# treeC2 <- treeC[complete.cases(treeC),]  
   
     
 ###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------

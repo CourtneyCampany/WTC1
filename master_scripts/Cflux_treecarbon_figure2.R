@@ -1,7 +1,6 @@
 # source("functions_and_packages/plot_objects.R")
 
 ###need to compare Cflux and mass from same date generation
-
 Cflux <- read.csv("calculated_mass/chamber_C_flux.csv")
 Cflux$Date <- as.Date(Cflux$Date)
 chamdate <- min(Cflux$Date)
@@ -21,12 +20,13 @@ allomfirst <- allomC[allomC$Date == "2008-04-15",c(1:2, 8:12)]
 
 ##ROOTS: will have to use R:S relationship to predict root from starting value R:S ratio
 rooteq <- read.csv("stats/rootshootmodel.csv")
+
 ###to be correct do it with mass pred instead of C and double check results (rooteq based off mass not C)
 allomM <- read.csv("whole_tree_csv/tree_mass_Cflux.csv")
 allomM$Date <- as.Date(allomM$Date)
 massfirst <- allomM[allomM$Date == "2008-04-15",c(1:2, 8:12)]
-massfirst$aboveC <- with(massfirst, branch_start+leaf_start+litter_start+bole_start)
-massfirst$rootmass_pred <- with(massfirst, rooteq[2,1]*(log10(aboveC*2)) + rooteq[1,1])
+massfirst$aboveM <- with(massfirst, branch_start+leaf_start+litter_start+bole_start)
+massfirst$rootmass_pred <- with(massfirst, rooteq[2,1]*(log10(aboveM)) + rooteq[1,1])
 massfirst$rootmass_pred2 <- 10^(massfirst$rootmass_pred)
 massfirst$root_start <- massfirst$rootmass_pred2 * .5
 
@@ -50,7 +50,7 @@ treeC11 <- harvest_corr[, c(1, 10:11, 19:24)]
 treeC11$treeC <- with(treeC11, bole11+branch11+root11+leaf11+litter11)
 treeC11$Cab <- with(treeC11, bole11+branch11+leaf11+litter11)
 
-# write.csv(treeC11, "master_scripts/Cmassflux11.csv", row.names = FALSE)
+#write.csv(treeC11, "master_scripts/Cmassflux11.csv", row.names = FALSE)
 
 ###now compare these (stats and figures) to CO2cham flux over same date---------------------------------------------------------
 
