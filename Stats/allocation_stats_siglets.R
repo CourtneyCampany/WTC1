@@ -86,7 +86,18 @@ tukey_bole<- glht(bole_mod2, linfct = mcp(treatment= "Tukey"))
 bole_siglets<- cld(tukey_bole)
 bole_siglets2 <- bole_siglets$mcletters$Letters
 
+bole_co2 <- lm(boleC ~ CO2_treatment, data=tree_C) 
+anova(bole_co2)
+# tukey_branchco2<- glht(branch_co2, linfct = mcp(CO2_treatment= "Tukey"))
+# branchco2_siglets<- cld(tukey_branchco2)
+# branchco2_siglets2 <- branchco2_siglets$mcletters$Letters
+# ## no difference in branch carbon with eco2
 
+bole_h20 <- lm(boleC ~ Water_treatment, data=tree_C) 
+anova(bole_h20)
+# tukey_branchh20 <- glht(branch_h20, linfct = mcp(Water_treatment= "Tukey"))
+# branchh20_siglets<- cld(tukey_branchh20)
+# branchh20_siglets2 <- branchh20_siglets$mcletters$Letters 
 
 
 ##2. branch---------------------------------------------------------------------------------------------------------------------  

@@ -7,6 +7,9 @@ tree_C$treatments <- with(tree_C, interaction(CO2_treatment, Water_treatment))
 
 treeC_agg <- summaryBy(.~treatments, data=tree_C, FUN=c(mean,se))
 
+##reorder
+treeC_agg2 <- treeC_agg[c(1,3,2,4),]
+
 ####START HERE to double check new data
 
 
@@ -17,10 +20,10 @@ treeC_agg <- summaryBy(.~treatments, data=tree_C, FUN=c(mean,se))
 
 ##need to split dataframe and combine with pasted mean(se)
 
-table_means <- treeC_agg[, c(2:9)]
-table_se <- treeC_agg[, c(10:17)]
+table_means <- treeC_agg2[, c(2:9)]
+table_se <- treeC_agg2[, c(10:17)]
 
-trts <- treeC_agg[, 1]
+trts <- treeC_agg2[, 1]
 trts2 <- c("aCO~2~-dry", "aCO~2~-wet", "eCO~2~-dry", "eCO~2~-wet")
 
 ###paste and round means and se together
