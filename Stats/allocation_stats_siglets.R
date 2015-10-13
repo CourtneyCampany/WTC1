@@ -36,8 +36,8 @@ bole_mod <- lm(boleC ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatme
   visreg(bole_mod)
   confint(bole_mod)
   
-Pbo <- anova(bole_mod)[[5]][1]
-Pbo_co2 <- anova(bole_mod)[[5]][2]
+Pbo <- anova(bole_mod)[[5]][3]
+Pbo_co2 <- anova(bole_mod)[[5]][1]
 Pbo_h20 <- anova(bole_mod)[[5]][2]   
   
   
@@ -135,8 +135,8 @@ branch_mod2 <- lm(branchC ~ treatment, data=tree_C)
   
 ## branch C not different by drought treatment
   
-Pbr <- anova(branch_mod)[[5]][1]
-Pbr_co2 <- anova(branch_mod)[[5]][2]
+Pbr <- anova(branch_mod)[[5]][3]
+Pbr_co2 <- anova(branch_mod)[[5]][1]
 Pbr_h20 <- anova(branch_mod)[[5]][2]
   
 ##3. leafC---------------------------------------------------------------------------------------------------------------------  
@@ -157,8 +157,8 @@ leaf_siglets<- cld(tukey_leaf)
 leaf_siglets2 <- leaf_siglets$mcletters$Letters
 
   
-Pl <- anova(leaf_mod)[[5]][1]
-Pl_co2 <- anova(leaf_mod)[[5]][2]
+Pl <- anova(leaf_mod)[[5]][3]
+Pl_co2 <- anova(leaf_mod)[[5]][1]
 Pl_h20 <- anova(leaf_mod)[[5]][2]  
   
 ##3. litter C---------------------------------------------------------------------------------------------------------------------  
@@ -174,8 +174,8 @@ ad.test(tree_C$littercarbon) ##appears normal
   litter_siglets<- cld(tukey_litter)
   litter_siglets2 <- litter_siglets$mcletters$Letters
   
-Pli <- anova(litter_mod)[[5]][1]
-Pli_co2 <- anova(litter_mod)[[5]][2]
+Pli <- anova(litter_mod)[[5]][3]
+Pli_co2 <- anova(litter_mod)[[5]][1]
 Pli_h20 <- anova(litter_mod)[[5]][2]  
 
 ##3. Root---------------------------------------------------------------------------------------------------------------------  
@@ -200,10 +200,8 @@ roots_mod2 <- lm(Cflux ~ treatment, data=tree_C)
   
 
 ###use treatments to get sig letters when there is not interaction
-
-
-Pr <- anova(root_mod)[[5]][1]
-Pr_co2 <- anova(root_mod)[[5]][2]
+Pr <- anova(root_mod)[[5]][3]
+Pr_co2 <- anova(root_mod)[[5]][1]
 Pr_h20 <- anova(root_mod)[[5]][2]   
 
 
@@ -215,8 +213,8 @@ flux_mod <- lm(Cflux ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatme
 anova(flux_mod)
 summary(flux_mod)
 
-Pf <- anova(flux_mod)[[5]][1]
-Pf_co2 <- anova(flux_mod)[[5]][2]
+Pf <- anova(flux_mod)[[5]][3]
+Pf_co2 <- anova(flux_mod)[[5]][1]
 Pf_h20 <- anova(flux_mod)[[5]][2]  
 
 flux_mod2 <- lm(Cflux ~ treatment, data=tree_C) 
@@ -235,7 +233,7 @@ flux_siglets2 <- flux_siglets$mcletters$Letters
 ###variable order = bole, br, leaf, litter, root, flux
 Pinter <- c(Pbo, Pbr, Pl, Pli, Pr, Pf)
 Pco2 <- c(Pbo_co2, Pbr_co2, Pl_co2, Pli_co2, Pr_co2, Pf_co2)
-Ph20 <- c(Pbo_h20, Pbr_h20, Pl_h20, Pli_h20, Pr_h20, Pf_co2)
+Ph20 <- c(Pbo_h20, Pbr_h20, Pl_h20, Pli_h20, Pr_h20, Pf_h20)
 
 sigletters<- data.frame(bole = bole_siglets2, branch = branch_siglets2,leaf = leaf_siglets2,
                          litterfall=litter_siglets2,root = root_siglets2,cflux = flux_siglets2)
