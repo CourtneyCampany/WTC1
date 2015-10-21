@@ -17,6 +17,7 @@ tree_C$rmf <- with(tree_C, (root11)/treeC)
 tree_C$treatment <- with(tree_C, as.factor(paste(CO2_treatment, Water_treatment, sep="-")))
 tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
 
+frac_trts <- summaryBy(lmf+leaf11+litter11 ~ treatment, data=tree_C, FUN=mean)
 
 #LMF----------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$lmf)
@@ -44,6 +45,15 @@ summary(lmf2_mod)
 plotresid(lmf2_mod)
 
 (mean(tree_C[tree_C$CO2_treatment=="elevated", "lmf2"]) - mean(tree_C[tree_C$CO2_treatment=="ambient", "lmf2"]))/mean(tree_C[tree_C$CO2_treatment=="elevated", "lmf2"])
+
+###did total mass of leaves or litter change??? may be important 
+leafmod <- lm(leaf11 ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+anova(leafmod)
+visreg(leafmod)
+(mean(tree_C[tree_C$Water_treatment=="wet", "leaf11"]) - mean(tree_C[tree_C$Water_treatment=="dry", "leaf11"]))/mean(tree_C[tree_C$Water_treatment=="wet", "leaf11"])
+
+littermod <- lm(litter11 ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
+anova(littermod)
 
 
 #SMF----------------------------------------------------------------------------------------------------------------------
