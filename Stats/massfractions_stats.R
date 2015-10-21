@@ -32,6 +32,7 @@ with(tree_C, boxplot(lmf~treatment))
 
 lmf_mod <- lm(lmf ~ CO2_treatment+Water_treatment+CO2_treatment:Water_treatment, data=tree_C)
 anova(lmf_mod)
+summary(lmf_mod)
 
 lmf_co2 <- lm(lmf ~ CO2_treatment, data=tree_C) 
 anova(lmf_co2)
@@ -42,7 +43,7 @@ lmfco2_siglets2 <- lmfco2_siglets$mcletters$Letters
 (mean(tree_C[tree_C$CO2_treatment=="elevated", "lmf"]) - mean(tree_C[tree_C$CO2_treatment=="ambient", "lmf"]))/mean(tree_C[tree_C$CO2_treatment=="elevated", "lmf"])
 ###lmf 15.2% higher in elevated CO2, no effect of h2o and no interation
 
-lmf_h20 <- lm(lmf_co2 ~ Water_treatment, data=tree_C) 
+lmf_h20 <- lm(lmf~ Water_treatment, data=tree_C) 
 anova(lmf_h20)
 tukey_lmfh20 <- glht(lmf_h20, linfct = mcp(Water_treatment= "Tukey"))
 lmfh20_siglets<- cld(tukey_lmfh20)

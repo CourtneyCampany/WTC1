@@ -73,45 +73,45 @@ par(mfrow=c(3,2), las=1, mgp=c(3,1,0), oma=c(5,7,1,7))
 
 #lmf
 par(mar=c(0,0,0,0))
-with(fracalloc, plot(lmf~treeC, ylab="", xaxt='n', xlab="", xlim=c(5000,22500), ylim=c(.15,.375), type='n'))
+with(fracalloc, plot(lmf~treeC, ylab="", xaxt='n', xlab="", xlim=c(5000,22500), ylim=c(0,.375), type='n'))
 ablineclip(lmfmod, x1=min(fracalloc$treeC), x2=max(fracalloc$treeC),lwd=2)
 with(fracalloc, points(lmf~treeC, pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5))
 axis(1, labels=FALSE, tcl=.5)
 mtext(lmflab, side=2, outer=TRUE, line=3.5, at=.85,las=3)
-legend("topleft", leglab2, pch=c(19,1, 19, 1), col=c("blue", "blue", "red", "red"), inset = 0.01,bty='n')
-text(x=22250, y=0.375,labels="(a)", cex=1.5)
+legend("topright", leglab2, pch=c(19,1, 19, 1), col=c("blue", "blue", "red", "red"), bty='n')
+text(x=5250, y=0.375,labels="(a)", cex=1.5)
 
 #leaf allocation
 par(mar=c(0,0,0,0))
-with(fracalloc, plot(leafallocation ~ cflux11, ylab="", axes=FALSE, xlab="", xlim=c(7500,27500), ylim=c(.0,.25), type='n'))
+with(fracalloc, plot(leafallocation ~ cflux11, ylab="", axes=FALSE, xlab="", xlim=c(7500,27500), ylim=c(.0,.375), type='n'))
 ablineclip(leafmod, x1=min(fracalloc$cflux11), x2=max(fracalloc$cflux11),lwd=2)
 with(fracalloc, points(leafallocation ~ cflux11, pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5))
 mtexti(leafalloclab, 4, outer=TRUE, cex=1.5, off=.5)
 axis(1, labels=FALSE, tcl=.5)
 axis(4, labels=TRUE)
 box()
-text(x=27200, y=0.25,labels="(b)", cex=1.5)
+text(x=7800, y=0.375,labels="(b)", cex=1.5)
 
 #smf
 par(mar=c(0,0,0,0))
-with(fracalloc, plot(smf~treeC,  ylab="", xaxt='n', yaxt='n', xlab="",ylim=c(.4,.7), xlim=c(5000,22500),type='n'))
+with(fracalloc, plot(smf~treeC,  ylab="", xaxt='n', yaxt='n', xlab="",ylim=c(.25,.65), xlim=c(5000,22500),type='n'))
 ablineclip(smfmod, x1=min(fracalloc$treeC), x2=max(fracalloc$treeC),lwd=2)
 with(fracalloc, points(smf~treeC, pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5))
 mtext(smflab, side=2, outer=TRUE, line=3.5, at=.5,las=3)
 axis(1, labels=FALSE, tcl=.5)
 axis(2, at=at.y2 ,labels=TRUE)
-text(x=22250, y=0.7,labels="(c)", cex=1.5)
+text(x=5250, y=0.65,labels="(c)", cex=1.5)
 
 #stem allocation
 par(mar=c(0,0,0,0))
-with(fracalloc, plot(stemallocation~ cflux11,  yaxt='n', ylab="", xlab="",ylim=c(.25,.5), xlim=c(7500,27500),type='n'))
+with(fracalloc, plot(stemallocation~ cflux11,  yaxt='n', ylab="", xlab="",ylim=c(.25,.65), xlim=c(7500,27500),type='n'))
 ablineclip(stemmod, x1=min(fracalloc$cflux11), x2=max(fracalloc$cflux11),lwd=2)
 with(fracalloc, points(stemallocation~ cflux11, pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5))
 mtext(treefluxlab2, side=1, outer=TRUE, line=-19, at=.75)
 mtexti(stemalloclab, 4, outer=TRUE, cex=1.5, off=.5)
 axis(4, labels=TRUE)
 box()
-text(x=27200, y=0.5,labels="(d)", cex=1.5)
+text(x=7800, y=0.65,labels="(d)", cex=1.5)
 
 #rmf
 par(mar=c(0,0,0,0))
@@ -124,7 +124,7 @@ axis(1, at=at.x ,labels=TRUE, outer=TRUE)
 
 mtext(rmflab, side=2, outer=TRUE, line=3.5, at=.15, las=3)
 mtext(treeclab, side=1, outer=TRUE, line=3.5, at=.25)
-text(x=22250, y=0.3,labels="(e)", cex=1.5)
+text(x=5250, y=0.3,labels="(e)", cex=1.5)
 
 #root allocation
 plot(1,1, type="n", axes=FALSE )
