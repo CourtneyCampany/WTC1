@@ -4,6 +4,7 @@ library(visreg)
 library(nortest)
 library(multcomp)
 library(RVAideMemoire)
+library(doBy)
 
 ##need final harvest values (not treatmen means)
 tree_C <- read.csv("master_scripts/Cmassflux11.csv")
@@ -14,10 +15,19 @@ tree_C$lmf2 <- with(tree_C, (leaf11)/treeC)
 tree_C$smf <- with(tree_C, (branch11+bole11)/treeC)
 tree_C$rmf <- with(tree_C, (root11)/treeC)
 
+tree_C$TBCA <- with(tree_C, cflux11-Cab)
+
 tree_C$treatment <- with(tree_C, as.factor(paste(CO2_treatment, Water_treatment, sep="-")))
 tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
 
 frac_trts <- summaryBy(lmf+leaf11+litter11 ~ treatment, data=tree_C, FUN=mean)
+
+
+###TBCA with tree mass
+
+tbca_mod <- lm(TBCA ~ treeC, data=tree_C)
+anova(tbca_mod)
+visreg(tbca_mod)
 
 #LMF----------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$lmf)
