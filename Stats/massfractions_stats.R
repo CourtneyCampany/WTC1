@@ -10,12 +10,20 @@ library(RVAideMemoire)
 #tree_C <- read.csv("master_scripts/harvest_chamber.csv")
 tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
 
-##calculated component fractions
-tree_C$lmf <- with(tree_C, (leafcarbon+littercarbon)/treeC)
-tree_C$smf <- with(tree_C, (branchC+boleC)/treeC)
-tree_C$rmf <- with(tree_C, (rootC)/treeC)
+###calculate mass fractions---------------------------------------------------------------------------------------
+###redone to exclude leaf litter from mass fraction and standing tree mass
+tree_C$standingtreemass <- with(tree_C, treeC-littercarbon)
 
-##calculate belowground flux
+##calculated component fractions
+tree_C$lmf <- with(tree_C, leafcarbon/standingtreemass)
+tree_C$smf <- with(tree_C, (branchC+boleC)/standingtreemass)
+tree_C$rmf <- with(tree_C, (rootC)/standingtreemass)
+
+##Verify that they add to 1
+tree_C$totalmassfraction <- with(tree_C, lmf+smf+rmf)
+
+
+##calculate belowground flux--------------------------------------------------------------------------------------
 tree_C$tbca <- with(tree_C, Cflux-Cab)
 tree_C$Fs_resid <- with(tree_C, Cflux - (Cab+rootC))
 
@@ -24,7 +32,7 @@ tree_C$treatment <-  relevel(tree_C$treatment, ref="ambient-wet")
 
 ###analyze mass fractions.....individual components are then below
 
-frac_trts <- summaryBy(lmf+smf+rmf ~ treatment, data=tree_C, FUN=c(mean, se))
+# frac_trts <- summaryBy(lmf+smf+rmf ~ treatment, data=tree_C, FUN=c(mean, se))
 
 #LMF----------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$lmf)
@@ -49,10 +57,11 @@ tukey_lmfh20 <- glht(lmf_h20, linfct = mcp(Water_treatment= "Tukey"))
 lmfh20_siglets<- cld(tukey_lmfh20)
 lmfh20_siglets2 <- lmfh20_siglets$mcletters$Letters  
 
-##lmf vs co2 flux
-fluxlmf_mod <- lm(lmf ~ Cflux, data=tree_C) 
+##lmf vs treemass
+fluxlmf_mod <- lm(lmf ~ standingtreemass, data=tree_C) 
 summary(fluxlmf_mod)
 anova(fluxlmf_mod)
+visreg(fluxlmf_mod)
 # fluxlmf_mod2 <- lm(lmf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
 #  summary(fluxlmf_mod2)
 #  anova(fluxlmf_mod2)
@@ -81,13 +90,13 @@ smfh20_siglets2 <- smfh20_siglets$mcletters$Letters
 (mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "smf"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"])
 
 
-##smf vs co2 flux
-fluxsmf_mod <- lm(smf ~ Cflux, data=tree_C) 
+##smf vs treemass
+fluxsmf_mod <- lm(smf ~ standingtreemass, data=tree_C) 
 summary(fluxsmf_mod)
 anova(fluxsmf_mod)
-fluxsmf_mod2 <- lm(smf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
-summary(fluxsmf_mod2)
-anova(fluxsmf_mod2)
+# fluxsmf_mod2 <- lm(smf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
+# summary(fluxsmf_mod2)
+# anova(fluxsmf_mod2)
 
 
 (mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "smf"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"])
@@ -102,10 +111,10 @@ summary(rmf_mod)
 visreg(rmf_mod)
 visreg(rmf_mod, xvar="Water_treatment", by="CO2_treatment", overlay=TRUE)
 
-##rmf vs co2 flux
-fluxrmf_mod <- lm(rmf ~ Cflux, data=tree_C) 
+##rmf vs tree mass
+fluxrmf_mod <- lm(rmf ~ standingtreemass, data=tree_C) 
 summary(fluxrmf_mod)
 anova(fluxrmf_mod)
-fluxsmf_mod2 <- lm(smf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
-summary(fluxsmf_mod2)
-anova(fluxsmf_mod2)
+# fluxsmf_mod2 <- lm(smf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
+# summary(fluxsmf_mod2)
+# anova(fluxsmf_mod2)

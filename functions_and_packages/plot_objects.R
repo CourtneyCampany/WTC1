@@ -7,7 +7,7 @@ treefluxlab <- "Tree Carbon Flux  (g C)"
 treefluxlab2 <- "Total Tree Carbon Flux  (g C)"
 
 tbcalab <- "TBCA  (g)"
-fslab <- expression(F[s]~residual)
+fslab <- expression(F['c,r'])
 
 ypos <- c(2.5,1,0)
 
