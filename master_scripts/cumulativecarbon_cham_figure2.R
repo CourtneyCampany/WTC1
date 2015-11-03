@@ -1,4 +1,4 @@
-# source("functions_and_packages/plot_objects.R")
+ # source("functions_and_packages/plot_objects.R")
 
 treeC <- read.csv("master_scripts/Cflux_day.csv")
   treeC$Date <- as.Date(treeC$Date)
@@ -31,7 +31,7 @@ LWD <- 2
 #axis.Date(1, at = xAT, labels = T)
 
 ##plot 12 panel with treatment means---------------------------------------------------------------------------------
-# windows (8,11)
+ # windows (8,11)
 
 par(mfrow=c(4,3), las=1, mgp=c(3.5,1,0), oma=c(4,6,1,1),mar=c(0,0,0,0))
 
