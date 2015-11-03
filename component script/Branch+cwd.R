@@ -46,7 +46,7 @@ br_volume_calc<- function(dfr) {
   volume_calc <- subset(volume_calc, select = c("Date", "chamber", "stemnumber", "branchnumber", "diameter", "length", "branchBA"))
   volume_calc <- volume_calc[complete.cases(volume_calc),]
   #add 5cm to height, assuming no difference taper btw base and insertion diam
-  volume_calc$Volume <- (volume_calc$branchBA*(volume_calc$length+5))*.75 
+  volume_calc$Volume <- (volume_calc$branchBA*(volume_calc$length))*.75 
   row.names(volume_calc)<-NULL
   return(volume_calc)
 }
@@ -76,7 +76,7 @@ br_mass_dates_calc <- function(allometry, density){
   allom_dates <- subset(allometry, select = c("Date",  "chamber",  "stemnumber",  "branchnumber",
                                               "diameter",	"length",	"branchBA"))
   mass_dates <- merge(allom_dates, density, by = "chamber")
-  mass_dates$branch_mass <- ((mass_dates$branchBA*(mass_dates$length+5))
+  mass_dates$branch_mass <- ((mass_dates$branchBA*(mass_dates$length))
                               *.75)*mass_dates$branch_density
   #as before assumes shape factor of .75 and adds 5cm to length w/ no taper
   return(mass_dates)                           
