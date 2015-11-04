@@ -15,8 +15,8 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
   
 # treeC2 <- treeC[complete.cases(treeC),]  
   
-drystart <- treeC[treeC$Date == "2008-10-01" & treeC$treatment == "ambient-dry","fluxC"]
-dryend <- treeC[treeC$Date == "2009-02-28"& treeC$treatment == "ambient-dry","fluxC"]
+# drystart <- treeC[treeC$Date == "2008-10-01" & treeC$treatment == "ambient-dry","fluxC"]
+# dryend <- treeC[treeC$Date == "2009-02-28"& treeC$treatment == "ambient-dry","fluxC"]
       
 ###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------
 palette(c("blue", "red"))
@@ -25,7 +25,6 @@ droughtcol = alpha("lightslategrey", alpha=0.275)
  # windows(7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 plot(TBCA ~ fluxC, data=treeC,  type='n',ylab="", xlab=treefluxlab2, yaxs="i", xaxs="i")
-rect(min(drystart), -50, max(dryend), 12000, col=droughtcol, border=NA)
 for(i in unique(treeC$treatment)){
   points(TBCA ~ fluxC, data=treeC[treeC$treatment == i,], col=as.factor(CO2_treatment), 
          type='l', lwd=2.5, lty=c(2,1)[as.factor(Water_treatment)])

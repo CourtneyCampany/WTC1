@@ -8,18 +8,7 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
 
 treeC$treatment <- with(treeC, paste(CO2_treatment,Water_treatment, sep="-"))
 
-###use Mab to predict roots since roots are not reset to zeo
-# rooteq <- read.csv("stats/rootshootmodel.csv")
-# 
-# mab_final <- treeC[treeC$Date == max(treeC$Date), c(1:3,9,11)]
-#   mab_final$rootmass_pred <- with(mab_final, rooteq[2,1]*(log10(aboveC*2)) + rooteq[1,1])
-#   mab_final$rootmass_pred2 <- 10^(mab_final$rootmass_pred)
-#   mab_final$rootC_pred <- mab_final$rootmass_pred2 * .5
-#   mab_final$treeC <- with(mab_final, rootC_pred+aboveC)
 
-##add roots to double check predicted values
-# roots <- read.csv("master_scripts/harvest_trt_means.csv")
-  
 ##Read pre-calculated root mass over 11 months from root predict component script
 roots <- read.csv("calculated_mass/rootallometry.csv")  
 
@@ -35,7 +24,7 @@ roots_agg <- summaryBy(. ~ treatment, data=roots, FUN=mean, keep.names = TRUE)
 finalC <- subset(treeC, Date=="2009-03-16")
   mab_final <- merge(roots_agg[,c(1,4)], finalC[,c(1,9,11)])
   mab_final$treeC <- with(mab_final, root11+aboveC)  
-
+  
 
 ##for ease of plotting seperate data by trt
 ambdry <- treeC[treeC$treatment == "ambient-dry",]
@@ -50,12 +39,41 @@ elevdry <- treeC[treeC$treatment == "elevated-dry",]
 elevwet <- treeC[treeC$treatment == "elevated-wet",]
   elevwet$Date <- as.Date(elevwet$Date)
   
+###what was the average percentage of biomass to C flux (use for results) 
   
-##plot bits
-xAT <- seq.Date(from=as.Date("2008-4-1"), length=13, by="month")
-LWD <- 2
+# totals <- mab_final[,c(1,4:5)]  
+# fluxtotal <- treeC[treeC$Date=="2009-03-06", c("fluxC", "treatment")]
+# totals2 <- merge(totals, fluxtotal)
+# 
+# totals2$percmass <- with(totals2, 1-((fluxC-treeC)/fluxC))
+# totals2$percshoot <- with(totals2, 1-((fluxC-aboveC)/fluxC))
+# ##aboveground mass
+# mean(totals2$percshoot)
+# se(totals2$percshoot)
+# 
+# ##whole tree mass
+# mean(totals2$percmass)
+# se(totals2$percmass)
+# 
+# ###all dates perc
+# tree2 <- treeC[treeC$Date != "2008-04-15", c("Date", "fluxC", "aboveC", "CO2_treatment", "Water_treatment")]
+#   tree2 <- tree2[complete.cases(tree2),]
+#   tree2$percshoot <- with(tree2, 1-((fluxC-aboveC)/fluxC))
+#   tree2 <- tree2[tree2$percshoot <= 1,]
+# 
+# boxplot(tree2$percshoot)
+# mean(tree2$percshoot)
+# se(tree2$percshoot)
+# with(tree2, plot(percshoot~Date, pch=c(1,19)[Water_treatment],col=CO2_treatment))
+# legend("topright", leglab2, pch=c(19,1, 19, 1), col=c("blue", "blue", "red", "red"), inset = 0.01, bty='n')
 
 ##plot four panel with treatment means---------------------------------------------------------------------------------
+
+##plot bits
+xAT <- seq.Date(from=as.Date("2008-4-1"), length=13, by="month")
+LWD <- 2 
+  
+  
 # windows (7,10)
 
 par(mfrow=c(2,2), las=1, mgp=c(3,1,0), oma=c(4,6,1,1))

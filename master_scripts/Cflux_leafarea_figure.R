@@ -26,6 +26,11 @@ la_flux <- merge(la_agg,treeC[, c(1:2)] )
 #   ad.test(leafflux$LAestlin)
 leaffluxlmodel <- lm(Cflux~LAestlin, data = la_flux)
 getP(leaffluxlmodel)
+# write.csv(coef(leaffluxlmodel), "Stats/leaffluxcoefs.csv", row.names = FALSE)
+###Test with all treatments
+# leaffluxlmodel2 <- lm(Cflux~LAestlin+CO2_treatment+LAestlin:CO2_treatment, data=la_flux)
+# anova(leaffluxlmodel2)
+# summary(leaffluxlmodel2)
 
 
 ##plot LA with total flux-----------------------------------------------------------------------------
