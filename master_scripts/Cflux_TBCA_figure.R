@@ -21,7 +21,7 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
 ###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------
 palette(c("blue", "red"))
 droughtcol = alpha("lightslategrey", alpha=0.275)
- 
+ # 
  # windows(7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 plot(TBCA ~ fluxC, data=treeC,  type='n',ylab="", xlab=treefluxlab2, yaxs="i", xaxs="i")

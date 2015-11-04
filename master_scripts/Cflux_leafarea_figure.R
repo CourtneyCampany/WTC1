@@ -35,8 +35,8 @@ getP(leaffluxlmodel)
 
 ##plot LA with total flux-----------------------------------------------------------------------------
 palette (c("blue", "red"))
-
-# windows (7,7)
+# 
+#  windows (7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 
 plot(1,type='n', ylab = "",xlab=meanlalab,ylim = c(5000, 30000), xlim = c(0, 50))
