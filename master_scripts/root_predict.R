@@ -2,6 +2,9 @@
 ##then use the regression to predict root mass at a given tree mass
 ##for additive plots mus this as tree mass does not equal the final biomass
 ##predict mass first then change to carbon
+
+# source("functions_and_packages/plot_objects.R")
+
 # library(RVAideMemoire)
 # library(visreg)
 # library(nortest)
@@ -19,6 +22,7 @@ treemass <- read.csv("calculated_mass/harvest_mass_new.csv")
 rootmass <- read.csv("calculated_mass/root_mass_simple.csv")
 
 harvestmass <- merge(rootmass, treemass[,c(1,6)])
+harvestmass$location <- "wtc"
 
 ##read and format potted plants
 pretree <- read.csv("raw csv/Biomass potted plants Dec 2007.csv")
@@ -29,10 +33,10 @@ pre_saligna_roots <- pre_saligna[complete.cases(pre_saligna),]
 pre_root <- pre_saligna_roots[, c("chamber", "rootmass", "wabvground")]
   names(pre_root)[3] <- "Mab" 
   names(pre_root)[2] <- "root_mass" 
-
+pre_root$location <- "pot"
 
 ###rbind these data
-rootshoot <- rbind(harvestmass[, c(1:2,6)], pre_root)
+rootshoot <- rbind(harvestmass[, c(1:2,6:7)], pre_root)
   rootshoot <- rootshoot[order(rootshoot$chamber),]
   rootshoot <- merge(rootshoot, chambersumm)
   rootshoot$treatments <- with(rootshoot, as.factor(paste(CO2_treatment,Water_treatment, sep="-")))
@@ -49,10 +53,16 @@ rs_mod <- lm(log10(root_mass) ~ log10(Mab), data=rootshoot)
 ##ploting
 # windows (7,7)
 par(mar=c(5,5,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
-with(rootshoot, plot(log10(root_mass)~log10(Mab), axes=FALSE, type='n', ylab="log10(Root Mass) (g)", xlab="log10(Shoot Mass) (g)"))
+with(rootshoot, plot(log10(root_mass)~log10(Mab), axes=FALSE, type='n', ylab="Root Mass (g)", xlab="Shoot Mass (g)"))
 ablineclip(rs_mod, lwd=2, col="black",x1=min(log10(rootshoot$Mab)), x2=max(log10(rootshoot$Mab)))
-with(rootshoot, points(log10(root_mass)~log10(Mab), pch=c(1,19)[Water_treatment],col=CO2_treatment,cex=1.5))
+
+with(rootshoot[rootshoot$location == "pot",], points(log10(root_mass)~log10(Mab), pch=c(2,17)[Water_treatment],
+     col=CO2_treatment,cex=1.5))
+with(rootshoot[rootshoot$location == "wtc",], points(log10(root_mass)~log10(Mab), pch=c(1,19)[Water_treatment],
+     col=CO2_treatment,cex=1.5))
+
 magaxis(side=c(1,2), unlog=c(1,2), frame.plot=TRUE)
+legend("topleft", leglab3, pch=c(19,1,19,1, 17,19), col=c("blue", "blue", "red", "red", "black", "black"), inset = 0.01, bty='n')
 
 # dev.copy2pdf(file= "master_scripts/paper_figs/rootshoot.pdf")
 # dev.off()
