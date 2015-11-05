@@ -41,13 +41,19 @@ elevwet <- treeC[treeC$treatment == "elevated-wet",]
   
 ###what was the average percentage of biomass to C flux (use for results) 
   
-# totals <- mab_final[,c(1,4:5)]  
+# totals <- mab_final[,c(1,4:5)]
 # fluxtotal <- treeC[treeC$Date=="2009-03-06", c("fluxC", "treatment")]
 # totals2 <- merge(totals, fluxtotal)
 # 
 # totals2$percmass <- with(totals2, 1-((fluxC-treeC)/fluxC))
 # totals2$percshoot <- with(totals2, 1-((fluxC-aboveC)/fluxC))
-# ##aboveground mass
+# totals2$tbca <- with(totals2, (fluxC-aboveC)/fluxC)
+# ##tbca 
+# mean(totals2$tbca)
+# se(totals2$tbca)
+# range(totals2$tbca)
+# 
+# ##shoots
 # mean(totals2$percshoot)
 # se(totals2$percshoot)
 # 

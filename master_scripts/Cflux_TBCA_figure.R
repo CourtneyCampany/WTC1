@@ -21,7 +21,7 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
 ###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------
 palette(c("blue", "red"))
 droughtcol = alpha("lightslategrey", alpha=0.275)
- # 
+
  # windows(7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 plot(TBCA ~ fluxC, data=treeC,  type='n',ylab="", xlab=treefluxlab2, yaxs="i", xaxs="i")
@@ -33,7 +33,7 @@ for(i in unique(treeC$treatment)){
 
 title(ylab=tbcalab, mgp=c(4,1,0))
 legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
-# abline(0, 1, lty=3, lwd=2)
+abline(0, .5, lty=3, lwd=2.5)
 
  # dev.copy2pdf(file="master_scripts/paper_figs/tbca_cflux.pdf")
  # dev.off()

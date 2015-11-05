@@ -19,8 +19,6 @@ tree_C <- read.csv("master_scripts/Cmassflux11.csv")
   
 rootmeans <- summaryBy(root11 ~ treatment, data=tree_C, FUN=c(mean, se))
 
-test <- read.csv("calculated_mass/rootallometry.csv")
-
 # boxplot(TBCA ~treatment, data=tree_C)
 below_means <- summaryBy(cflux11+TBCA+Fs_resid ~ treatment, data=tree_C, FUN=c(mean, se))
 

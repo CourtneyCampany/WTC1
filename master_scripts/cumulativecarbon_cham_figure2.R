@@ -4,25 +4,20 @@ treeC <- read.csv("master_scripts/Cflux_day.csv")
   treeC$Date <- as.Date(treeC$Date)
   treeC$bolebranch <- with(treeC, boleC+branchC)
 
-# ##use harvest roots to make sure pred roots are in the right ballpark (these should be slightly higher)    
-# roots <- read.csv("calculated_mass/root_mass_simple.csv")
-#   roots$Date <- as.Date("2009-03-16")
-#   roots$root_carbon <- roots$root_mass*.5
-# 
-# rooteq <- read.csv("stats/rootshootmodel.csv")
-#   
-# #root values need to be predicted and added to aboveground C 
-#   finalC <- subset(treeC, Date=="2009-03-16")
-#   mab_final <- subset(finalC, select = c("chamber", "Date", "aboveC"))
-#   mab_final$rootmass_pred <- with(mab_final, rooteq[2,1]*(log10(aboveC*2)) + rooteq[1,1])
-#   mab_final$rootmass_pred2 <- 10^(mab_final$rootmass_pred)
-#   mab_final$rootC_pred <- mab_final$rootmass_pred2 * .5
-#   mab_final$treeC <- with(mab_final, rootC_pred+aboveC)
-  
 roots <- read.csv("calculated_mass/rootallometry.csv")  
+
+
 finalC <- subset(treeC, Date=="2009-03-16")
+
 mab_final <- merge(roots[,c(1,4)], finalC[,c(1:2,10)])
 mab_final$treeC <- with(mab_final, root11+aboveC) 
+
+###range in final TBCA across WTCs on last date 
+# lastflux <- treeC[treeC$Date=="2009-03-06", "fluxC"]
+# lastmass <- finalC[,10]
+# tbcaperc <- (lastflux-lastmass)/lastflux
+# mean(tbcaperc)
+# range(tbcaperc)
 
 ##plot bits
 xAT <- seq.Date(from=as.Date("2008-4-1"), length=13, by="month")
