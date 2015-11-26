@@ -51,18 +51,20 @@ rs_mod <- lm(log10(root_mass) ~ log10(Mab), data=rootshoot)
 # rs_mod_coef <-data.frame(coef(rs_mod))
 
 ##ploting
+palette (c("blue", "red"))
+
 # windows (7,7)
 par(mar=c(5,5,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 with(rootshoot, plot(log10(root_mass)~log10(Mab), axes=FALSE, type='n', ylab="Root Mass (g)", xlab="Shoot Mass (g)"))
 ablineclip(rs_mod, lwd=2, col="black",x1=min(log10(rootshoot$Mab)), x2=max(log10(rootshoot$Mab)))
 
-with(rootshoot[rootshoot$location == "pot",], points(log10(root_mass)~log10(Mab), pch=c(2,17)[Water_treatment],
+with(rootshoot[rootshoot$location == "pot",], points(log10(root_mass)~log10(Mab), pch=17,
      col=CO2_treatment,cex=1.5))
 with(rootshoot[rootshoot$location == "wtc",], points(log10(root_mass)~log10(Mab), pch=c(1,19)[Water_treatment],
      col=CO2_treatment,cex=1.5))
 
 magaxis(side=c(1,2), unlog=c(1,2), frame.plot=TRUE)
-legend("topleft", leglab3, pch=c(19,1,19,1, 17,19), col=c("blue", "blue", "red", "red", "black", "black"), inset = 0.01, bty='n')
+legend("topleft", leglab3, pch=c(15,0,15,0, 17,19), col=c("blue", "blue", "red", "red", "black", "black"), inset = 0.01, bty='n')
 
 # dev.copy2pdf(file= "master_scripts/paper_figs/rootshoot.pdf")
 # dev.off()
