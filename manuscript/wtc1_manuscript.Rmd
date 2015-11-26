@@ -193,7 +193,7 @@ Here, total C allocation to leaves and aboveground wood (branches + bole) could 
 \
 (5)
 $$M_{c,T} = \int a_{c} F_{c,d}dt - \int \lambda M_{c}dt$$
-where $\text{M}_{c,T}$ is the total dry C mass of either component (estimated at the end of the experiment) and $\text{F}_{c,d}$ is the daily net aboveground C flux (g C d^-1^). From equation 5, we estimated allocation by rearranging (as all other components were measured).For example, C allocation to leaves ($\text{a}_{l}$) was determined by combining measurements of harvested dry C mass of leaves ($\text{M}_{l,T}$) with $\text{F}_{c,T}$ and total litterfall ($\text{L}_{l,T}$), giving:
+where $\text{M}_{c,T}$ is the total dry C mass of either leaves or wood (estimated at the end of the experiment) and $\text{F}_{c,d}$ is the daily net aboveground C flux (g C d^-1^). From equation 5, we estimated allocation by rearranging (as all other components were measured). For example, C allocation to leaves ($\text{a}_{l}$) was determined by combining measurements of harvested dry C mass of leaves ($\text{M}_{l,T}$) with $\text{F}_{c,T}$ and total litterfall ($\text{L}_{l,T}$), giving:
 
 \
 (6)
