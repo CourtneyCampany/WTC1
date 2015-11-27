@@ -205,7 +205,8 @@ bole310_pred <- do.call(rbind, bole310_sp)
 bole310_pred <- merge(bole310_pred, bole_corr[, c(1,5)], by="chamber")
 
 bole310_pred$bole_mass_adj <- with(bole310_pred, bole_pred * (1-bole_offset)) 
-bole310_pred$bole_carbon <- bole310_pred$bole_mass_adj * .5
+#bole carbon% from dryad database
+bole310_pred$bole_carbon <- bole310_pred$bole_mass_adj * .48
 
 
 #write to calcualted mass subfolder
