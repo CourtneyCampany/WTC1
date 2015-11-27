@@ -52,13 +52,13 @@ treemass2 <- merge(treemass, moremass, by = "chamber")
   ##this includes above + belowground
 
 #Calcualte Tree carbon-------------------------------------------------------------------------------------------------------------
-  treemass4$woodC <- with(treemass4, woodmass * .5)
+  treemass4$woodC <- with(treemass4, woodmass * .48)
   treemass4$treeC <- with(treemass4, leafcarbon+woodC+littercarbon)
   
-  treemass4$rootC <- with(treemass4, root_mass * .5)
+  treemass4$rootC <- with(treemass4, root_mass * .48)
   
-  treemass4$branchC <- with(treemass4, (wbr+cwd) * .5)
-  treemass4$boleC <- with(treemass4, stem_mass_dry * .5)
+  treemass4$branchC <- with(treemass4, (wbr+cwd) * .48)
+  treemass4$boleC <- with(treemass4, stem_mass_dry * .48)
   
   treemass4$Cab <- with(treemass4, branchC+boleC+leafcarbon+littercarbon)
 
