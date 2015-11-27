@@ -1,6 +1,24 @@
 
 source("HFE chamber read data.R")
 
+# chamber treatments
+chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
+chambersumm <- subset(chambersumm, inside_or_outside_WTC == "inside")
+chambersumm <- droplevels(chambersumm[,1:3])
+
+#chamberflux
+chams <-  paste0("ch", sprintf("%02.0f",1:12))
+fns <- paste0("raw csv/HFE WTC hourly flux GapFilled ",chams,".csv")
+allflux <- lapply(fns, read.csv)
+
+#tree chamber flux
+flux<-do.call(rbind, allflux)
+flux<-data.frame(flux)
+flux$DateTime<-as.character(flux$DateTime)
+flux$DateTime<-as.POSIXct(flux$DateTime, tz = "GMT")
+flux$Date <- as.Date(flux$DateTime)
+
+
 #TREE CHAMBER FLUX
 WTCflux<- flux[, c("DateTime", "Date", "chamber", "FluxH2Otot", "FluxCO2tot", "sunrise", 
                    "sunset", "daylength")]
