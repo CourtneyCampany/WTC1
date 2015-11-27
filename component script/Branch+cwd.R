@@ -116,7 +116,8 @@ brmass_sp <- lapply(brmass_sp, function(z){
 })
 brmass_pred <- do.call(rbind, brmass_sp)
 
-brmass_pred$branch_carbon <- brmass_pred$branch_pred * .5
+##carbon%frpm dryad database
+brmass_pred$branch_carbon <- brmass_pred$branch_pred * .48
 
 
 #write to calcualted mass subfolder
