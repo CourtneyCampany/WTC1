@@ -17,7 +17,14 @@ treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
   
 # drystart <- treeC[treeC$Date == "2008-10-01" & treeC$treatment == "ambient-dry","fluxC"]
 # dryend <- treeC[treeC$Date == "2009-02-28"& treeC$treatment == "ambient-dry","fluxC"]
-      
+  
+###how constat for abstract  
+# treeC2 <- treeC[complete.cases(treeC),]  
+# treeC3 <- treeC2[treeC2$TBCA > 0,]
+# treeC3$tbcaperc <- with(treeC3, (fluxC-TBCA)/fluxC) 
+# tbca_agg <- summaryBy(tbcaperc ~ treatment, data=treeC3, FUN=c(mean,se))
+# mean(treeC3$tbcaperc)
+     
 ###plot relationships of TBCA and leaf area with CO2 flux---------------------------------------------------------------------
 palette(c("blue", "red"))
 droughtcol = alpha("lightslategrey", alpha=0.275)
