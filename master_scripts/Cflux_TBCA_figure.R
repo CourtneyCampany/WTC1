@@ -46,18 +46,23 @@ legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "blac
  # dev.off()
 
 
-##can use "master_scripts/Cflux_day.csv")
+
 ###all WTC-----------------
+##can use "master_scripts/Cflux_day.csv")
+# tbca_wtc <- read.csv("master_scripts/Cflux_day.csv")
+#   tbca_wtc$Date <- as.Date(tbca_wtc$Date)
+#   tbca_wtc$TBCA <- with(tbca_wtc, fluxC-aboveC)
+#   tbca_wtc$treatment <-with(tbca_wtc, paste(CO2_treatment, Water_treatment, sep="-"))
+# 
 # windows(7,7)
 # par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
-# plot(TBCA~CO2cum, data=flux_la,  type='n',ylab="", xlab=treefluxlab)
+# plot(TBCA~fluxC, data=tbca_wtc,  type='n',ylab="", xlab=treefluxlab,yaxs="i", xaxs="i", ylim=c(0, 12500), xlim=c(0, 25500))
 # 
-# for(i in unique(flux_la$treatment)){
-#   points(TBCA~CO2cum, data=flux_la[flux_la$treatment == i,], col=as.factor(CO2_treatment), 
+# for(i in unique(tbca_wtc$treatment)){
+#   points(TBCA~fluxC, data=tbca_wtc[tbca_wtc$treatment == i,], col=as.factor(CO2_treatment),
 #          type='l', lwd=2.5, lty=c(1,2)[as.factor(Water_treatment)])
 # }
 # 
 # title(ylab=tbcalab, mgp=c(4,1,0))
 # legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
-# abline(0, 1, lty=2, lwd=2)
-
+# 
