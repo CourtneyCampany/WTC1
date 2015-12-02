@@ -67,6 +67,14 @@ visreg(fluxlmf_mod)
 #  anova(fluxlmf_mod2)
 
 
+####attempts to measure LMF at a common size......
+##try with eCO2 modlel
+library(lsmeans)
+ref.grid(lmf_mod)
+lmf_lsm <- lsmeans(lmf_mod, "CO2_treatment")
+plot(lmf_lsm)
+##dont seem to overlap (not based on platn size???)
+
 #SMF----------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$smf)
 with(tree_C, boxplot(smf~treatment)) 
@@ -100,6 +108,11 @@ anova(fluxsmf_mod)
 
 
 (mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "smf"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"])
+
+ref.grid(smf_mod)
+smf_lsm <- lsmeans(smf_mod, "CO2_treatment")
+plot(smf_lsm)
+####(smf CIs overlap at a common size, so smf if size related???)
 
 # RMF----------------------------------------------------------------------------------------------------------------------
 ad.test(tree_C$rmf)

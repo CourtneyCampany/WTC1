@@ -1,7 +1,13 @@
+source("functions_and_packages/plot_objects.R")
+source("functions_and_packages/functions.R")
+
+###new LA Cflux figure with CI
+
 ###stats correlations between the variables plotted in flux, leafarea, tbca
 library(RVAideMemoire)
 library(visreg)
 library(nortest)
+library(doBy)
 
 ## treatments
 chambersumm <- read.csv("raw csv/HFE chamber treatments.csv")
@@ -31,6 +37,8 @@ leaffluxlmodel <- lm(Cflux~LAestlin.mean, data = la_flux)
 
 # leaffluxlmodel2 <- lm(Cflux~LAestlin.mean*CO2_treatment*Water_treatment, data = la_flux)
 #   anova(leaffluxlmodel2)
+
+  
 
   
 

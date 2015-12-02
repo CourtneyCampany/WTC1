@@ -24,6 +24,16 @@ la_flux <- merge(la_agg,treeC[, c(1:2)] )
 leaffluxmod_amb <- lm(Cflux~LAestlin, data = la_flux[la_flux$CO2_treatment == "ambient",])
 leaffluxmod_elev <- lm(Cflux~LAestlin, data = la_flux[la_flux$CO2_treatment == "elevated",])
 
+# ###at a common plant size????###
+# leaffluxmod <- lm(Cflux~LAestlin*CO2_treatment, data = la_flux)
+# library(lsmeans)
+# ref.grid(leaffluxmod)
+# lsmeans(leaffluxmod, "CO2_treatment")
+# with(la_flux, tapply(Cflux, CO2_treatment, mean))
+# lmf_lsm <- lsmeans(leaffluxmod, "CO2_treatment")
+# plot(lmf_lsm)
+# ###no effect at common plant size
+
 amb_dat <- la_flux[la_flux$CO2_treatment == "ambient",]
 amb_new <- seq(min(amb_dat$LAestlin), max(amb_dat$LAestlin), length=101)
 amb_pred <- predict(leaffluxmod_amb, newdata=data.frame(LAestlin=amb_new), se.fit=TRUE)
@@ -44,7 +54,7 @@ elelwr <- ele_pred$fit - (2*ele_pred$se.fit)
 ##plot LA with total flux-----------------------------------------------------------------------------
 palette (c("blue", "red"))
 
-windows (7,7)
+# windows (7,7)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 
 plot(1,type='n', ylab = "",xlab=meanlalab,ylim = c(5000, 30000), xlim = c(0, 50))
@@ -65,8 +75,8 @@ lines(amb_new, amb_pred$fit, lty=1, lwd=2,col="blue")
 
 points(Cflux ~ LAestlin, data = la_flux,pch=c(1,19)[Water_treatment],col=CO2_treatment, cex=1.5)
 
-dev.copy2pdf(file= "stats/flux_leafarea_co2.pdf")
-dev.off()
+# dev.copy2pdf(file= "master_scripts/paper_figs/flux_leafarea_co2.pdf")
+# dev.off()
 
 
 
