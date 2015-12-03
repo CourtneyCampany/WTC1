@@ -62,16 +62,13 @@ fluxlmf_mod <- lm(lmf ~ standingtreemass, data=tree_C)
 summary(fluxlmf_mod)
 anova(fluxlmf_mod)
 visreg(fluxlmf_mod)
-# fluxlmf_mod2 <- lm(lmf ~ Cflux*CO2_treatment*Water_treatment , data=tree_C)
-#  summary(fluxlmf_mod2)
-#  anova(fluxlmf_mod2)
 
-
-####attempts to measure LMF at a common size......
-##try with eCO2 modlel
+##retest co2 effect of lmf at a common tree size
+##try with model of lmf vs trees size with treatments
+masslmf_mod <- lm(lmf ~ standingtreemass*CO2_treatment*Water_treatment , data=tree_C)
 library(lsmeans)
-ref.grid(lmf_mod)
-lmf_lsm <- lsmeans(lmf_mod, "CO2_treatment")
+ref.grid(masslmf_mod)
+lmf_lsm <- lsmeans(masslmf_mod, "CO2_treatment")
 plot(lmf_lsm)
 ##dont seem to overlap (not based on platn size???)
 
@@ -109,8 +106,10 @@ anova(fluxsmf_mod)
 
 (mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"]) - mean(tree_C[tree_C$CO2_treatment=="elevated", "smf"]))/mean(tree_C[tree_C$CO2_treatment=="ambient", "smf"])
 
-ref.grid(smf_mod)
-smf_lsm <- lsmeans(smf_mod, "CO2_treatment")
+##retest co2 effect of smf at a common tree size
+masssmf_mod <- lm(smf ~ standingtreemass*CO2_treatment*Water_treatment , data=tree_C)
+ref.grid(masssmf_mod)
+smf_lsm <- lsmeans(masssmf_mod, "CO2_treatment")
 plot(smf_lsm)
 ####(smf CIs overlap at a common size, so smf if size related???)
 
