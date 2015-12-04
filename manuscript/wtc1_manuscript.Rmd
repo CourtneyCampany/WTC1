@@ -52,6 +52,20 @@ Pco2 <- round(Pco2, 3)
 Ph2o <- read.csv("Stats/p_sigs/P_h20.csv")
 Ph2o <- round(Ph2o, 3)
 
+###sla P values
+Pinter_sla <- read.csv("Stats/p_sigs/sla/P_interactions_sla.csv")
+Pinter_sla <- round(Pinter_sla, 3)
+
+Pco2_sla <- read.csv("Stats/p_sigs/sla/P_co2_sla.csv")
+Pco2_sla <- round(Pco2_sla, 3)
+
+Ph2o_sla <- read.csv("Stats/p_sigs/sla/P_h20_sla.csv")
+Ph2o_sla <- round(Ph2o_sla, 3)
+
+###Add together
+Pinter_2 <- rbind(Pinter, Pinter_sla)
+Pco2_2 <- rbind(Pco2, Pco2_sla)
+Ph2o_2 <- rbind(Ph2o, Ph2o_sla)
 ```
 
 
@@ -233,7 +247,7 @@ Differences in experimental parameters to the interaction of C~a~ and drought tr
 Both whole tree C and $\text{C}_{ab}$ from the final harvest were reduced in eC~a~ treatments by 32 % (both P < 0.03). Over the entire 11 month measured chamber flux period the summed aboveground C uptake ($\text{F}_{c,T}$) was significantly reduced by 30.5 % in eC~a~ treatments (P = 0.043), while no effects of the drought treatment were detected (Table 1). $\text{F}_{c,T}$ was positively correlated with estimates of both whole tree C (R^2^ = 0.74, Figure `r fluxtreefig`a) and $\text{C}_{ab}$ (R^2^ = 0.69, Figure `r fluxtreefig`b) over the same time period. Whole tree C mass estimated during the chamber flux period represented ca. 75 % of total harvested tree C mass. As the majority of biomass production occurred during this period, the allometric estimates of whole tree C were used for comparison to $\text{F}_{c,T}$.
 
 \
-Leaf area at the final harvest was significantly reduced by by 31.3 % under eC~a~ (p < 0.001) and this pattern was observed across the final eleven months of the experiment (Figure `r lafig`). Specific leaf area was reduced by 11 % in eC~a~ treatments (P = 0.053), but was not affected by drought treatments. Overall, $\text{F}_{c,T}$ was positively correlated with mean leaf area (P < 0.001, Figure `r fluxlafig`). Intercepts and slopes between separate linear regressions of $\text{F}_{c,T}$ and mean leaf area for aC~a~ and eC~a~ treatments were not different, however, there was negligible overlap of data between treatments. Thus, we were unable to determine if reductions in $\text{F}_{c,T}$ in eC~a~ treatments were a function of lower mean leaf area or shifts in *A~n~* and tissue respiration rates.
+Leaf area at the final harvest was significantly reduced by by 31.3 % under eC~a~ (p < 0.001) and this pattern was observed across the final eleven months of the experiment (Figure `r lafig`). Specific leaf area was reduced by 10.9 % in eC~a~ treatments (P = 0.053), and by 8.9 % in drought treatments (P = 0.089, Table 1). Overall, $\text{F}_{c,T}$ was positively correlated with mean leaf area (P < 0.001, Figure `r fluxlafig`). Intercepts and slopes between separate linear regressions of $\text{F}_{c,T}$ and mean leaf area for aC~a~ and eC~a~ treatments were not different, however, there was negligible overlap of data between treatments. Thus, we were unable to determine if reductions in $\text{F}_{c,T}$ in eC~a~ treatments were a function of lower mean leaf area or shifts in *A~n~* and tissue respiration rates.
 
 ## Harvested tissue carbon mass and biomass partitioning
 At the end of this two year experiment, harvested C mass of tissue components was affected in eC~a~ but not drought treatments (Table 1). Aboveground wood C mass was reduced by 37 % in eC~a~ treatments (P = 0.015), driven mostly by eC~a~ effects on bole wood. Neither standing crop leaf C mass or total litterfall C mass over the study period differed between C~a~ treatments. Total root C mass was  reduced by 29% in eC~a~ treatments (P = 0.091).
@@ -278,7 +292,7 @@ With estimations of daily aboveground C mass accrual and measured cumulative who
 Here we use novel aspects of the WTC experimental facility to show that whole tree C flux and tree growth were highly correlated, while patterns in biomass partitioning alone were insufficient to explain eC~a~ effects on tree growth. With individual *Eucalyptus saligna* trees we show different responses of above and belowground C allocation to eC~a~ treatments, which has important implications for how C allocation should be represented in process-based forest models. As empirical measurements of belowground processes are still difficult to obtain, models may have to assume that responses of aboveground tissues to global change represent those of belowground tissues [@giardina2005response]. As a result, continued empirical measurements to define C allocation patterns constrained by functional relationships with biomass production are needed to reduce uncertainty and improve model predictions [@de2014does]. Continuing to apply novel approaches to better evaluate TBCA and empirically measure whole tree C fluxes, such as the WTC experiment, are the way forward in addressing questions regarding the fate of assimilated C under global climate change.
 
 # List of Tables
-**Table 1**. Final harvest C mass of above and belowground tissues and cumulative aboveground tree C flux ($\text{F}_{c,T}$). Each value represents the mean (&pm; 1 standard error) for each treatment combination and units for all values are g C. For each component, different letters represent significant differences between treatments from the overall model which includes C~a~ * drought interactions. For each variable, P values represent overall differences of C~a~ or drought main effects and the C~a~ * drought interaction.
+**Table 1**. Final harvest C mass of above and belowground tissues, cumulative aboveground tree C uptake ($\text{F}_{c,T}$) and specific leaf area (SLA). Each value represents the mean (&pm; 1 standard error) for each treatment combination. Units for C mass and $\text{F}_{c,T}$ are g C, while SLA are cm^2^ g^-1^. For each variable, different letters represent significant differences between treatments from the overall model which includes C~a~ * drought interactions. P values represent overall differences of C~a~ or drought main effects and the C~a~ * drought interaction.
 
 # List of Figures
 **Figure 1**. Whole tree C mass as a function of cumulative aboveground C flux for each WTC tree. Values of cumulative aboveground net C flux were measured over the final eleven months of the experiment. Whole tree C mass represents the sum of bole, branch, leaf and root C mass from allometric estimates over the same time period. The dotted line is the 1:1 relationship and the solid line represents the significant overall linear model fit from the equation y = 0.56x + 878.2 (R^2^ = 0.86).
@@ -310,11 +324,11 @@ Root mass as a function of shoot mass in *Eucalyptus saligna* for potted seedlin
 Cumulative aboveground net C flux and additive C allocation of individual tree components from 2008-4-15 and 2009-3-16. Panels represent each individual WTC. Both aboveground net C flux and tissue C allocation where set to 0 on 2008-4-15 in order to track the allocation of C in daily time steps. Total root C mass, predicted from the log relationship between above and belowground mass partitioning of pre-planting seedlings and harvested trees, is shown on the last date.
 
 # Tables {.unnumbered}
-**Table 1**. Final harvest C mass of above and belowground tissues and cumulative aboveground tree C flux. Each value represents the mean (&pm; 1 standard error) for each treatment combination and units for all values are g C. For each component, different letters represent significant differences between treatments from the overall model which includes C~a~ * drought interactions. For each variable, P values represent overall differences of C~a~ or drought main effects and the C~a~ * drought interaction.
+**Table 1**. Final harvest C mass of above and belowground tissues, cumulative aboveground tree C uptake ($\text{F}_{c,T}$) and specific leaf area (SLA). Each value represents the mean (&pm; 1 standard error) for each treatment combination. Units for C mass and $\text{F}_{c,T}$ are g C, while SLA are cm^2^ g^-1^. For each variable, different letters represent significant differences between treatments from the overall model which includes C~a~ * drought interactions. P values represent overall differences of C~a~ or drought main effects and the C~a~ * drought interaction.
 ```{r table, echo=FALSE}
-table2 <- rbind(table, c("CO~2~ effect (P)",  Pco2$x))
-table3 <- rbind(table2, c("Drought effect (P)",  Ph2o$x))
-table4 <- rbind(table3, c("CO~2~ * Drought (P)",  Pinter$x))
+table2 <- rbind(table, c("CO~2~ effect (P)",  Pco2_2$x))
+table3 <- rbind(table2, c("Drought effect (P)",  Ph2o_2$x))
+table4 <- rbind(table3, c("CO~2~ * Drought (P)",  Pinter_2$x))
 
 dust(table4) %>%
     sprinkle(rows= 1, part="head",bold=TRUE)%>%

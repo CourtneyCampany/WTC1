@@ -10,20 +10,21 @@ treeC_agg <- summaryBy(.~treatments, data=tree_C, FUN=c(mean,se))
 ##reorder
 treeC_agg2 <- treeC_agg[c(1,3,2,4),]
 
-####START HERE to double check new data
 
+####Add SLA to end of table
+sla <- read.csv("calculated_mass/sla_means.csv")
+sla$treatments  <- sla$treatment 
+sla$treatments <- gsub("-", ".", sla$treatments)
 
-###Data table/stacked bar plot / boxplot of component fractions
-
-#table <- read.csv("master_scripts/harvest_trt_means.csv")
+treeC_agg3 <- merge(treeC_agg2, sla[,2:4])
 
 
 ##need to split dataframe and combine with pasted mean(se)
 
-table_means <- treeC_agg2[, c(2:9)]
-table_se <- treeC_agg2[, c(10:17)]
+table_means <- treeC_agg3[, c(2:9, 18)]
+table_se <- treeC_agg3[, c(10:17, 19)]
 
-trts <- treeC_agg2[, 1]
+trts <- treeC_agg3[, 1]
 trts2 <- c("aCO~2~-dry", "aCO~2~-wet", "eCO~2~-dry", "eCO~2~-wet")
 
 ###paste and round means and se together
@@ -33,7 +34,7 @@ v3 <- data.frame(paste0(sprintf("%4.1f", round(table_means[,3], 1)), " (", sprin
 v4 <- data.frame(paste0(sprintf("%4.1f", round(table_means[,4], 1)), " (", sprintf("%3.1f", round(table_se[,4],1)),")"))
 v5 <- data.frame(paste0(sprintf("%4.1f",round(table_means[,5], 1)), " (", sprintf("%3.1f", round(table_se[,5],1)),")"))
 v6 <- data.frame(paste0(sprintf("%3.1f",round(table_means[,6],1)), " (", sprintf("%2.1f",round(table_se[,6],1)),")"))
-# v7 <- data.frame(paste0(sprintf("%4.1f",round(table_means[,7], 1)), " (", sprintf("%3.1f",round(table_se[,7],1)),")"))
+v7 <- data.frame(paste0(sprintf("%3.1f",round(table_means[,9], 1)), " (", sprintf("%2.1f",round(table_se[,9],1)),")"))
 
 tree_table <- cbind(trts2, v1)
 tree_table <- cbind(tree_table, v2)
@@ -41,28 +42,30 @@ tree_table <- cbind(tree_table, v3)
 tree_table <- cbind(tree_table, v4)
 tree_table <- cbind(tree_table, v5)
 tree_table <- cbind(tree_table, v6)
-# tree_table <- cbind(tree_table, v7)
+tree_table <- cbind(tree_table, v7)
 
 
 ##order the variables
-tree_table <- tree_table[, c(1,5,4,6,7,3,2)]
+tree_table <- tree_table[, c(1,5,4,6,7,3,2,8)]
 
 #co2lab <- expression(CO^2~Flux)
 
-vars <- c("Treatment", "Bole", "Branch", "Leaf", "Litter", "Root", "Tree C flux")
+vars <- c("Treatment", "Bole", "Branch", "Leaf", "Litter", "Root", "Tree C flux", "SLA")
 
 colnames(tree_table) <- vars
 
 
 ##add sigletters
 siglets <- read.csv("Stats/p_sigs/sigletters.csv")
+siglets_sla <- read.csv("Stats/p_sigs/sla/sigletters_sla.csv")
 
 tree_table[[2]] <- paste(tree_table[[2]], siglets[[1]])
 tree_table[[3]] <- paste(tree_table[[3]], siglets[[2]])
 tree_table[[4]] <- paste(tree_table[[4]], siglets[[3]])
 tree_table[[5]] <- paste(tree_table[[5]], siglets[[4]])
-tree_table[[6]] <- paste(tree_table[[6]], siglets[[6]])
+tree_table[[6]] <- paste(tree_table[[6]], siglets[[5]])
 tree_table[[7]] <- paste(tree_table[[7]], siglets[[6]])
+tree_table[[8]] <- paste(tree_table[[8]], siglets_sla[[1]])
 
 ###three columns with P by treatments and interactions
 ###sigletters by numbers as done previously
