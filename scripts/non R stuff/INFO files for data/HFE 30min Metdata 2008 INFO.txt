@@ -1,0 +1,33 @@
+DateTime : time-stamp (dd-mm-yyyy hh:mm)
+DOY -  Day of year
+timecorr - Time correction (minutes); Local time + time correction = local apparent time (solar time).
+
+
+Air temperature (deg C):
+TairRef : Thermistor in ventilated radiation shield (at the demountable)
+TairRot : HMP45/ Rotrotronic sensor in ventilated radiation shield (at the demountable)
+TairMet : From weather station by the IxF experiment.
+
+Relative humidity (%)
+RHdem : Vaisala sensor in ventilated radiation shield (demountable).
+RHmet :  From weather station by the IxF experiment.
+
+AirPress - Atmospheric pressure from Licor 7000 (kPa)
+
+VPD - vapor pressure deficit (kPa), using Jones (1992) formula.
+VPDdem : VPD calculated with demountable data (RHRot and TaRot)
+VPDmet : VPD calculated at the met station (with RH and Tair) (and average Pa when not measured)
+
+PAR - Licor PAR sensor on roof of demountable on mast 4.5m up. (umol m-2 s-1)
+Rglob - Licor Pyranometer in weather station by the IxF experiment (W m-2)
+
+Raindem - Raingauge on roof of demountable (mm)
+Rainmet - Raingauge at weather station by the IxF experiment (mm)
+
+Winddem - Sensor on mast at demountable (m s-1)
+Windmet - Cup anemometer at weather station by the IxF experiment (m s-1)
+Winddirection - Wind direction (degrees from N) (weather station).
+
+SoilHeatFlux - Soil heat flux (W m-2), IxF weather station.
+
+
