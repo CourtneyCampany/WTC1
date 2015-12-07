@@ -93,6 +93,8 @@ belowbarfig <- "4.7"
 tbcafluxfig <- "4.8"
 rootshootpred <- "4.S1"
 additivechamfig <- "4.S2"
+
+wtc1tab1 <- "4.1"
 ```
 
 
@@ -250,7 +252,7 @@ Differences in experimental parameters to the interaction of C~a~ and drought tr
 # Results
 
 ## Total aboveground carbon flux, whole tree C mass and leaf area
-Both whole tree C and $\text{C}_{ab}$ from the final harvest were reduced in eC~a~ treatments by 32 % (both P < 0.03). Over the entire 11 month measured chamber flux period the summed aboveground C uptake ($\text{F}_{c,T}$) was significantly reduced by 30.5 % in eC~a~ treatments (P = 0.043), while no effects of the drought treatment were detected (Table 1). $\text{F}_{c,T}$ was positively correlated with estimates of both whole tree C (R^2^ = 0.74, Figure `r fluxtreefig`a) and $\text{C}_{ab}$ (R^2^ = 0.69, Figure `r fluxtreefig`b) over the same time period. Whole tree C mass estimated during the chamber flux period represented ca. 75 % of total harvested tree C mass. As the majority of biomass production occurred during this period, the allometric estimates of whole tree C were used for comparison to $\text{F}_{c,T}$.
+Both whole tree C and $\text{C}_{ab}$ from the final harvest were reduced in eC~a~ treatments by 32 % (both P < 0.03). Over the entire 11 month measured chamber flux period the summed aboveground C uptake ($\text{F}_{c,T}$) was significantly reduced by 30.5 % in eC~a~ treatments (P = 0.043), while no effects of the drought treatment were detected (Table `r wtc1tab1`). $\text{F}_{c,T}$ was positively correlated with estimates of both whole tree C (R^2^ = 0.74, Figure `r fluxtreefig`a) and $\text{C}_{ab}$ (R^2^ = 0.69, Figure `r fluxtreefig`b) over the same time period. Whole tree C mass estimated during the chamber flux period represented ca. 75 % of total harvested tree C mass. As the majority of biomass production occurred during this period, the allometric estimates of whole tree C were used for comparison to $\text{F}_{c,T}$.
 
 \
 ```{r fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
@@ -260,7 +262,7 @@ source("master_scripts/Cflux_treecarbon_figure3.R")
 **Figure 4.2**. Whole tree C mass as a function of cumulative aboveground C flux for each WTC tree. Values of cumulative aboveground net C flux were measured over the final eleven months of the experiment. Whole tree C mass represents the sum of bole, branch, leaf and root C mass from allometric estimates over the same time period. The dotted line is the 1:1 relationship and the solid line represents the significant overall linear model fit from the equation y = 0.56x + 878.2 (R^2^ = 0.86).
 
 \
-Leaf area at the final harvest was significantly reduced by by 31.3 % under eC~a~ (p < 0.001) and this pattern was observed across the final eleven months of the experiment (Figure `r lafig`). Specific leaf area was reduced by 10.9 % in eC~a~ treatments (P = 0.053), and by 8.9 % in drought treatments (P = 0.089, Table 1). Overall, $\text{F}_{c,T}$ was positively correlated with mean leaf area (P < 0.001, Figure `r fluxlafig`). Intercepts and slopes between separate linear regressions of $\text{F}_{c,T}$ and mean leaf area for aC~a~ and eC~a~ treatments were not different, however, there was negligible overlap of data between treatments. Thus, we were unable to determine if reductions in $\text{F}_{c,T}$ in eC~a~ treatments were a function of lower mean leaf area or shifts in *A~n~* and tissue respiration rates.
+Leaf area at the final harvest was significantly reduced by by 31.3 % under eC~a~ (p < 0.001) and this pattern was observed across the final eleven months of the experiment (Figure `r lafig`). Specific leaf area was reduced by 10.9 % in eC~a~ treatments (P = 0.053), and by 8.9 % in drought treatments (P = 0.089, Table `r wtc1tab1`). Overall, $\text{F}_{c,T}$ was positively correlated with mean leaf area (P < 0.001, Figure `r fluxlafig`). Intercepts and slopes between separate linear regressions of $\text{F}_{c,T}$ and mean leaf area for aC~a~ and eC~a~ treatments were not different, however, there was negligible overlap of data between treatments. Thus, we were unable to determine if reductions in $\text{F}_{c,T}$ in eC~a~ treatments were a function of lower mean leaf area or shifts in *A~n~* and tissue respiration rates.
 
 \
 ```{r leafarea, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
@@ -276,7 +278,7 @@ source("master_scripts/Cflux_leafarea_regressions.R")
 **Figure 4.4**. Treatment means of cumulative aboveground C flux as a function of mean daily canopy leaf area over the final eleven months of the experiment. The solid line represents the significant overall linear model fit (R^2^ = 0.77) from the equation: y = 611.9x + 2791.2. Separate 95% confidence intervals are shown for linear regression between $\text{F}_{c,T}$ and mean leaf area for aC~a~ and eC~a~ treatments.
 
 ## Harvested tissue carbon mass and biomass partitioning
-At the end of this two year experiment, harvested C mass of tissue components was affected in eC~a~ but not drought treatments (Table 1). Aboveground wood C mass was reduced by 37 % in eC~a~ treatments (P = 0.015), driven mostly by eC~a~ effects on bole wood. Neither standing crop leaf C mass or total litterfall C mass over the study period differed between C~a~ treatments. Total root C mass was  reduced by 29% in eC~a~ treatments (P = 0.091).
+At the end of this two year experiment, harvested C mass of tissue components was affected in eC~a~ but not drought treatments (Table `r wtc1tab1`). Aboveground wood C mass was reduced by 37 % in eC~a~ treatments (P = 0.015), driven mostly by eC~a~ effects on bole wood. Neither standing crop leaf C mass or total litterfall C mass over the study period differed between C~a~ treatments. Total root C mass was  reduced by 29% in eC~a~ treatments (P = 0.091).
 
 \
 **Table 4.1**. Final harvest C mass of above and belowground tissues, cumulative aboveground tree C uptake ($\text{F}_{c,T}$) and specific leaf area (SLA). Each value represents the mean (&pm; 1 standard error) for each treatment combination. Units for C mass and $\text{F}_{c,T}$ are g C, while SLA are cm^2^ g^-1^. For each variable, different letters represent significant differences between treatments from the overall model which includes C~a~ * drought interactions. P values represent overall differences of C~a~ or drought main effects and the C~a~ * drought interaction.
