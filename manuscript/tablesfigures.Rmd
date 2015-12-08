@@ -124,7 +124,7 @@ dust(table4) %>%
 
 # Figures {.unnumbered}
 
-```{r concept, echo=FALSE, error=TRUE,fig.width=8, fig.height=6,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r concept, echo=FALSE, error=TRUE,fig.width=8, fig.height=6,dev="png", dpi=600, dev.args=list(type="cairo")}
 library(png)
 concept <- readPNG("manuscript/conceptfig.png")
 par(mar=c(0,0,0,0))
@@ -135,43 +135,43 @@ rasterImage(concept, xleft = 0, ybottom = 0, xright = 1, ytop =1)
 \
 **Figure 1**. 
 
-```{r fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_treecarbon_figure3.R")
 ```
 \
 **Figure 2**. 
 
-```{r leafarea, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r leafarea, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/leafarea_figure.R")
 ```
 \
 **Figure 3**. 
 
-```{r fluxla, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r fluxla, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_leafarea_regressions.R")
 ```
 \
 **Figure 4**. 
 
-```{r c_allocation, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r c_allocation, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/fractionallocation_fig2.R")
 ```
 \
 **Figure 5**. 
 
-```{r c_cumulative, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r c_cumulative, fig.width=7, fig.height=10, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/cumulativecarbon_figure.R")
 ```
 \
 **Figure 6**. 
 
-```{r belowbar, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r belowbar, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/tbca_figure2.R")
 ```
 \
 **Figure 7**. 
 
-```{r tbcaflux, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r tbcaflux, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_TBCA_figure.R")
 ```
 \
@@ -179,13 +179,13 @@ source("master_scripts/Cflux_TBCA_figure.R")
 
 # Supporting Information {.unnumbered}
 
-```{r rootshoot, fig.width=7, fig.height=7, message=FALSE,echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r rootshoot, fig.width=7, fig.height=7, message=FALSE,echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/root_predict.R")
 ```
 \
 **Figure S1**.
 
-```{r chambers, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=400, dev.args=list(type="cairo")}
+```{r chambers, fig.width=8, fig.height=11, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/cumulativecarbon_cham_figure2.R")
 ```
 \
