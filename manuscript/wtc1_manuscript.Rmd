@@ -14,14 +14,14 @@ csl: tree-physiology.csl
 bibliography: references.bib
 ---
 
-\
-Courtney E. Campany^1^, Craig Barton^1^, Ross E. McMurtrie^2^, Remko A. Duursma^1^.
+<!-- \ -->
+<!-- Courtney E. Campany^1^, Craig Barton^1^, Ross E. McMurtrie^2^, Remko A. Duursma^1^. -->
 
-\
-^1^ Hawkesbury Institute for the Environment, University of Western Sydney, Locked Bag 1797, Penrith, NSW, Australia
+<!-- \ -->
+<!-- ^1^ Hawkesbury Institute for the Environment, University of Western Sydney, Locked Bag 1797, Penrith, NSW, Australia -->
 
-\
-^2^ School of Biological, Earth and Environmental Sciences, University of New South Wales, Sydney, NSW, Australia
+<!-- \ -->
+<!-- ^2^ School of Biological, Earth and Environmental Sciences, University of New South Wales, Sydney, NSW, Australia -->
 
 <!-- \ -->
 <!-- *Corresponding author*:  -->
