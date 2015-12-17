@@ -98,7 +98,7 @@ additivechamfig <- "S2"
 **Figure 7**. Treatment means &pm; 1 standard error of cumulative aboveground net C flux, TBCA, and the residual belowground C flux ($\text{F}_{c,r}$). Values of cumulative aboveground net C flux were measured over the final eleven months of the experiment. Values for TBCA are the residual between the cumulative C flux and total C mass aboveground estimated from allometric surveys over the same time period. Values for $\text{F}_{c,r}$ were calculated as the residual between TBCA and root C mass predicted on the last date of the eleven month period. 
 
 \
-**Figure 8**. Total belowground C allocation as a function of cumulative aboveground net C flux across the final eleven months of the experiment. Carbon mass aboveground was estimated from allometric surveys, interpolated on a daily time scale and then subtracted from the aboveground net C flux to quantify TBCA. Individual lines represent treatment means, with color and line type distinguishing treatment combinations. The dotted line represents a theoretical investment of 50 % of aboveground net C flux towards TBCA.
+**Figure 8**. Total belowground C allocation as a function of cumulative aboveground net C flux across the final eleven months of the experiment. Carbon mass aboveground was estimated from allometric surveys, interpolated on a daily time scale and then subtracted from the aboveground net C flux to quantify TBCA. Individual lines represent treatment means, with color and line type distinguishing treatment combinations.
 
 \
 **Figure S1**.
