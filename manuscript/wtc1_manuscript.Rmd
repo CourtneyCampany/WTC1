@@ -257,6 +257,19 @@ Differences in experimental parameters to the interaction of CO~2~ and drought t
 Both whole tree C and $\text{C}_{ab}$ from the final harvest were reduced in eC~a~ treatments by 32 % (both P < 0.03). Over the entire 11 month measured chamber flux period the summed aboveground C uptake ($\text{F}_{c,T}$) was significantly reduced by 30.5 % in eC~a~ treatments (P = 0.043), while no effects of the drought treatment were detected (Table `r wtc1tab1`). $\text{F}_{c,T}$ was positively correlated with estimates of both whole tree C (R^2^ = 0.74, Figure `r fluxtreefig`a) and $\text{C}_{ab}$ (R^2^ = 0.69, Figure `r fluxtreefig`b) over the same time period. Whole tree C mass increment estimated during the chamber flux period represented ca. 75 % of total harvested tree C mass. As the majority of biomass production occurred during this period, the allometric estimates of whole tree C were used for comparison to $\text{F}_{c,T}$.
 
 \
+**Table 4.1**. Final harvest C mass of above and belowground tissues, cumulative aboveground tree C uptake ($\text{F}_{c,T}$) and specific leaf area (SLA). Each value represents the mean (&pm; 1 standard error) for each treatment combination. Units for C mass and $\text{F}_{c,T}$ are g C, while SLA are cm^2^ g^-1^. For each variable, different letters represent significant differences between treatments from the overall model which includes CO~2~ * drought interactions. P values represent overall differences of CO~2~ or drought main effects and the CO~2~ * drought interaction.
+```{r table, echo=FALSE}
+table2 <- rbind(table, c("CO~2~ effect (P)",  Pco2_2$x))
+table3 <- rbind(table2, c("Drought effect (P)",  Ph2o_2$x))
+table4 <- rbind(table3, c("CO~2~ * Drought (P)",  Pinter_2$x))
+
+dust(table4) %>%
+    sprinkle(rows= 1, part="head",bold=TRUE)%>%
+    sprinkle_colnames(Tree.C.flux = "F~c,T~") %>%
+    sprinkle_print_method("markdown")
+```
+
+\
 ```{r fluxmass, fig.width=7, fig.height=7, echo=FALSE,warning=FALSE,dev="png", dpi=600, dev.args=list(type="cairo")}
 source("master_scripts/Cflux_treecarbon_figure3.R")
 ```
@@ -281,19 +294,6 @@ source("master_scripts/Cflux_leafarea_regressions.R")
 
 ##4.4.2 Harvested tissue carbon mass and biomass partitioning
 At the end of this two year experiment, harvested C mass of tissue components was affected in eC~a~ but not drought treatments (Table `r wtc1tab1`). Aboveground wood C mass was reduced by 37 % in eC~a~ treatments (P = 0.015), driven mostly by eC~a~ effects on bole wood. Neither standing crop leaf C mass or total litterfall C mass over the study period differed between CO~2~ treatments. Total root C mass was  reduced by 29% in eC~a~ treatments (P = 0.091).
-
-\
-**Table 4.1**. Final harvest C mass of above and belowground tissues, cumulative aboveground tree C uptake ($\text{F}_{c,T}$) and specific leaf area (SLA). Each value represents the mean (&pm; 1 standard error) for each treatment combination. Units for C mass and $\text{F}_{c,T}$ are g C, while SLA are cm^2^ g^-1^. For each variable, different letters represent significant differences between treatments from the overall model which includes CO~2~ * drought interactions. P values represent overall differences of CO~2~ or drought main effects and the CO~2~ * drought interaction.
-```{r table, echo=FALSE}
-table2 <- rbind(table, c("CO~2~ effect (P)",  Pco2_2$x))
-table3 <- rbind(table2, c("Drought effect (P)",  Ph2o_2$x))
-table4 <- rbind(table3, c("CO~2~ * Drought (P)",  Pinter_2$x))
-
-dust(table4) %>%
-    sprinkle(rows= 1, part="head",bold=TRUE)%>%
-    sprinkle_colnames(Tree.C.flux = "F~c,T~") %>%
-    sprinkle_print_method("markdown")
-```
 
 \
 Leaf mass fraction (LMF) increased by 15.0 % in eC~a~ treatments (P = 0.011) but was not affected by the drought treatment. Leaf mass fraction was negatively correlated with whole tree C mass (P= 0.007, Figure `r massfracfig`a). Stem mass fraction (SMF) was marginally reduced by 6.0 % under eC~a~ (P = 0.077), with no effect of the drought treatment detected. Stem mass fraction had a weak positive correlation with whole tree C mass (P = 0.08, Figure `r massfracfig`c). Root mass fraction (RMF) was not affected by either treatment and was not correlated to whole tree C mass (Figure `r massfracfig`e).
