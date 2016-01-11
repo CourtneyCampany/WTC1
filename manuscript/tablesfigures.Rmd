@@ -106,7 +106,7 @@ Root mass as a function of shoot mass in *Eucalyptus saligna* for potted seedlin
 
 \
 **Figure S2**.
-Cumulative aboveground net C flux and additive C allocation of individual tree components from 2008-4-15 and 2009-3-16. Panels represent each individual WTC. Both aboveground net C flux and tissue C allocation where set to 0 on 2008-4-15 in order to track the allocation of C in daily time steps. Total root C mass, predicted from the log relationship between above and belowground mass partitioning of pre-planting seedlings and harvested trees, is shown on the last date.
+Cumulative aboveground net C flux and additive C allocation to individual tree components from 15 April 2008 to 16 March 2009. Panels represent each individual WTC. Both aboveground net C flux and tissue C allocation where set to 0 on 2008-4-15 in order to track the allocation of C in daily time steps. Total root C mass, predicted from the log relationship between above and belowground mass partitioning of pre-planting seedlings and harvested trees, is shown on the last date.
 
 # Tables {.unnumbered}
 **Table 1**. Final harvest C mass of above and belowground tissues, cumulative aboveground tree C uptake ($\text{F}_{c,T}$) and specific leaf area (SLA). Each value represents the mean (&pm; 1 standard error) for each treatment combination. Units for C mass and $\text{F}_{c,T}$ are g C, while SLA is cm^2^ g^-1^. For each variable, different letters represent significant differences between treatments from the overall model which includes CO~2~ * drought interactions. P values represent overall differences of CO~2~ or drought main effects and the CO~2~ * drought interaction.

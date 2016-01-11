@@ -42,7 +42,8 @@ plot(LAestlin ~ Date, data=leafarea, type='n',ylab=leaflab,  xaxt='n', xlab="", 
   #points(LAestlin ~ Date, data=leafarea, type='l', subset=chamber=="ch04", col="green")
   
   for (i in unique(leafarea$chamber)){
-    points(LAestlin ~ Date, data=leafarea[leafarea$chamber == i,], col=CO2_treatment, type='l', lwd=2, lty=c(2,1)[Water_treatment])
+    points(LAestlin ~ Date, data=leafarea[leafarea$chamber == i,], col=CO2_treatment, type='l', lwd=2, 
+           lty=c(2,1)[Water_treatment])
   }
   
 legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
