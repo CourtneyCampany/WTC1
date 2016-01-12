@@ -11,3 +11,14 @@
 
 ##keywords are commented out for thesis
 ##authoer correspondence is commenting out for thesis
+
+
+
+###comment from MT to address in manuscript
+
+#We found that leaf area was consistently reduced in eCa treatments, 
+#likely leading to reductions in both tree C uptake and whole tree C mass of near identical magnitudes (ca. 30 %). 
+
+##True. Someone may ask did leaf level photosynthesis increase under eCO2? 
+##A negative effect of eCO2 on tree C uptake and growth is a surprising finding. 
+##This seems to warrant further discussion.
