@@ -1,8 +1,7 @@
 ###manuscript figure with both allocation and partitioning
-# source("functions_and_packages/plot_objects.R")
-# source("functions_and_packages/functions.R")
-# library(plotrix)
-
+source("functions_and_packages/plot_objects.R")
+source("functions_and_packages/functions.R")
+library(plotrix)
 
 ##calculate allocation and regressions-------------------------------------------------------------------------------------
 
@@ -70,7 +69,6 @@ at.x <- seq(5000, by=5000, length.out=4)
 ##3: plot
 
 #par(cex.axis=1.21, cex.lab=1.51 ) 
-
 # windows (7,10)
 par(mfrow=c(3,2), las=1, mgp=c(3,1,0), oma=c(5,7,1,7))
 
@@ -135,4 +133,4 @@ text(x=5250, y=0.29,labels="(e)", cex=1.5)
 plot(1,1, type="n", axes=FALSE)
 
 # dev.copy2pdf(file="master_scripts/paper_figs/allocfractions.pdf")
-# dev.off()
+#dev.off()

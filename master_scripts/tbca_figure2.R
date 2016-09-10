@@ -1,7 +1,7 @@
 ### This script creates TBCA from the flux data and the biomass data
-# source("functions_and_packages/functions.R")
-# source("functions_and_packages/plot_objects.R")
-# library(doBy)
+source("functions_and_packages/functions.R")
+source("functions_and_packages/plot_objects.R")
+library(doBy)
 
 #1: Fc,t = GPP - (Rl + Rs,br) = total carbon flux by chamber
 #2: TBCA = Fc,t - Mab,t
@@ -50,6 +50,4 @@ title(ylab="Carbon  (g)", mgp=c(4,1,0))
 # dev.copy2pdf(file="master_scripts/paper_figs/belowground_flux_plots2.pdf")
 # dev.off() 
 
-
-  
   

@@ -1,5 +1,5 @@
-# source("functions_and_packages/plot_objects.R")
-# library(doBy)
+source("functions_and_packages/plot_objects.R")
+library(doBy)
 
 #treeC <- read.csv("calculated_mass/treeC_day.csv")
 treeC <- read.csv("master_scripts/Cflux_day_trt.csv")
