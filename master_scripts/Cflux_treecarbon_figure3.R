@@ -1,4 +1,4 @@
- # source("functions_and_packages/plot_objects.R")
+source("functions_and_packages/plot_objects.R")
 
 ###need to compare Cflux and mass from same date generation
 Cflux <- read.csv("calculated_mass/chamber_C_flux.csv")
@@ -66,6 +66,8 @@ palette (c("blue", "red"))
 library(plotrix)
 
 # windows (7,7)
+png(filename = "makepngs/cflux_treeC.png", width = 11, height = 8.5, units = "in", res= 400)
+
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 
 plot(1,type='n',xlim = c(0, 30000),ylim = c(0, 30000), ylab="", xlab=treefluxlab2)
@@ -77,7 +79,7 @@ points(treeC ~ cflux11, data = treeC11,pch=c(1,19)[Water_treatment],col=CO2_trea
 title(ylab=treeclab, mgp=c(4,1,0))
 
 # dev.copy2pdf(file= "master_scripts/paper_figs/flux_treecarbon3.pdf")
-# dev.off()
+dev.off()
 
 
 

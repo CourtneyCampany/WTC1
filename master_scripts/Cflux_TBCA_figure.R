@@ -30,6 +30,7 @@ palette(c("blue", "red"))
 droughtcol = alpha("lightslategrey", alpha=0.275)
 
 # windows(7,7)
+png(filename = "makepngs/cflux_tbca.png", width = 11, height = 8.5, units = "in", res= 400)
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 plot(TBCA ~ fluxC, data=treeC,  type='n',ylab="", xlab=treefluxlab2, yaxs="i", xaxs="i", ylim=c(0, 12500), xlim=c(0, 25500))
 for(i in unique(treeC$treatment)){
@@ -43,7 +44,7 @@ legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "blac
 #abline(0, .5, lty=3, lwd=2.5)
 
  # dev.copy2pdf(file="master_scripts/paper_figs/tbca_cflux.pdf")
- # dev.off()
+  dev.off()
 
 
 
