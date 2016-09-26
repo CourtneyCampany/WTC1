@@ -35,6 +35,9 @@ palette (c("blue", "red"))
 
 # windows(7,7)
 
+# png(filename = "makepngs/leafarea.png", width = 11, height = 8.5, units = "in", res= 400)
+# par(mar=c(5,5.5,1,5), mgp=c(3,1,0), las=1,cex.axis=1.25, cex.lab=1.75)
+
 par(mar=c(4,5,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 
 plot(LAestlin ~ Date, data=leafarea, type='n',ylab=leaflab,  xaxt='n', xlab="", xlim=xlimdays, ylim=c(0, 70))  
@@ -49,6 +52,6 @@ plot(LAestlin ~ Date, data=leafarea, type='n',ylab=leaflab,  xaxt='n', xlab="", 
 legend("topleft", trtlab,  lty=c(1, 1, 1,2), col=c("blue", "red", "black", "black"), bty='n', inset=0.01, lwd=2)
   
 # dev.copy2pdf(file="master_scripts/paper_figs/leafarea.pdf")
-# dev.off()
+ # dev.off()
   
 

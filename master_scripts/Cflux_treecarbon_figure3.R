@@ -66,7 +66,8 @@ palette (c("blue", "red"))
 library(plotrix)
 
 # windows (7,7)
-png(filename = "makepngs/cflux_treeC.png", width = 11, height = 8.5, units = "in", res= 400)
+# png(filename = "makepngs/cflux_treeC.png", width = 11, height = 8.5, units = "in", res= 400)
+#  par(mar=c(5.5,6.5,1,5), mgp=c(4,1,0), las=1,cex.axis=1.25, cex.lab=1.75)
 
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
 
