@@ -1,0 +1,113 @@
+---
+title: "Untitled"
+author: "Court Campany"
+date: "16 November 2016"
+output: ioslides_presentation
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Shiny Presentation
+
+This R Markdown presentation is made interactive using Shiny. The viewers of the presentation can change the assumptions underlying what's presented and see the results immediately. 
+
+To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+## Interactive Plot
+
+```{r eruptions}
+library(plotrix)
+tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
+
+  tree_C$standingtreemass <- with(tree_C, treeC-littercarbon)
+  ##calculated component fractions
+  tree_C$lmf <- with(tree_C, leafcarbon/standingtreemass)
+  tree_C$smf <- with(tree_C, (boleC+branchC)/standingtreemass)
+  tree_C$rmf <- with(tree_C, (rootC)/standingtreemass)
+  ##order by treatment
+  tree_C$treatment <- with(tree_C, paste(CO2_treatment, Water_treatment, sep="-"))  
+  tree_C <- tree_C[order(tree_C$treatment),]
+
+#simple mode for abline and sig
+lmfmod <- lm(lmf ~ standingtreemass, data = tree_C)
+smfmod <- lm(smf~ standingtreemass, data = tree_C)
+rmfmod <- lm(rmf ~ standingtreemass, data = tree_C)
+
+modresults <- data.frame(lmf = c(coef(lmfmod[1]), coef(lmfmod[2])), smf = c(coef(smfmod[1]), coef(smfmod[2])), rmf = c(coef(rmfmod[1]), coef(rmfmod[2])))
+
+# plot bits ---------------------------------------------------------------
+
+palette(c("blue", "red"))
+at.y2 <- seq(.3, by=.1, length.out=5)
+at.yleaf <- seq(0, by=.1, length.out = 4)
+at.x <- seq(5000, by=5000, length.out=4)
+
+leglab2 = c(expression(paste(aCO[2], ", " ,"wet")), expression(paste(aCO[2], ", " ,"dry")),
+            expression(paste(eCO[2], ", " ,"wet")), expression(paste(eCO[2], ", " ,"dry")))
+
+treefluxlab2 <- "Total Tree Carbon Flux  (g C)"
+fraclab <- expression(Component~Mass~Fraction~~(g~g^-1))
+
+# plotting ----------------------------------------------------------------
+
+shinyApp(
+  
+ui = fluidPage(
+      titlePanel(""),
+      sidebarLayout(position="right",
+        ##type selection
+        sidebarPanel(
+        style = "border-color: #cc2904; background-color: white; border-style:dotted;border-width:thick",
+        checkboxGroupInput("whichcomponent", "Pick a component:",c("LMF" = "lmf", "SMF" = "smf", "RMF" = "rmf")),
+        actionButton("Clear", label="Clear")
+        ),
+  
+      mainPanel(
+        plotOutput('plot1'))
+  )
+  ),
+  
+server = function(input, output) {
+  
+   observe({
+   if (input$Uncheck > 0) {
+      updateCheckboxGroupInput(session=session, inputId="whichcomponent", choices=c("smf","rmf","lmf"), selected=NULL)
+   }
+ })  
+    
+    component_ss <- reactive({
+      tree_C[, c("standingtreemass",input$whichcomponent,"Water_treatment","CO2_treatment")]
+    })
+    
+    mod_ss <- reactive({
+      modresults[,input$whichcomponent]
+    })
+    
+output$plot1 <- renderPlot({
+
+par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
+  
+plot(tree_C$smf~tree_C$standingtreemass, ylim=c(0, .75), xlim=c(5000,21000), ylab=fraclab, xlab=treefluxlab2, type='n') 
+       points(component_ss()[[2]] ~ component_ss()[[1]], cex=2, pch=c(1,19)[component_ss()[,3]], 
+       col=c(rep("blue",6), rep("red", 6)))
+  })
+  }
+)
+```
+
+## Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## R Output
+
+```{r cars}
+summary(cars)
+```
+
+
