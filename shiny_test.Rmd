@@ -16,7 +16,7 @@ This R Markdown presentation is made interactive using Shiny.
 
 ## Interactive Plot
 
-```{r eruptions}
+```{r massfractions}
 library(plotrix)
 tree_C <- read.csv("calculated_mass/chamber_carbon.csv")
 
@@ -39,14 +39,10 @@ modresults <- data.frame(lmf = c(coef(lmfmod[1]), coef(lmfmod[2])), smf = c(coef
 # plot bits ---------------------------------------------------------------
 
 palette(c("blue", "red"))
-at.y2 <- seq(.3, by=.1, length.out=5)
-at.yleaf <- seq(0, by=.1, length.out = 4)
-at.x <- seq(5000, by=5000, length.out=4)
 
 leglab2 = c(expression(paste(aCO[2], ", " ,"wet")), expression(paste(aCO[2], ", " ,"dry")),
             expression(paste(eCO[2], ", " ,"wet")), expression(paste(eCO[2], ", " ,"dry")))
 
-treefluxlab2 <- "Total Tree Carbon Flux  (g C)"
 fraclab <- expression(Component~Mass~Fraction~~(g~g^-1))
 
 # plotting ----------------------------------------------------------------
@@ -59,8 +55,7 @@ ui = fluidPage(
         ##type selection
         sidebarPanel(
         style = "border-color: #cc2904; background-color: white; border-style:dotted;border-width:thick",
-        checkboxGroupInput("whichcomponent", "Pick a component:",c("LMF" = "lmf", "SMF" = "smf", "RMF" = "rmf")),
-        actionButton("Clear", label="Clear")
+        radioButtons("whichcomponent", "Pick a component:",c("LMF" = "lmf", "SMF" = "smf", "RMF" =                              "rmf"))
         ),
   
       mainPanel(
@@ -69,12 +64,7 @@ ui = fluidPage(
   ),
   
 server = function(input, output, session) {
-  
-   observe({
-   if (input$Clear > 0) {
-      updateCheckboxGroupInput(session=session, inputId="whichcomponent", choices=c("smf","rmf","lmf"), selected=NULL)
-   }
- })
+
     
     component_ss <- reactive({
       tree_C[, c("standingtreemass",input$whichcomponent,"Water_treatment","CO2_treatment")]
@@ -88,12 +78,21 @@ output$plot1 <- renderPlot({
 
 par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
   
-plot(tree_C$smf~tree_C$standingtreemass, ylim=c(0, .75), xlim=c(5000,21000), ylab=fraclab, xlab=treefluxlab2, type='n') 
-       points(component_ss()[[2]] ~ component_ss()[[1]], cex=2, pch=c(1,19)[component_ss()[,3]], 
-       col=c(rep("blue",6), rep("red", 6))
-       #col=component_ss()[,4]
-       )
-ablineclip(mod_ss(), x1=min(component_ss()[[1]]), x2=max(component_ss()[[1]]),lwd=2)       
+plot(tree_C$smf~tree_C$standingtreemass, ylim=c(0, .75), xlim=c(5000,21000), 
+     xlab="Tree Biomass (g C)", ylab=fraclab, type='n') 
+
+points(component_ss()[[2]] ~ component_ss()[[1]], cex=2, pch=c(1,19)[component_ss()[,3]], 
+        col=c(rep("blue",6), rep("red", 6)))
+        #col=component_ss()[,4])  #this doesnt work because of multiple column selection with input
+
+ablineclip(mod_ss(), x1=min(component_ss()[[1]]), x2=max(component_ss()[[1]]),lwd=2) 
+legend("topleft", leglab2, pch=c(19,1, 19, 1), col=c("blue", "blue", "red", "red"), bty='n')  
+        
+#if checkboxGroup use this input with looping to keep all (do not need reactives)
+# for(variable in input$whichcomponent)points(tree_C[,"standingtreemass"], tree_C[,variable], col=tree_C[,"CO2_treatment"], cex=2, pch=c(1,19)[tree_C$Water_treatment])
+# 
+# for(variable in input$whichcomponent)ablineclip(modresults[,variable] , x1=min(tree_C$standingtreemass), x2=max(tree_C$standingtreemass),lwd=2)
+
   })
   }
 )
