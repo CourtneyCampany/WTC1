@@ -12,9 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Shiny Presentation
 
-This R Markdown presentation is made interactive using Shiny. The viewers of the presentation can change the assumptions underlying what's presented and see the results immediately. 
-
-To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+This R Markdown presentation is made interactive using Shiny. 
 
 ## Interactive Plot
 
@@ -70,13 +68,13 @@ ui = fluidPage(
   )
   ),
   
-server = function(input, output) {
+server = function(input, output, session) {
   
    observe({
-   if (input$Uncheck > 0) {
+   if (input$Clear > 0) {
       updateCheckboxGroupInput(session=session, inputId="whichcomponent", choices=c("smf","rmf","lmf"), selected=NULL)
    }
- })  
+ })
     
     component_ss <- reactive({
       tree_C[, c("standingtreemass",input$whichcomponent,"Water_treatment","CO2_treatment")]
@@ -92,7 +90,10 @@ par(mar=c(5,6,1,1),las=1, cex.axis=1, cex.lab=1.25, mgp=c(3,1,0))
   
 plot(tree_C$smf~tree_C$standingtreemass, ylim=c(0, .75), xlim=c(5000,21000), ylab=fraclab, xlab=treefluxlab2, type='n') 
        points(component_ss()[[2]] ~ component_ss()[[1]], cex=2, pch=c(1,19)[component_ss()[,3]], 
-       col=c(rep("blue",6), rep("red", 6)))
+       col=c(rep("blue",6), rep("red", 6))
+       #col=component_ss()[,4]
+       )
+ablineclip(mod_ss(), x1=min(component_ss()[[1]]), x2=max(component_ss()[[1]]),lwd=2)       
   })
   }
 )
@@ -103,11 +104,5 @@ plot(tree_C$smf~tree_C$standingtreemass, ylim=c(0, .75), xlim=c(5000,21000), yla
 - Bullet 1
 - Bullet 2
 - Bullet 3
-
-## R Output
-
-```{r cars}
-summary(cars)
-```
 
 
